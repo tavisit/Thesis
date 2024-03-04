@@ -61,4 +61,3 @@ jobs:
         ITCH_USER: ${{ secrets.MY_ITCH_USERNAME }}
         VERSION: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
         CHANNEL: windows
-        PACKAGE: build/windows
