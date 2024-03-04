@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           lfs: true
-          submodules: recursive
         
       - name: Cache Unity Library
         uses: actions/cache@v2
@@ -33,15 +33,12 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          targetPlatform: StandaloneWindows
-          projectPath: .  # Specify the project path if necessary
-          buildName: WindowsBuild  # Specify your build name
+          targetPlatform: StandaloneWindows64 
           
-      - name: Upload build to artifact
-        uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v3
         with:
-          name: unity-build-artifact
-          path: build
+          name: Build-StandaloneWindows64 
+          path: build/StandaloneWindows64
           
   deploy:
     name: Deploy to itch.io
@@ -50,9 +47,10 @@ jobs:
 
     steps:
       - name: Download Build Artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
-          name: unity-build-artifact
+          name: Build-StandaloneWindows64
+          path: build/StandaloneWindows64
 
       - name: Set release date
         run: echo "RELEASE_DATE=$(date --rfc-3339=date)" >> $GITHUB_ENV
@@ -66,6 +64,6 @@ jobs:
           butlerCredentials: ${{ secrets.MY_ITCH_API_CODE }}
           game: ${{ secrets.MY_ITCH_GAME }}
           user: ${{ secrets.MY_ITCH_USERNAME }}
-          channel: windows
-          directory: .  # Assuming the artifact contains the directory structure as needed for deployment
           version: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
+          channel: windows
+          directory: ./Build-StandaloneWindows64
