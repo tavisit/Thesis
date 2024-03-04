@@ -24,7 +24,8 @@ jobs:
           submodules: recursive
           
       # Cache
-      - uses: actions/cache@v3
+      - id: cache
+        uses: actions/cache@v3
         with:
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
@@ -33,6 +34,7 @@ jobs:
 
       # Build project
       - name: Build project
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -52,7 +54,7 @@ jobs:
         uses: robpc/itchio-upload-action@v1
         with:
           path: build
-          project: ${{ secrets.MY_ITCH_GAME }}
-          channel: windows
+          project:  ${{ secrets.MY_ITCH_USERNAME }}/${{ secrets.MY_ITCH_GAME }}
+          channel: win
           api-key: ${{ secrets.MY_ITCH_API_CODE }}
           version: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
