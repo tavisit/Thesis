@@ -36,23 +36,21 @@ jobs:
           targetPlatform: StandaloneWindows
           projectPath: .  # Specify the project path if necessary
           buildName: WindowsBuild  # Specify your build name
-          buildPath: ${{ github.workspace }}/Build
+          buildsPath: ${{ github.workspace }}/Builds
           
       - name: Upload build to artifact
         uses: actions/upload-artifact@v2
         with:
           name: unity-build-artifact
-          path: ${{ github.workspace }}/Build/**
+          path: ${{ github.workspace }}/Builds/**/*
           
   deploy:
     name: Deploy to itch.io
     needs: build
-    runs-on: ubuntu-latest         
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    runs-on: ubuntu-latest
 
-      - name: Download build artifact
+    steps:
+      - name: Download Build Artifact
         uses: actions/download-artifact@v2
         with:
           name: unity-build-artifact
@@ -63,14 +61,12 @@ jobs:
       - name: Set short hash
         run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
-      - name: List Build Directory Contents
-        run: ls -R "${{ github.workspace }}/DownloadedBuild"  # Adjust to match the unpack path
-
-      - name: Push Windows version to itch.io
+      - name: Deploy to itch.io
         uses: manleydev/butler-publish-itchio-action@v1.0.3
         with:
+          butlerCredentials: ${{ secrets.MY_ITCH_API_CODE }}
           game: ${{ secrets.MY_ITCH_GAME }}
           user: ${{ secrets.MY_ITCH_USERNAME }}
           channel: windows
-          directory: .  # Assuming the artifact is downloaded to the current working directory
+          directory: .  # Assuming the artifact contains the directory structure as needed for deployment
           version: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
