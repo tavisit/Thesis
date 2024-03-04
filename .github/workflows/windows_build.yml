@@ -64,7 +64,10 @@ jobs:
   
       - name: Set short hash
         run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-  
+        
+      - name: List directory structure
+        run: ls -R
+        
       - name: Deploy to itch.io
         uses: manleydev/butler-publish-itchio-action@master
         env:
@@ -73,4 +76,4 @@ jobs:
           ITCH_GAME: ${{ secrets.MY_ITCH_GAME }}
           ITCH_USER: ${{ secrets.MY_ITCH_USERNAME }}
           VERSION: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
-          PACKAGE: Build-StandaloneWindows64
+          PACKAGE: ./Build-StandaloneWindows64
