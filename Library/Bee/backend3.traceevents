@@ -1,0 +1,240 @@
+{ "cat":"", "pid":12345, "tid":0, "ts":0, "ph":"M", "name":"process_name", "args": { "name":"bee_backend" } }
+,{ "pid":12345, "tid":0, "ts":1709554759658697, "dur":69, "ph":"X", "name": "IPC_Client_InitializeAndConnectToParent",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1709554759658827, "dur":12257, "ph":"X", "name": "DriverInitData",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1709554759671100, "dur":190, "ph":"X", "name": "RemoveStaleOutputs",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1709554759671358, "dur":1214, "ph":"X", "name": "BuildQueueInit",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1709554759672613, "dur":60, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"Player" }}
+,{ "pid":12345, "tid":0, "ts":1709554759672678, "dur":50, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/globalgamemanagers" }}
+,{ "pid":12345, "tid":0, "ts":1709554759672779, "dur":102, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/globalgamemanagers.assets.resS" }}
+,{ "pid":12345, "tid":0, "ts":1709554759672885, "dur":57, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/level0" }}
+,{ "pid":12345, "tid":0, "ts":1709554759672945, "dur":83, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/resources.assets" }}
+,{ "pid":12345, "tid":0, "ts":1709554759673035, "dur":59, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/resources.assets.resS" }}
+,{ "pid":12345, "tid":0, "ts":1709554759673147, "dur":50, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/RuntimeInitializeOnLoads.json" }}
+,{ "pid":12345, "tid":0, "ts":1709554759673200, "dur":77, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/ScriptingAssemblies.json" }}
+,{ "pid":12345, "tid":0, "ts":1709554759673282, "dur":78, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/sharedassets0.assets" }}
+,{ "pid":12345, "tid":0, "ts":1709554759673365, "dur":62, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/sharedassets0.assets.resS" }}
+,{ "pid":12345, "tid":0, "ts":1709554759673430, "dur":68, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/boot.config" }}
+,{ "pid":12345, "tid":0, "ts":1709554759673546, "dur":65, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"WriteText Library/Bee/artifacts/csharpactions/boot.config_tyr4.info" }}
+,{ "pid":12345, "tid":0, "ts":1709554759673732, "dur":63, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.AccessibilityModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759673798, "dur":51, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.AndroidJNIModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759674099, "dur":70, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.AssetBundleModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759674174, "dur":63, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.AudioModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759674240, "dur":57, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.ClothModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759674301, "dur":55, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.ClusterInputModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759674547, "dur":62, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.DSPGraphModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759674746, "dur":65, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.GridModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759674861, "dur":59, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.IMGUIModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759675181, "dur":57, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.LocalizationModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759675241, "dur":70, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.NVIDIAModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759675365, "dur":64, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.PerformanceReportingModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759675528, "dur":56, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.ProfilerModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759675674, "dur":54, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.ScreenCaptureModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759675821, "dur":52, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.SpriteShapeModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759675925, "dur":54, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.SubstanceModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759676192, "dur":64, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759676260, "dur":67, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759676331, "dur":68, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.TextRenderingModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759676447, "dur":62, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.UIElementsModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759676690, "dur":51, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.UnityConnectModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759676832, "dur":72, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759677254, "dur":70, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.VRModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759677369, "dur":72, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.VideoModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759677446, "dur":50, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.VirtualTexturingModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759677498, "dur":66, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.WindModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759677567, "dur":66, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.XRModule.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759677636, "dur":57, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759677702, "dur":62, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Assembly-CSharp.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759677811, "dur":53, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759677867, "dur":56, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Unity.VisualEffectGraph.Runtime.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759677926, "dur":54, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Unity.RenderPipelines.Core.Runtime.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759678025, "dur":66, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.XR.LegacyInputHelpers.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759678142, "dur":73, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.SpatialTracking.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759678267, "dur":61, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Unity.VisualScripting.Flow.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759678473, "dur":65, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Unity.RenderPipelines.Core.ShaderLibrary.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759678583, "dur":63, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Unity.TextMeshPro.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759678696, "dur":65, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Unity.RenderPipelines.HighDefinition.Runtime.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759678807, "dur":67, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Silk.NET.Input.Common.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759678878, "dur":53, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Text.Json.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759679017, "dur":67, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Silk.NET.Vulkan.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759679088, "dur":66, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Microsoft.Extensions.DependencyModel.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759679249, "dur":68, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Silk.NET.GLFW.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759679321, "dur":55, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Silk.NET.Vulkan.Extensions.KHR.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759679607, "dur":53, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Unity.VisualScripting.Antlr3.Runtime.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759679752, "dur":51, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Unity.Burst.Unsafe.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759679805, "dur":65, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Silk.NET.Input.Glfw.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759679920, "dur":65, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Silk.NET.Core.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759679989, "dur":59, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Silk.NET.Windowing.Sdl.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759680052, "dur":59, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Text.Encodings.Web.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759680298, "dur":56, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/netstandard.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759680358, "dur":69, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Mono.Security.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759680478, "dur":59, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Configuration.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759680617, "dur":58, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Data.DataSetExtensions.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759680724, "dur":60, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Drawing.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759680877, "dur":58, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.IO.Compression.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759680939, "dur":61, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Net.Http.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759681050, "dur":55, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Numerics.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759681108, "dur":53, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Runtime.Serialization.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759681257, "dur":55, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Transactions.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759681316, "dur":60, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Xml.Linq.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759681380, "dur":62, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Xml.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759681535, "dur":60, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Plugins/x86_64/lib_burst_generated.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759681722, "dur":57, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/app.info" }}
+,{ "pid":12345, "tid":0, "ts":1709554759681824, "dur":54, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Resources/unity default resources" }}
+,{ "pid":12345, "tid":0, "ts":1709554759682022, "dur":53, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser" }}
+,{ "pid":12345, "tid":0, "ts":1709554759682079, "dur":70, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx" }}
+,{ "pid":12345, "tid":0, "ts":1709554759682200, "dur":66, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/2.0/settings.map" }}
+,{ "pid":12345, "tid":0, "ts":1709554759682270, "dur":56, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/2.0/web.config" }}
+,{ "pid":12345, "tid":0, "ts":1709554759682420, "dur":65, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/4.0/machine.config" }}
+,{ "pid":12345, "tid":0, "ts":1709554759682532, "dur":65, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/4.0/web.config" }}
+,{ "pid":12345, "tid":0, "ts":1709554759682646, "dur":60, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx" }}
+,{ "pid":12345, "tid":0, "ts":1709554759682885, "dur":59, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/browscap.ini" }}
+,{ "pid":12345, "tid":0, "ts":1709554759682993, "dur":53, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/mconfig/config.xml" }}
+,{ "pid":12345, "tid":0, "ts":1709554759683098, "dur":52, "ph":"X", "name": "EmitFirstTimeEnqueue",  "args": { "detail":"CopyFiles D:/Browser Downloads/UnityPlayer.dll" }}
+,{ "pid":12345, "tid":0, "ts":1709554759672603, "dur":10548, "ph":"X", "name": "EnqueueRequestedNodes",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1709554759683152, "dur":10823, "ph":"X", "name": "WaitForBuildFinished", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1709554759693998, "dur":176, "ph":"X", "name": "JoinBuildThread",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1709554759694174, "dur":226, "ph":"X", "name": "ThreadStateDestroy",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1709554759694690, "dur":5614, "ph":"X", "name": "Tundra",  "args": { "detail":"Write AllBuiltNodes" }}
+,{ "pid":12345, "tid":1, "ts":1709554759673187, "dur":9989, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1709554759683181, "dur":233, "ph":"X", "name": "EarlyStatNonGeneratedFile",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1709554759683414, "dur":1915, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1709554759685366, "dur":520, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx" }}
+,{ "pid":12345, "tid":1, "ts":1709554759685915, "dur":394, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Silk.NET.Input.Glfw.dll" }}
+,{ "pid":12345, "tid":1, "ts":1709554759686332, "dur":312, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Unity.RenderPipelines.Core.Runtime.dll" }}
+,{ "pid":12345, "tid":1, "ts":1709554759686669, "dur":391, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.UIModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1709554759687109, "dur":514, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.GridModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1709554759687624, "dur":6359, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1709554759673180, "dur":9987, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1709554759683172, "dur":2022, "ph":"X", "name": "CheckDagSignatures",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1709554759685268, "dur":353, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"AddBootConfigGUID Library/Bee/artifacts/WinPlayerBuildProgram/boot.config" }}
+,{ "pid":12345, "tid":2, "ts":1709554759685695, "dur":147, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Drawing.dll" }}
+,{ "pid":12345, "tid":2, "ts":1709554759685877, "dur":80, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Runtime.CompilerServices.Unsafe.dll" }}
+,{ "pid":12345, "tid":2, "ts":1709554759686028, "dur":375, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Silk.NET.Vulkan.Extensions.KHR.dll" }}
+,{ "pid":12345, "tid":2, "ts":1709554759686464, "dur":293, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.VirtualTexturingModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1709554759686851, "dur":413, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1709554759687290, "dur":257, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.AnimationModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1709554759687550, "dur":6422, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1709554759673533, "dur":9724, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1709554759683260, "dur":325, "ph":"X", "name": "EarlyStatNonGeneratedFile",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1709554759683585, "dur":1677, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1709554759685305, "dur":137, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/4.5/settings.map" }}
+,{ "pid":12345, "tid":3, "ts":1709554759685521, "dur":1569, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Xml.dll" }}
+,{ "pid":12345, "tid":3, "ts":1709554759687147, "dur":245, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.DSPGraphModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1709554759687409, "dur":280, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/ScriptingAssemblies.json" }}
+,{ "pid":12345, "tid":3, "ts":1709554759687690, "dur":6313, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":4, "ts":1709554759673288, "dur":9905, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":4, "ts":1709554759683198, "dur":226, "ph":"X", "name": "EarlyStatNonGeneratedFile",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":4, "ts":1709554759683425, "dur":1876, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":4, "ts":1709554759685356, "dur":176, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/4.0/web.config" }}
+,{ "pid":12345, "tid":4, "ts":1709554759685598, "dur":610, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Numerics.Vectors.dll" }}
+,{ "pid":12345, "tid":4, "ts":1709554759686226, "dur":53, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.UI.dll" }}
+,{ "pid":12345, "tid":4, "ts":1709554759686335, "dur":349, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Unity.VisualEffectGraph.Runtime.dll" }}
+,{ "pid":12345, "tid":4, "ts":1709554759686812, "dur":177, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.SpriteMaskModule.dll" }}
+,{ "pid":12345, "tid":4, "ts":1709554759687013, "dur":561, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.JSONSerializeModule.dll" }}
+,{ "pid":12345, "tid":4, "ts":1709554759687575, "dur":6415, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1709554759673359, "dur":9849, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1709554759683215, "dur":235, "ph":"X", "name": "EarlyStatNonGeneratedFile",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1709554759683451, "dur":1864, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1709554759685361, "dur":198, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/4.0/settings.map" }}
+,{ "pid":12345, "tid":5, "ts":1709554759685605, "dur":191, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Net.Http.dll" }}
+,{ "pid":12345, "tid":5, "ts":1709554759685834, "dur":300, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Text.Encodings.Web.dll" }}
+,{ "pid":12345, "tid":5, "ts":1709554759686189, "dur":342, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Unity.RenderPipelines.HighDefinition.Config.Runtime.dll" }}
+,{ "pid":12345, "tid":5, "ts":1709554759686572, "dur":289, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.UnityCurlModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1709554759686879, "dur":54, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.PropertiesModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1709554759686985, "dur":788, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.LocalizationModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1709554759687775, "dur":6212, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1709554759673418, "dur":9804, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1709554759683228, "dur":359, "ph":"X", "name": "EarlyStatNonGeneratedFile",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1709554759683587, "dur":1657, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1709554759685302, "dur":341, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/4.5/web.config" }}
+,{ "pid":12345, "tid":6, "ts":1709554759685764, "dur":216, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Mono.Security.dll" }}
+,{ "pid":12345, "tid":6, "ts":1709554759685995, "dur":433, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Silk.NET.Input.Sdl.dll" }}
+,{ "pid":12345, "tid":6, "ts":1709554759686577, "dur":313, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.UnityConnectModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1709554759686911, "dur":457, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.PhysicsModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1709554759687406, "dur":262, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/RuntimeInitializeOnLoads.json" }}
+,{ "pid":12345, "tid":6, "ts":1709554759687669, "dur":6308, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1709554759673477, "dur":9766, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1709554759683250, "dur":324, "ph":"X", "name": "EarlyStatNonGeneratedFile",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1709554759683574, "dur":1702, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1709554759685333, "dur":145, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/4.5/machine.config" }}
+,{ "pid":12345, "tid":7, "ts":1709554759685494, "dur":855, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/mscorlib.dll" }}
+,{ "pid":12345, "tid":7, "ts":1709554759686389, "dur":321, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Assembly-CSharp.dll" }}
+,{ "pid":12345, "tid":7, "ts":1709554759686731, "dur":236, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.TextRenderingModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1709554759687156, "dur":265, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.CrashReportingModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1709554759687467, "dur":289, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/globalgamemanagers.assets" }}
+,{ "pid":12345, "tid":7, "ts":1709554759687757, "dur":6223, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1709554759673595, "dur":9667, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1709554759683268, "dur":320, "ph":"X", "name": "EarlyStatNonGeneratedFile",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1709554759683589, "dur":1643, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1709554759685268, "dur":101, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/browscap.ini" }}
+,{ "pid":12345, "tid":8, "ts":1709554759685402, "dur":265, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx" }}
+,{ "pid":12345, "tid":8, "ts":1709554759685731, "dur":199, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Core.dll" }}
+,{ "pid":12345, "tid":8, "ts":1709554759685951, "dur":426, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Microsoft.DotNet.PlatformAbstractions.dll" }}
+,{ "pid":12345, "tid":8, "ts":1709554759686419, "dur":316, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.XRModule.dll" }}
+,{ "pid":12345, "tid":8, "ts":1709554759686887, "dur":284, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.ProfilerModule.dll" }}
+,{ "pid":12345, "tid":8, "ts":1709554759687448, "dur":267, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/level0" }}
+,{ "pid":12345, "tid":8, "ts":1709554759687716, "dur":6284, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":9, "ts":1709554759673657, "dur":9619, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":9, "ts":1709554759683281, "dur":341, "ph":"X", "name": "EarlyStatNonGeneratedFile",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":9, "ts":1709554759683622, "dur":1589, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":9, "ts":1709554759685262, "dur":59, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/mconfig/config.xml" }}
+,{ "pid":12345, "tid":9, "ts":1709554759685465, "dur":567, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis.exe" }}
+,{ "pid":12345, "tid":9, "ts":1709554759686125, "dur":333, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Silk.NET.OpenGL.dll" }}
+,{ "pid":12345, "tid":9, "ts":1709554759686516, "dur":716, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll" }}
+,{ "pid":12345, "tid":9, "ts":1709554759687256, "dur":237, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.AudioModule.dll" }}
+,{ "pid":12345, "tid":9, "ts":1709554759687494, "dur":6485, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":10, "ts":1709554759673703, "dur":9591, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":10, "ts":1709554759683300, "dur":305, "ph":"X", "name": "EarlyStatNonGeneratedFile",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":10, "ts":1709554759683605, "dur":1617, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":10, "ts":1709554759685353, "dur":351, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser" }}
+,{ "pid":12345, "tid":10, "ts":1709554759685764, "dur":349, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.ComponentModel.Composition.dll" }}
+,{ "pid":12345, "tid":10, "ts":1709554759686195, "dur":358, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Unity.Timeline.dll" }}
+,{ "pid":12345, "tid":10, "ts":1709554759686605, "dur":912, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.dll" }}
+,{ "pid":12345, "tid":10, "ts":1709554759687518, "dur":6480, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":11, "ts":1709554759673753, "dur":9557, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":11, "ts":1709554759683316, "dur":69, "ph":"X", "name": "EarlyStatNonGeneratedFile",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":11, "ts":1709554759683385, "dur":1903, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":11, "ts":1709554759685372, "dur":537, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/2.0/settings.map" }}
+,{ "pid":12345, "tid":11, "ts":1709554759685938, "dur":289, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Unity.Burst.Unsafe.dll" }}
+,{ "pid":12345, "tid":11, "ts":1709554759686243, "dur":376, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Unity.VisualScripting.Core.dll" }}
+,{ "pid":12345, "tid":11, "ts":1709554759686668, "dur":625, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.UIElementsModule.dll" }}
+,{ "pid":12345, "tid":11, "ts":1709554759687319, "dur":278, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.AccessibilityModule.dll" }}
+,{ "pid":12345, "tid":11, "ts":1709554759687598, "dur":6404, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":12, "ts":1709554759673798, "dur":9530, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":12, "ts":1709554759683329, "dur":1875, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":12, "ts":1709554759685210, "dur":396, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"GenerateNativePluginsForAssemblies Library/Bee/artifacts/WinPlayerBuildProgram/AsyncPluginsFromLinker" }}
+,{ "pid":12345, "tid":12, "ts":1709554759685630, "dur":143, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"GenerateNativePluginsForAssemblies Library/Bee/artifacts/WinPlayerBuildProgram/AsyncPluginsFromLinker" }}
+,{ "pid":12345, "tid":12, "ts":1709554759686129, "dur":312, "ph":"X", "name": "ComputeFileSignatureSha1",  "args": { "detail":"Library\\Bee\\artifacts\\WinPlayerBuildProgram\\AsyncPluginsFromLinker\\x86_64\\lib_burst_generated.dll" }}
+,{ "pid":12345, "tid":12, "ts":1709554759686128, "dur":314, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Plugins/x86_64/lib_burst_generated.dll" }}
+,{ "pid":12345, "tid":12, "ts":1709554759688211, "dur":5699, "ph":"X", "name": "CopyFiles",  "args": { "detail":"D:/Browser Downloads/Thesis_Data/Plugins/x86_64/lib_burst_generated.dll" }}
+,{ "pid":12345, "tid":13, "ts":1709554759673848, "dur":9493, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":13, "ts":1709554759683342, "dur":1864, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":13, "ts":1709554759685271, "dur":312, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/UnityCrashHandler64.exe" }}
+,{ "pid":12345, "tid":13, "ts":1709554759685603, "dur":216, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Numerics.dll" }}
+,{ "pid":12345, "tid":13, "ts":1709554759685978, "dur":605, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Silk.NET.SDL.dll" }}
+,{ "pid":12345, "tid":13, "ts":1709554759686605, "dur":358, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.UnityAnalyticsModule.dll" }}
+,{ "pid":12345, "tid":13, "ts":1709554759687009, "dur":308, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.InputModule.dll" }}
+,{ "pid":12345, "tid":13, "ts":1709554759687355, "dur":288, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/sharedassets0.assets.resS" }}
+,{ "pid":12345, "tid":13, "ts":1709554759687644, "dur":6368, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":14, "ts":1709554759673902, "dur":9452, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":14, "ts":1709554759683355, "dur":1987, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":14, "ts":1709554759685551, "dur":1650, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.ServiceModel.Internals.dll" }}
+,{ "pid":12345, "tid":14, "ts":1709554759687226, "dur":507, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.ClusterInputModule.dll" }}
+,{ "pid":12345, "tid":14, "ts":1709554759687734, "dur":6273, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":15, "ts":1709554759673953, "dur":9414, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":15, "ts":1709554759683368, "dur":1834, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":15, "ts":1709554759685241, "dur":488, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"WriteText Library/Bee/artifacts/WinPlayerBuildProgram/Data/app.info" }}
+,{ "pid":12345, "tid":15, "ts":1709554759685803, "dur":204, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.Runtime.dll" }}
+,{ "pid":12345, "tid":15, "ts":1709554759686049, "dur":430, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/Silk.NET.Maths.dll" }}
+,{ "pid":12345, "tid":15, "ts":1709554759686515, "dur":959, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll" }}
+,{ "pid":12345, "tid":15, "ts":1709554759687496, "dur":6513, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":16, "ts":1709554759674007, "dur":9375, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":16, "ts":1709554759683383, "dur":1971, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":16, "ts":1709554759685399, "dur":221, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/MonoBleedingEdge/etc/mono/2.0/machine.config" }}
+,{ "pid":12345, "tid":16, "ts":1709554759685644, "dur":420, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/System.IO.Compression.dll" }}
+,{ "pid":12345, "tid":16, "ts":1709554759686242, "dur":686, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.XR.LegacyInputHelpers.dll" }}
+,{ "pid":12345, "tid":16, "ts":1709554759686965, "dur":156, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.Physics2DModule.dll" }}
+,{ "pid":12345, "tid":16, "ts":1709554759687193, "dur":257, "ph":"X", "name": "EmitNodeUpToDate",  "args": { "detail":"CopyFiles D:/Browser Downloads/Thesis_Data/Managed/UnityEngine.ClusterRendererModule.dll" }}
+,{ "pid":12345, "tid":16, "ts":1709554759687477, "dur":6518, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1709554759707092, "dur":1451, "ph":"X", "name": "ProfilerWriteOutput" }
+,
