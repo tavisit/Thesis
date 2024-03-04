@@ -122,15 +122,10 @@ public class OpenClRunner<T>
     }
     public static unsafe nint CreateProgram(CL cl, nint context, nint device, string fileName)
     {
-        if (!File.Exists(fileName))
-        {
-            Debug.Log($"File does not exist: {fileName}");
-            return IntPtr.Zero;
-        }
-        using StreamReader sr = new StreamReader(fileName);
-        string clStr = sr.ReadToEnd();
+        TextAsset[] clFiles = Resources.LoadAll<TextAsset>("OpenCL_Scripts");
+        string clSource = Array.FindAll(clFiles, match: s => s.name.Equals(fileName))[0].text;
 
-        var program = cl.CreateProgramWithSource(context, 1, new string[] { clStr }, null, null);
+        var program = cl.CreateProgramWithSource(context, 1, new string[] { clSource }, null, null);
         if (program == IntPtr.Zero)
         {
             Debug.Log("Failed to create CL program from source.");

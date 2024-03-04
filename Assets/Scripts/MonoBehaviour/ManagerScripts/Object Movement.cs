@@ -8,7 +8,7 @@ public class ObjectMovement : MonoBehaviour
 
     void Start()
     {
-        universalAttraction = new UniversalAttractionRunner(".\\Assets\\Scripts\\OpenCL\\Scripts\\UniversalAttractionOpenCL.cl", "universal_attraction_force");
+        universalAttraction = new UniversalAttractionRunner("UniversalAttractionOpenCL", "universal_attraction_force");
     }
 
     // Update is called once per frame
