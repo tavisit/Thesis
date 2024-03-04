@@ -9,8 +9,6 @@ jobs:
   build:
     name: Build Project
     runs-on: ubuntu-latest
-    outputs:  # Define outputs for the job
-      build-path: ${{ steps.unity_build.outputs.build-path }}
 
     steps:
       - name: Checkout repository
@@ -20,17 +18,15 @@ jobs:
           submodules: recursive
 
       - name: Cache Unity Library
-        id: cache
         uses: actions/cache@v2
         with:
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
             Library-
-            
+
       - name: Build project
         if: steps.cache.outputs.cache-hit != 'true'
-        id: unity_build
         uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -42,32 +38,41 @@ jobs:
           buildName: WindowsBuild  # Specify your build name
           buildPath: ${{ github.workspace }}/Builds
           
+      - name: Upload build to artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: unity-build-artifact
+          path: ${{ github.workspace }}/Build/**
+          
   deploy:
     name: Deploy to itch.io
     needs: build
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-latest         
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0  # Fetch the entire history for git operations
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set release date
-      run: echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
+      - name: Download build artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: unity-build-artifact
+          path: ${{ github.workspace }}/DownloadedBuild  # This is where the artifact will be unpacked
 
-    - name: Set short hash
-      run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> ${GITHUB_ENV}
-    
-    - name: List Build Directory Contents
-      run: ls -R "${{ steps.unity_build.outputs.build-path }}"
+      - name: Set release date
+        run: echo "RELEASE_DATE=$(date --rfc-3339=date)" >> $GITHUB_ENV
 
-    - name: Push Windows version to itch.io
-      uses: manleydev/butler-publish-itchio-action@v1.0.3
-      env:
-        BUTLER_CREDENTIALS: ${{ secrets.MY_ITCH_API_CODE }}
-        ITCH_GAME: ${{ secrets.MY_ITCH_GAME }}
-        ITCH_USER: ${{ secrets.MY_ITCH_USERNAME }}
-        VERSION: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
-        CHANNEL: windows
-        directory: ${{ needs.build.outputs.build-path }}
+      - name: Set short hash
+        run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: List Build Directory Contents
+        run: ls -R "${{ github.workspace }}/DownloadedBuild"  # Adjust to match the unpack path
+
+      - name: Push Windows version to itch.io
+        uses: manleydev/butler-publish-itchio-action@v1.0.3
+        with:
+          butlerCredentials: ${{ secrets.MY_ITCH_API_CODE }}
+          game: ${{ secrets.MY_ITCH_GAME }}
+          user: ${{ secrets.MY_ITCH_USERNAME }}
+          channel: windows
+          directory: ${{ github.workspace }}/DownloadedBuild  # Adjust this path based on your structure
+          version: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
