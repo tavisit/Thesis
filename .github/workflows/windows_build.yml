@@ -9,6 +9,8 @@ jobs:
   build:
     name: Build Project
     runs-on: ubuntu-latest
+    outputs:  # Define outputs for the job
+      build-path: ${{ steps.unity_build.outputs.build-path }}
 
     steps:
       - name: Checkout repository
@@ -36,6 +38,9 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: StandaloneWindows
+          projectPath: .  # Specify the project path if necessary
+          buildName: WindowsBuild  # Specify your build name
+          buildPath: ${{ github.workspace }}/Builds
           
   deploy:
     name: Deploy to itch.io
@@ -55,7 +60,7 @@ jobs:
       run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> ${GITHUB_ENV}
     
     - name: List Build Directory Contents
-      run: ls -Rd */
+      run: ls -R "${{ needs.build.outputs.build-path }}"
 
     - name: Push Windows version to itch.io
       uses: manleydev/butler-publish-itchio-action@v1.0.3
@@ -65,4 +70,4 @@ jobs:
         ITCH_USER: ${{ secrets.MY_ITCH_USERNAME }}
         VERSION: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
         CHANNEL: windows
-        ENTRY_POINT: ${{ steps.unity_build.outputs.build-path }}
+        directory: ${{ needs.build.outputs.build-path }}
