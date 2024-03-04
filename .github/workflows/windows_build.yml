@@ -25,23 +25,16 @@ jobs:
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
             Library-
-
-      - name: Get Unity Editor
-        uses: unity-actions/get-editor@v1
-
-      - name: Build Unity project
+            
+      - name: Build project
         if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          # Unity Editor executable path
-          UNITY_EXECUTABLE="${{ env.UNITY_EXECUTABLE }}"
-          # Path to your Unity project
-          PROJECT_PATH="./"
-          # Build target (StandaloneWindows)
-          BUILD_TARGET="StandaloneWindows"
-          # Output path for the build
-          OUTPUT_PATH="./Build/Thesis.exe"
-          # Build the Unity project
-          $UNITY_EXECUTABLE -batchmode -projectPath $PROJECT_PATH -buildTarget $BUILD_TARGET -executeMethod BuildScript.PerformBuild -quit
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneWindows
           
   deploy:
     name: Deploy to itch.io
