@@ -28,6 +28,7 @@ jobs:
             
       - name: Build project
         if: steps.cache.outputs.cache-hit != 'true'
+        id: unity_build
         uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
