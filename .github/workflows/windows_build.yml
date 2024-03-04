@@ -44,12 +44,14 @@ jobs:
     steps:
       - name: Set release date
         run: echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
+      - name: Set short hash
+        run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> ${GITHUB_ENV}
 
-      - name: Push windows version to itch.io
+      - name: Push Windows version to itch.io
         uses: manleydev/butler-publish-itchio-action@v1.0.3
         env:
           BUTLER_CREDENTIALS: ${{ secrets.MY_ITCH_API_CODE }}
           ITCH_GAME: ${{ secrets.MY_ITCH_GAME }}
           ITCH_USER: ${{ secrets.MY_ITCH_USERNAME }}
           CHANNEL: win
-          VERSION: ${{ env.RELEASE_DATE }}
+          VERSION: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
