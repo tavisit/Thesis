@@ -48,7 +48,7 @@ jobs:
       - name: Push windows version to itch.io
         uses: manleydev/butler-publish-itchio-action@v1.0.3
         env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          BUTLER_CREDENTIALS: ${{ secrets.MY_ITCH_API_CODE }}
           ITCH_GAME: ${{ secrets.MY_ITCH_GAME }}
           ITCH_USER: ${{ secrets.MY_ITCH_USERNAME }}
           CHANNEL: win
