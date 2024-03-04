@@ -1,0 +1,1629 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Silk.NET.OpenAL</name>
+    </assembly>
+    <members>
+        <member name="T:Silk.NET.OpenAL.AL">
+            <summary>
+            Provides access to the OpenAL 1.1 API.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.#ctor(Silk.NET.Core.Contexts.INativeContext)">
+            <inheritdoc cref="!:NativeLibraryBase" />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.IsExtensionPresent(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.AL.SearchPaths">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetProcAddress(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetEnumValue(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GenBuffers(System.Int32,System.UInt32*)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.DeleteBuffers(System.Int32,System.UInt32*)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.IsBuffer(System.UInt32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.BufferData(System.UInt32,Silk.NET.OpenAL.BufferFormat,System.Void*,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetBufferProperty(System.UInt32,Silk.NET.OpenAL.BufferFloat,System.Single)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetBufferProperty(System.UInt32,Silk.NET.OpenAL.BufferVector3,System.Single,System.Single,System.Single)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetBufferProperty(System.UInt32,Silk.NET.OpenAL.BufferVector3,System.Numerics.Vector3@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetBufferProperty(System.UInt32,Silk.NET.OpenAL.BufferVector3,System.Single*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetBufferProperty(System.UInt32,Silk.NET.OpenAL.BufferInteger,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetBufferProperty(System.UInt32,Silk.NET.OpenAL.BufferInteger,System.Int32,System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetBufferProperty(System.UInt32,Silk.NET.OpenAL.BufferInteger,System.Int32*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetBufferProperty(System.UInt32,Silk.NET.OpenAL.BufferFloat,System.Single@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetBufferProperty(System.UInt32,Silk.NET.OpenAL.BufferVector3,System.Single@,System.Single@,System.Single@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetBufferProperty(System.UInt32,Silk.NET.OpenAL.BufferVector3,System.Numerics.Vector3@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetBufferProperty(System.UInt32,Silk.NET.OpenAL.BufferFloat,System.Single*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetBufferProperty(System.UInt32,Silk.NET.OpenAL.GetBufferInteger,System.Int32@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetBufferProperty(System.UInt32,Silk.NET.OpenAL.GetBufferInteger,System.Int32@,System.Int32@,System.Int32@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetBufferProperty(System.UInt32,Silk.NET.OpenAL.GetBufferInteger,System.Int32*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetError">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetListenerProperty(Silk.NET.OpenAL.ListenerFloat,System.Single)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetListenerProperty(Silk.NET.OpenAL.ListenerVector3,System.Single,System.Single,System.Single)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetListenerProperty(Silk.NET.OpenAL.ListenerVector3,System.Numerics.Vector3@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetListenerProperty(Silk.NET.OpenAL.ListenerFloatArray,System.Single*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetListenerProperty(Silk.NET.OpenAL.ListenerInteger,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetListenerProperty(Silk.NET.OpenAL.ListenerInteger,System.Int32,System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetListenerProperty(Silk.NET.OpenAL.ListenerInteger,System.Int32*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetListenerProperty(Silk.NET.OpenAL.ListenerFloat,System.Single@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetListenerProperty(Silk.NET.OpenAL.ListenerVector3,System.Single@,System.Single@,System.Single@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetListenerProperty(Silk.NET.OpenAL.ListenerVector3,System.Numerics.Vector3@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetListenerProperty(Silk.NET.OpenAL.ListenerFloatArray,System.Single*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetListenerProperty(Silk.NET.OpenAL.ListenerInteger,System.Int32@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetListenerProperty(Silk.NET.OpenAL.ListenerInteger,System.Int32@,System.Int32@,System.Int32@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetListenerProperty(Silk.NET.OpenAL.ListenerInteger,System.Int32*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GenSources(System.Int32,System.UInt32*)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.DeleteSources(System.Int32,System.UInt32*)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.IsSource(System.UInt32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceFloat,System.Single)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceVector3,System.Single,System.Single,System.Single)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceVector3,System.Numerics.Vector3@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceVector3,System.Single*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceBoolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceInteger,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceInteger,System.Int32,System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceInteger,System.Int32*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceInteger,System.UInt32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceInteger,System.UInt32,System.UInt32,System.UInt32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceInteger,System.UInt32*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceFloat,System.Single@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceBoolean,System.Boolean@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceVector3,System.Single@,System.Single@,System.Single@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceVector3,System.Numerics.Vector3@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceFloat,System.Single*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetSourceProperty(System.UInt32,Silk.NET.OpenAL.GetSourceInteger,System.Int32@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetSourceProperty(System.UInt32,Silk.NET.OpenAL.GetSourceInteger,System.Int32@,System.Int32@,System.Int32@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetSourceProperty(System.UInt32,Silk.NET.OpenAL.GetSourceInteger,System.Int32*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourcePlay(System.UInt32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourcePlay(System.Int32,System.UInt32*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourcePause(System.UInt32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourcePause(System.Int32,System.UInt32*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourceStop(System.UInt32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourceStop(System.Int32,System.UInt32*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourceRewind(System.UInt32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourceRewind(System.Int32,System.UInt32*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourceQueueBuffers(System.UInt32,System.Int32,System.UInt32*)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourceUnqueueBuffers(System.UInt32,System.Int32,System.UInt32*)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.Enable(Silk.NET.OpenAL.Capability)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.Disable(Silk.NET.OpenAL.Capability)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.IsEnabled(Silk.NET.OpenAL.Capability)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetStateProperty(Silk.NET.OpenAL.StateBoolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetStateProperty(Silk.NET.OpenAL.StateDouble)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetStateProperty(Silk.NET.OpenAL.StateFloat)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetStateProperty(Silk.NET.OpenAL.StateInteger)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetStateProperty(Silk.NET.OpenAL.StateString)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.DistanceModel(Silk.NET.OpenAL.DistanceModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.DopplerFactor(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SpeedOfSound(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetApi(System.Boolean)">
+            <summary>
+            Gets an instance of the API.
+            </summary>
+            <param name="soft">Prefer OpenAL Soft libraries.</param>
+            <returns>The instance.</returns>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.TryGetExtension``1(``0@)">
+            <summary>
+            Attempts to load a native OpenAL extension of type <typeparamref name="T" />.
+            </summary>
+            <param name="ext">The loaded extension.</param>
+            <typeparam name="T">Type of <see cref="T:Silk.NET.Core.Native.NativeExtension`1" /> to load.</typeparam>
+            <returns><c>true</c> if the extension was loaded, otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GetExtension``1">
+            <summary>
+            Gets an instance of the API of an extension to the API.
+            </summary>
+            <typeparam name="TExtension">The extension type.</typeparam>
+            <returns>The extension.</returns>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GenBuffers(System.Int32)">
+            <summary>
+            Creates one or more buffers.
+            </summary>
+            <param name="count">The number of slots to create.</param>
+            <returns>The slots.</returns>
+            <seealso cref="M:Silk.NET.OpenAL.AL.DeleteBuffers(System.UInt32[])" />
+            <seealso cref="M:Silk.NET.OpenAL.AL.IsBuffer(System.UInt32)" />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GenBuffer">
+            <summary>
+            Creates an buffer.
+            </summary>
+            <returns>The slot.</returns>
+            <seealso cref="M:Silk.NET.OpenAL.AL.DeleteBuffer(System.UInt32)" />
+            <seealso cref="M:Silk.NET.OpenAL.AL.IsBuffer(System.UInt32)" />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.DeleteBuffers(System.UInt32[])">
+            <summary>
+            Deletes and frees resources used for a set of buffers.
+            </summary>
+            <param name="slots">An array of slots to delete.</param>
+            <seealso cref="M:Silk.NET.OpenAL.AL.GenBuffers(System.Int32)" />
+            <seealso cref="M:Silk.NET.OpenAL.AL.IsBuffer(System.UInt32)" />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.DeleteBuffer(System.UInt32)">
+            <summary>
+            Deletes and frees resources used an buffer.
+            </summary>
+            <param name="slot">The slot to delete.</param>
+            <seealso cref="M:Silk.NET.OpenAL.AL.GenBuffer" />
+            <seealso cref="M:Silk.NET.OpenAL.AL.IsBuffer(System.UInt32)" />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.BufferData``1(System.UInt32,Silk.NET.OpenAL.BufferFormat,``0[],System.Int32)">
+            <summary>
+            Fills a buffer with audio data.
+            </summary>
+            <typeparam name="TElement">The type of the data.</typeparam>
+            <param name="buffer">The buffer to fill.</param>
+            <param name="format">The format of the data.</param>
+            <param name="data">The data.</param>
+            <param name="frequency">The frequency of the data.</param>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GenSources(System.Int32)">
+            <summary>
+            Creates one or more sources.
+            </summary>
+            <param name="count">The number of slots to create.</param>
+            <returns>The slots.</returns>
+            <seealso cref="M:Silk.NET.OpenAL.AL.DeleteSources(System.UInt32[])" />
+            <seealso cref="M:Silk.NET.OpenAL.AL.IsSource(System.UInt32)" />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.GenSource">
+            <summary>
+            Creates an source.
+            </summary>
+            <returns>The slot.</returns>
+            <seealso cref="M:Silk.NET.OpenAL.AL.DeleteSource(System.UInt32)" />
+            <seealso cref="M:Silk.NET.OpenAL.AL.IsSource(System.UInt32)" />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.DeleteSources(System.UInt32[])">
+            <summary>
+            Deletes and frees resources used for a set of sources.
+            </summary>
+            <param name="slots">An array of slots to delete.</param>
+            <seealso cref="M:Silk.NET.OpenAL.AL.GenSources(System.Int32)" />
+            <seealso cref="M:Silk.NET.OpenAL.AL.IsSource(System.UInt32)" />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.DeleteSource(System.UInt32)">
+            <summary>
+            Deletes and frees resources used an source.
+            </summary>
+            <param name="slot">The slot to delete.</param>
+            <seealso cref="M:Silk.NET.OpenAL.AL.GenSource" />
+            <seealso cref="M:Silk.NET.OpenAL.AL.IsSource(System.UInt32)" />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourcePlay(System.UInt32[])">
+            <summary>
+            Plays a set of sources.
+            </summary>
+            <param name="sources">The sources to play.</param>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourcePause(System.UInt32[])">
+            <summary>
+            Pauses a set of sources.
+            </summary>
+            <param name="sources">The sources to pause.</param>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourceStop(System.UInt32[])">
+            <summary>
+            Stops a set of sources.
+            </summary>
+            <param name="sources">The sources to stop.</param>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourceRewind(System.UInt32[])">
+            <summary>
+            Rewinds a set of sources.
+            </summary>
+            <param name="sources">The sources to rewind.</param>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourceQueueBuffers(System.UInt32,System.UInt32[])">
+            <summary>
+            Queues a set of buffers on the source. All buffers attached to a source will be played in sequence, and the
+            number of processed buffers can be detected using a call to
+            <see cref="M:Silk.NET.OpenAL.AL.GetSourceProperty(System.UInt32,Silk.NET.OpenAL.SourceFloat,System.Single@)" />.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="buffers">The buffers.</param>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AL.SourceUnqueueBuffers(System.UInt32,System.UInt32[])">
+            <summary>
+            Unqueues a set of buffers on the source. The number of processed buffers can be detected using a call to
+            <see cref="M:Silk.NET.OpenAL.AL.GetSourceProperty(System.UInt32,Silk.NET.OpenAL.GetSourceInteger,System.Int32@)" />, which is the maximum number of
+            buffers that can be unqueued during this call.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="buffers">The buffers.</param>
+        </member>
+        <member name="T:Silk.NET.OpenAL.AudioError">
+            <summary>
+            Returned by AL.GetError.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.AudioError.NoError">
+            <summary>
+            No OpenAL Error.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.AudioError.InvalidName">
+            <summary>
+            Invalid Name paramater passed to OpenAL call.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.AudioError.IllegalEnum">
+            <summary>
+            Invalid parameter passed to OpenAL call.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.AudioError.InvalidEnum">
+            <summary>
+            Invalid parameter passed to OpenAL call.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.AudioError.InvalidValue">
+            <summary>
+            Invalid OpenAL enum parameter value.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.AudioError.IllegalCommand">
+            <summary>
+            Illegal OpenAL call.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.AudioError.InvalidOperation">
+            <summary>
+            Illegal OpenAL call.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.AudioError.OutOfMemory">
+            <summary>
+            No OpenAL memory left.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.BufferFloat">
+            <summary>
+            A list of valid <see cref="T:System.Single" /> Buffer/GetBuffer parameters.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.BufferFormat">
+            <summary>
+            Sound samples: Format specifier.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.BufferFormat.Mono8">
+            <summary>
+            1 Channel, 8 bits per sample.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.BufferFormat.Mono16">
+            <summary>
+            1 Channel, 16 bits per sample.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.BufferFormat.Stereo8">
+            <summary>
+            2 Channels, 8 bits per sample each.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.BufferFormat.Stereo16">
+            <summary>
+            2 Channels, 16 bits per sample each.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.BufferInteger">
+            <summary>
+            A list of valid <see cref="T:System.Int32" /> Buffer/GetBuffer parameters.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.BufferState">
+            <summary>
+            Buffer state. Not supported for public use (yet).
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.BufferState.Unused">
+            <summary>
+            Buffer state. Not supported for public use (yet).
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.BufferState.Pending">
+            <summary>
+            Buffer state. Not supported for public use (yet).
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.BufferState.Processed">
+            <summary>
+            Buffer state. Not supported for public use (yet).
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.BufferVector3">
+            <summary>
+            A list of valid <see cref="T:System.Numerics.Vector3" /> Buffer/GetBuffer parameters.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.GetBufferInteger">
+            <summary>
+            A list of valid Int32 GetBuffer parameters.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetBufferInteger.Frequency">
+            <summary>
+            Sound sample's frequency, in units of hertz [Hz]. This is the number of samples per second. Half of the sample
+            frequency marks the maximum significant frequency component.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetBufferInteger.Bits">
+            <summary>
+            Bit depth of the buffer. Should be 8 or 16.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetBufferInteger.Channels">
+            <summary>
+            Number of channels in buffer. > 1 is valid, but buffer won’t be positioned when played. 1 for Mono, 2 for
+            Stereo.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetBufferInteger.Size">
+            <summary>
+            size of the Buffer in bytes.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.Capability">
+            <summary>
+            A list of valid Enable/Disable/IsEnabled parameters.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.Capability.Invalid">
+            <summary>
+            Currently no state toggles exist for vanilla OpenAL and no Extension uses it.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.DistanceModel">
+            <summary>
+            Used by AL.DistanceModel(), the distance model can be retrieved by AL.Get() with
+            ALGetInteger.DistanceModel.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.DistanceModel.None">
+            <summary>
+            Bypasses all distance attenuation calculation for all Sources.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.DistanceModel.InverseDistance">
+            <summary>
+            InverseDistance is equivalent to the IASIG I3DL2 model with the exception that SourceFloat.ReferenceDistance
+            does not imply any clamping.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.DistanceModel.InverseDistanceClamped">
+            <summary>
+            InverseDistanceClamped is the IASIG I3DL2 model, with SourceFloat.ReferenceDistance indicating both the
+            reference distance and the distance below which gain will be clamped.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.DistanceModel.LinearDistance">
+            <summary>
+            AL_EXT_LINEAR_DISTANCE extension.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.DistanceModel.LinearDistanceClamped">
+            <summary>
+            AL_EXT_LINEAR_DISTANCE extension.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.DistanceModel.ExponentDistance">
+            <summary>
+            AL_EXT_EXPONENT_DISTANCE extension.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.DistanceModel.ExponentDistanceClamped">
+            <summary>
+            AL_EXT_EXPONENT_DISTANCE extension.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.ListenerFloat">
+            <summary>
+            A list of valid 32-bit Float Listener/GetListener parameters.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.ListenerFloat.Gain">
+            <summary>
+            Indicate the gain (Volume amplification) applied. Type: float Range: [0.0f - ? ] A value of 1.0 means
+            un-attenuated/unchanged. Each division by 2 equals an attenuation of -6dB. Each multiplicaton with 2 equals an
+            amplification of +6dB. A value of 0.0f is interpreted as zero volume and the channel is effectively disabled.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.ListenerFloatArray">
+            <summary>
+            A list of valid float[] Listener/GetListener parameters.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.ListenerFloatArray.Orientation">
+            <summary>
+            Indicate Listener orientation. Expects two Vector3, At followed by Up.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.ListenerInteger">
+            <summary>
+            A list of valid <see cref="T:System.Int32" /> Listener/GetListener parameters.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.ListenerVector3">
+            <summary>
+            A list of valid Math.Vector3 Listener/GetListener parameters.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.ListenerVector3.Position">
+            <summary>
+            Specify the current location in three dimensional space. OpenAL, like OpenGL, uses a right handed coordinate
+            system, where in a frontal default view X (thumb) points right, Y points up (index finger), and Z points towards
+            the viewer/camera (middle finger). To switch from a left handed coordinate system, flip the sign on the Z
+            coordinate. Listener position is always in the world coordinate system.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.ListenerVector3.Velocity">
+            <summary>
+            Specify the current velocity in three dimensional space.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.GetSourceInteger">
+            <summary>
+            A list of valid Int32 GetSource parameters.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetSourceInteger.ByteOffset">
+            <summary>
+            The playback position, expressed in bytes. AL_EXT_OFFSET Extension.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetSourceInteger.SampleOffset">
+            <summary>
+            The playback position, expressed in samples. AL_EXT_OFFSET Extension.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetSourceInteger.Buffer">
+            <summary>
+            Indicate the Buffer to provide sound samples. Type: uint Range: any valid Buffer Handle.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetSourceInteger.SourceState">
+            <summary>
+            The state of the source (Stopped, Playing, etc.) Use the enum AlSourceState for comparison.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetSourceInteger.BuffersQueued">
+            <summary>
+            The number of buffers queued on this source.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetSourceInteger.BuffersProcessed">
+            <summary>
+            The number of buffers in the queue that have been processed.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetSourceInteger.SourceType">
+            <summary>
+            Source type (Static, Streaming or undetermined). Use enum AlSourceType for comparison.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.SourceBoolean">
+            <summary>
+            A list of valid 8-bit boolean Source/GetSource parameters.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceBoolean.SourceRelative">
+            <summary>
+            Indicate that the Source has relative coordinates. Type: bool Range: [True, False].
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceBoolean.Looping">
+            <summary>
+            Indicate whether the Source is looping. Type: bool Range: [True, False] Default: False.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.SourceFloat">
+            <summary>
+            A list of valid 32-bit Float Source/GetSource parameters.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceFloat.ReferenceDistance">
+            <summary>
+            Source specific reference distance. Type: float Range: [0.0f - float.PositiveInfinity] At 0.0f, no distance
+            attenuation occurs. Type: float Default: 1.0f.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceFloat.MaxDistance">
+            <summary>
+            Indicate distance above which Sources are not attenuated using the inverse clamped distance model. Default:
+            float.PositiveInfinity Type: float Range: [0.0f - float.PositiveInfinity].
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceFloat.RolloffFactor">
+            <summary>
+            Source specific rolloff factor. Type: float Range: [0.0f - float.PositiveInfinity].
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceFloat.Pitch">
+            <summary>
+            Specify the pitch to be applied, either at Source, or on mixer results, at Listener. Range: [0.5f - 2.0f]
+            Default: 1.0f.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceFloat.Gain">
+            <summary>
+            Indicate the gain (volume amplification) applied. Type: float. Range: [0.0f - ? ] A value of 1.0 means
+            un-attenuated/unchanged. Each division by 2 equals an attenuation of -6dB. Each multiplicaton with 2 equals an
+            amplification of +6dB. A value of 0.0f is meaningless with respect to a logarithmic scale; it is interpreted as
+            zero volume - the channel is effectively disabled.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceFloat.MinGain">
+            <summary>
+            Indicate minimum Source attenuation. Type: float Range: [0.0f - 1.0f] (Logarthmic).
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceFloat.MaxGain">
+            <summary>
+            Indicate maximum Source attenuation. Type: float Range: [0.0f - 1.0f] (Logarthmic).
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceFloat.ConeInnerAngle">
+            <summary>
+            Directional Source, inner cone angle, in degrees. Range: [0-360] Default: 360.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceFloat.ConeOuterAngle">
+            <summary>
+            Directional Source, outer cone angle, in degrees. Range: [0-360] Default: 360.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceFloat.ConeOuterGain">
+            <summary>
+            Directional Source, outer cone gain. Default: 0.0f Range: [0.0f - 1.0] (Logarithmic).
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceFloat.SecOffset">
+            <summary>
+            The playback position, expressed in seconds.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.SourceInteger">
+            <summary>
+            A list of valid Int32 Source parameters.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceInteger.ByteOffset">
+            <summary>
+            The playback position, expressed in bytes.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceInteger.SampleOffset">
+            <summary>
+            The playback position, expressed in samples.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceInteger.Buffer">
+            <summary>
+            Indicate the Buffer to provide sound samples. Type: uint Range: any valid Buffer Handle.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceInteger.SourceType">
+            <summary>
+            Source type (Static, Streaming or undetermined). Use enum AlSourceType for comparison.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.SourceState">
+            <summary>
+            Source state information, can be retrieved by AL.Source() with SourceInteger.SourceState.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceState.Initial">
+            <summary>
+            Default State when loaded, can be manually set with AL.SourceRewind().
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceState.Playing">
+            <summary>
+            The source is currently playing.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceState.Paused">
+            <summary>
+            The source has paused playback.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceState.Stopped">
+            <summary>
+            The source is not playing.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.SourceType">
+            <summary>
+            Source type information,  can be retrieved by AL.Source() with SourceInteger.SourceType.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceType.Static">
+            <summary>
+            Source is Static if a Buffer has been attached using AL.Source with the parameter Sourcei.Buffer.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceType.Streaming">
+            <summary>
+            Source is Streaming if one or more Buffers have been attached using AL.SourceQueueBuffers.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceType.Undetermined">
+            <summary>
+            Source is undetermined when it has a null Buffer attached.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.SourceVector3">
+            <summary>
+            A list of valid Math.Vector3 Source/GetSource parameters.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceVector3.Position">
+            <summary>
+            Specify the current location in three dimensional space. OpenAL, like OpenGL, uses a right handed coordinate
+            system, where in a frontal default view X (thumb) points right, Y points up (index finger), and Z points towards
+            the viewer/camera (middle finger). To switch from a left handed coordinate system, flip the sign on the Z
+            coordinate. Listener position is always in the world coordinate system.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceVector3.Velocity">
+            <summary>
+            Specify the current velocity in three dimensional space.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.SourceVector3.Direction">
+            <summary>
+            Specify the current direction vector.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.StateBoolean">
+            <summary>
+            A list of valid <see cref="T:System.Boolean" /> parameters for <see cref="!:IState.GetStateProperty(StateBoolean)" />.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.StateBoolean.HasDopplerFactor">
+            <summary>
+            Determines whether or not the state has a doppler factor set.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.StateBoolean.HasDopplerVelocity">
+            <summary>
+            Determines whether or not the state has a doppler velocity set.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.StateBoolean.IsDistanceModelInverseDistanceClamped">
+            <summary>
+            Determines whether or not the state's distance model is the clamped inverse distance model.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.StateBoolean.HasSpeedOfSound">
+            <summary>
+            Determines whether or not the state has a speed of sound set.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.StateDouble">
+            <summary>
+            A list of valid <see cref="T:System.Double" /> <see cref="!:IState.GetStateProperty(StateDouble)" /> parameters.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.StateDouble.DopplerFactor">
+            <summary>
+            Scale for source and listener velocities.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.StateDouble.SpeedOfSound">
+            <summary>
+            The speed at which sound waves are assumed to travel, when calculating the doppler effect.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.StateFloat">
+            <summary>
+            A list of valid 32-bit Float AL.Get() parameters.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.StateFloat.DopplerFactor">
+            <summary>
+            Doppler scale. Default 1.0f.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.StateFloat.SpeedOfSound">
+            <summary>
+            Speed of Sound in units per second. Default: 343.3f.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.StateInteger">
+            <summary>
+            A list of valid Int32 AL.Get() parameters.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.StateInteger.DistanceModel">
+            <summary>
+            Gets the distance model. The return value corresponds to one of the members in
+            <see cref="T:Silk.NET.OpenAL.DistanceModel" />.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.StateString">
+            <summary>
+            A list of valid string AL.Get() parameters.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.StateString.Vendor">
+            <summary>
+            Gets the Vendor name.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.StateString.Version">
+            <summary>
+            Gets the driver version.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.StateString.Renderer">
+            <summary>
+            Gets the renderer mode.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.StateString.Extensions">
+            <summary>
+            Gets a list of all available Extensions, separated with spaces.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.ALContext">
+            <summary>
+            Provides access to the OpenAL 1.1 context API.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.#ctor(Silk.NET.Core.Contexts.INativeContext)">
+            <inheritdoc cref="!:NativeLibraryBase" />
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.CreateContext(Silk.NET.OpenAL.Device*,System.Int32*)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.MakeContextCurrent(Silk.NET.OpenAL.Context*)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.ProcessContext(Silk.NET.OpenAL.Context*)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.SuspendContext(Silk.NET.OpenAL.Context*)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.DestroyContext(Silk.NET.OpenAL.Context*)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.GetCurrentContext">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.GetContextsDevice(Silk.NET.OpenAL.Context*)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.OpenDevice(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.CloseDevice(Silk.NET.OpenAL.Device*)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.GetError(Silk.NET.OpenAL.Device*)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.IsExtensionPresent(Silk.NET.OpenAL.Device*,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.GetProcAddress(Silk.NET.OpenAL.Device*,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.GetEnumValue(Silk.NET.OpenAL.Device*,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.GetContextProperty(Silk.NET.OpenAL.Device*,Silk.NET.OpenAL.GetContextString)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.GetContextProperty(Silk.NET.OpenAL.Device*,Silk.NET.OpenAL.GetContextInteger,System.Int32,System.IntPtr)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.GetContextProperty(Silk.NET.OpenAL.Device*,Silk.NET.OpenAL.GetContextInteger,System.Int32,System.Int32*)">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.GetApi(System.Boolean)">
+            <summary>
+            Gets an instance of the API.
+            </summary>
+            <param name="soft">Prefer OpenAL Soft libraries.</param>
+            <returns>The instance.</returns>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.TryGetExtension``1(Silk.NET.OpenAL.Device*,``0@)">
+            <summary>
+            Attempts to load the given extension.
+            </summary>
+            <typeparam name="T">The extension type.</typeparam>
+            <param name="device">The device the context is on.</param>
+            <param name="ext">The extension to check for.</param>
+            <returns>Whether the extension is available.</returns>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.GetExtension``1(Silk.NET.OpenAL.Device*)">
+            <summary>
+            Gets an instance of the API of an extension to the API.
+            </summary>
+            <typeparam name="TContextExtension">The extension type.</typeparam>
+            <param name="device">The device the context is on.</param>
+            <returns>The extension.</returns>
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.CreateContextHandle(Silk.NET.OpenAL.Device*,System.Int32*)">
+            <inheritdoc cref="M:Silk.NET.OpenAL.ALContext.CreateContext(Silk.NET.OpenAL.Device*,System.Int32*)" />
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.MakeContextCurrent(System.IntPtr)">
+            <inheritdoc cref="M:Silk.NET.OpenAL.ALContext.MakeContextCurrent(Silk.NET.OpenAL.Context*)" />
+        </member>
+        <member name="M:Silk.NET.OpenAL.ALContext.GetCurrentContextHandle">
+            <inheritdoc cref="M:Silk.NET.OpenAL.ALContext.GetCurrentContext" />
+        </member>
+        <member name="T:Silk.NET.OpenAL.ContextAttributes">
+            <summary>
+            Defines available context attributes.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.ContextAttributes.Frequency">
+            <summary>
+            Followed by System.Int32 Hz
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.ContextAttributes.Refresh">
+            <summary>
+            Followed by System.Int32 Hz
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.ContextAttributes.Sync">
+            <summary>
+            Followed by AlBoolean.True, or AlBoolean.False
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.ContextAttributes.MonoSources">
+            <summary>
+            Followed by System.Int32 Num of requested Mono (3D) Sources
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.ContextAttributes.StereoSources">
+            <summary>
+            Followed by System.Int32 Num of requested Stereo Sources
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.ContextError">
+            <summary>
+            Defines OpenAL context errors.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.ContextError.NoError">
+            <summary>
+            There is no current error.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.ContextError.InvalidDevice">
+            <summary>
+            No Device. The device handle or specifier names an inaccessible driver/server.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.ContextError.InvalidContext">
+            <summary>
+            Invalid context ID. The Context argument does not name a valid context.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.ContextError.InvalidEnum">
+            <summary>
+            Bad enum. A token used is not valid, or not applicable.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.ContextError.InvalidValue">
+            <summary>
+            Bad value. A value (e.g. Attribute) is not valid, or not applicable.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.ContextError.OutOfMemory">
+            <summary>
+            Out of memory. Unable to allocate memory.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.GetContextInteger">
+            <summary>
+            Defines available parameters for
+            <see cref="!:IContextState.GetContextProperty(Device*, GetContextInteger, int, System.IntPtr)" />.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetContextInteger.MajorVersion">
+            <summary>
+            The specification revision for this implementation (major version). NULL is an acceptable device.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetContextInteger.MinorVersion">
+            <summary>
+            The specification revision for this implementation (minor version). NULL is an acceptable device.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetContextInteger.AttributesSize">
+            <summary>
+            The size (number of ALCint values) required for a zero-terminated attributes list, for the current context.
+            NULL is an invalid device.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetContextInteger.AllAttributes">
+            <summary>
+            Expects a destination of ALC_ATTRIBUTES_SIZE, and provides an attribute list for the current context of the
+            specified device. NULL is an invalid device.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.GetContextString">
+            <summary>
+            Defines available parameters for <see cref="!:IContextState.GetContextProperty(Device*,GetContextString)" />.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetContextString.Extensions">
+            <summary>
+            A list of available context extensions separated by spaces.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.GetContextString.DeviceSpecifier">
+            <summary>
+            Gets the name of the provided device.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.AlcVersion">
+            <summary>
+            Defines the known OpenAL versions.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.AlcVersion.Alc10">
+            <summary>
+            OpenAL 1.0.
+            </summary>
+        </member>
+        <member name="F:Silk.NET.OpenAL.AlcVersion.Alc11">
+            <summary>
+            OpenAL 1.1.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.Attributes.FormatHelpers">
+            <summary>
+            Helper methods for buffer formats.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.Attributes.FormatHelpers.GetFormatSize``1(``0)">
+            <summary>
+            Gets the native byte size of the given format.
+            </summary>
+            <typeparam name="TFormat">The format type.</typeparam>
+            <param name="format">The format.</param>
+            <returns>The size.</returns>
+        </member>
+        <member name="T:Silk.NET.OpenAL.Attributes.FormatSizeAttribute">
+            <summary>
+            Specifies the native size of one sample of a given buffer format.
+            </summary>
+        </member>
+        <member name="P:Silk.NET.OpenAL.Attributes.FormatSizeAttribute.Size">
+            <summary>
+            Gets or sets the native size of the buffer format. Defaults to one byte.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.AudioContext">
+            <summary>
+            Provides methods to instantiate, use and destroy an audio context for playback.
+            Static methods are provided to list available devices known by the driver.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContext.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Silk.NET.OpenAL.AudioContext" /> class using the default audio device.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContext.#ctor(System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Silk.NET.OpenAL.AudioContext" /> class using the specified audio device and
+            device parameters.
+            </summary>
+            <param name="device">The name of the audio device to use.</param>
+            <param name="freq">Frequency for mixing output buffer, in units of Hz. Pass 0 for driver default.</param>
+            <remarks>
+            Use AudioContext.AvailableDevices to obtain a list of all available audio devices.
+            devices.
+            </remarks>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContext.#ctor(System.String,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Silk.NET.OpenAL.AudioContext" /> class using the specified audio device and
+            device parameters.
+            </summary>
+            <param name="device">The name of the audio device to use.</param>
+            <param name="freq">Frequency for mixing output buffer, in units of Hz. Pass 0 for driver default.</param>
+            <param name="refresh">Refresh intervals, in units of Hz. Pass 0 for driver default.</param>
+            <remarks>
+            Use AudioContext.AvailableDevices to obtain a list of all available audio devices.
+            devices.
+            </remarks>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContext.#ctor(System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Silk.NET.OpenAL.AudioContext" /> class using the specified audio device and
+            device parameters.
+            </summary>
+            <param name="device">The device descriptor obtained through AudioContext.AvailableDevices.</param>
+            <param name="freq">Frequency for mixing output buffer, in units of Hz. Pass 0 for driver default.</param>
+            <param name="refresh">Refresh intervals, in units of Hz. Pass 0 for driver default.</param>
+            <param name="sync">Flag, indicating a synchronous context.</param>
+            <exception cref="T:System.ArgumentNullException">Occurs when the device string is invalid.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Occurs when a specified parameter is invalid.</exception>
+            <exception cref="T:Silk.NET.OpenAL.AudioDeviceException">
+            Occurs when the specified device is not available, or is in use by another program.
+            </exception>
+            <exception cref="T:Silk.NET.OpenAL.AudioContextException">
+            Occurs when an audio context could not be created with the specified parameters.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Occurs when an AudioContext already exists.
+            </exception>
+            <remarks>
+             <para>For maximum compatibility, you are strongly recommended to use the default constructor.</para>
+             <para>Multiple AudioContexts are not supported at this point.</para>
+             <para>
+            The number of auxiliary EFX sends depends on the audio hardware and drivers. Most Realtek devices, as well
+            as the Creative SB Live!, support 1 auxiliary send. Creative's Audigy and X-Fi series support 4 sends.
+            Values higher than supported will be clamped by the driver.
+             </para>
+            </remarks>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContext.#ctor(System.String,System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Silk.NET.OpenAL.AudioContext" /> class using the specified audio device and
+            device parameters.
+            </summary>
+            <param name="device">The device descriptor obtained through AudioContext.AvailableDevices.</param>
+            <param name="attributes">The context attributes to use.</param>
+            <exception cref="T:System.ArgumentNullException">Occurs when the device string is invalid.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">Occurs when a specified parameter is invalid.</exception>
+            <exception cref="T:Silk.NET.OpenAL.AudioDeviceException">
+            Occurs when the specified device is not available, or is in use by another program.
+            </exception>
+            <exception cref="T:Silk.NET.OpenAL.AudioContextException">
+            Occurs when an audio context could not be created with the specified parameters.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Occurs when an AudioContext already exists.
+            </exception>
+            <remarks>
+            For maximum compatibility, you are strongly recommended to use the default constructor.
+            <para />
+            Multiple AudioContexts are not supported at this point.
+            <para />
+            </remarks>
+        </member>
+        <member name="P:Silk.NET.OpenAL.AudioContext.CurrentContext">
+            <summary>
+            Gets the <see cref="T:Silk.NET.OpenAL.AudioContext" /> which is current in the application.
+            </summary>
+            <remarks>
+            Only one AudioContext can be current in the application at any time,
+            <b>regardless of the number of threads</b>.
+            </remarks>
+        </member>
+        <member name="P:Silk.NET.OpenAL.AudioContext.IsCurrent">
+            <summary>
+            Gets or sets a value indicating whether the <see cref="T:Silk.NET.OpenAL.AudioContext" /> is current.
+            </summary>
+            <remarks>
+            Only one <see cref="T:Silk.NET.OpenAL.AudioContext" /> can be current in the application at any time,
+            <b>regardless of the number of threads</b>.
+            </remarks>
+        </member>
+        <member name="P:Silk.NET.OpenAL.AudioContext.CurrentError">
+            <summary>
+            Gets the ALC error code for this instance.
+            </summary>
+        </member>
+        <member name="P:Silk.NET.OpenAL.AudioContext.IsProcessing">
+            <summary>
+            Gets a value indicating whether the AudioContext is
+            currently processing audio events.
+            </summary>
+            <seealso cref="M:Silk.NET.OpenAL.AudioContext.Process" />
+            <seealso cref="M:Silk.NET.OpenAL.AudioContext.Suspend" />
+        </member>
+        <member name="P:Silk.NET.OpenAL.AudioContext.IsSynchronized">
+            <summary>
+            Gets a value indicating whether the AudioContext is
+            synchronized.
+            </summary>
+            <seealso cref="M:Silk.NET.OpenAL.AudioContext.Process" />
+        </member>
+        <member name="P:Silk.NET.OpenAL.AudioContext.CurrentDevice">
+            <summary>
+            Gets a System.String with the name of the device used in this context.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContext.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContext.MakeCurrent(Silk.NET.OpenAL.AudioContext)">
+            \internal
+            <summary>
+            Makes the specified AudioContext current in the calling thread.
+            </summary>
+            <param name="context">The <see cref="T:Silk.NET.OpenAL.AudioContext" /> to make current, or null.</param>
+            <exception cref="T:System.ObjectDisposedException">
+            Occurs if this function is called after the AudioContext has been disposed.
+            </exception>
+            <exception cref="T:Silk.NET.OpenAL.AudioContextException">
+            Occurs when the AudioContext could not be made current.
+            </exception>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContext.CreateContext(System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Creates the audio context using the specified device.
+            </summary>
+            <param name="device">
+            The device descriptor obtained through AudioContext.AvailableDevices, or null for the default
+            device.
+            </param>
+            <param name="frequency">Frequency for mixing output buffer, in units of Hz. Pass 0 for driver default.</param>
+            <param name="refreshRate">Refresh intervals, in units of Hz. Pass 0 for driver default.</param>
+            <param name="isSynchronous">Flag, indicating a synchronous context.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Occurs when a specified parameter is invalid.</exception>
+            <exception cref="T:Silk.NET.OpenAL.AudioDeviceException">
+            Occurs when the specified device is not available, or is in use by another program.
+            </exception>
+            <exception cref="T:Silk.NET.OpenAL.AudioContextException">
+            Occurs when an audio context could not be created with the specified parameters.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Occurs when an AudioContext already exists.
+            </exception>
+            <remarks>
+             <para>For maximum compatibility, you are strongly recommended to use the default constructor.</para>
+             <para>Multiple AudioContexts are not supported at this point.</para>
+            </remarks>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContext.CreateContext(System.String,System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Creates the audio context using the specified device.
+            </summary>
+            <param name="device">
+            The device descriptor obtained through AudioContext.AvailableDevices, or null for the default
+            device.
+            </param>
+            <param name="attributes">The attributes to use.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Occurs when a specified parameter is invalid.</exception>
+            <exception cref="T:Silk.NET.OpenAL.AudioDeviceException">
+            Occurs when the specified device is not available, or is in use by another program.
+            </exception>
+            <exception cref="T:Silk.NET.OpenAL.AudioContextException">
+            Occurs when an audio context could not be created with the specified parameters.
+            </exception>
+            <exception cref="T:System.NotSupportedException">
+            Occurs when an AudioContext already exists.
+            </exception>
+            <remarks>
+             <para>For maximum compatibility, you are strongly recommended to use the default constructor.</para>
+             <para>Multiple AudioContexts are not supported at this point.</para>
+            </remarks>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContext.MakeCurrent">
+            <summary>
+            Makes the AudioContext current in the calling thread.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">
+            Occurs if this function is called after the AudioContext has been disposed.
+            </exception>
+            <exception cref="T:Silk.NET.OpenAL.AudioContextException">
+            Occurs when the AudioContext could not be made current.
+            </exception>
+            <remarks>
+            Only one AudioContext can be current in the application at any time,
+            <b>regardless of the number of threads</b>.
+            </remarks>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContext.Process">
+            <summary>
+            Processes queued audio events.
+            </summary>
+            <remarks>
+             <para>
+            If AudioContext.IsSynchronized is true, this function will resume
+            the internal audio processing thread. If AudioContext.IsSynchronized is false,
+            you will need to call this function multiple times per second to process
+            audio events.
+             </para>
+             <para>
+            In some implementations this function may have no effect.
+             </para>
+            </remarks>
+            <exception cref="T:System.ObjectDisposedException">Occurs when this function is called after the AudioContext had been disposed.</exception>
+            <seealso cref="M:Silk.NET.OpenAL.AudioContext.Suspend" />
+            <seealso cref="P:Silk.NET.OpenAL.AudioContext.IsProcessing" />
+            <seealso cref="P:Silk.NET.OpenAL.AudioContext.IsSynchronized" />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContext.Suspend">
+            <summary>
+            Suspends processing of audio events.
+            </summary>
+            <remarks>
+             <para>
+            To avoid audio artifacts when calling this function, set audio gain to zero before
+            suspending an AudioContext.
+             </para>
+             <para>
+            In some implementations, it can be faster to suspend processing before changing
+            AudioContext state.
+             </para>
+             <para>
+            In some implementations this function may have no effect.
+             </para>
+            </remarks>
+            <exception cref="T:System.ObjectDisposedException">Occurs when this function is called after the AudioContext had been disposed.</exception>
+            <seealso cref="M:Silk.NET.OpenAL.AudioContext.Process" />
+            <seealso cref="P:Silk.NET.OpenAL.AudioContext.IsProcessing" />
+            <seealso cref="P:Silk.NET.OpenAL.AudioContext.IsSynchronized" />
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContext.SupportsExtension(System.String)">
+            <summary>
+            Checks whether the specified OpenAL extension is supported.
+            </summary>
+            <param name="extension">The name of the extension to check (e.g. "ALC_EXT_EFX").</param>
+            <returns>true if the extension is supported; false otherwise.</returns>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContext.Finalize">
+            <summary>
+            Finalizes an instance of the <see cref="T:Silk.NET.OpenAL.AudioContext" /> class.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContext.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that desrcibes this instance.
+            </summary>
+            <returns>A <see cref="T:System.String" /> that desrcibes this instance.</returns>
+        </member>
+        <member name="T:Silk.NET.OpenAL.AudioContextException">
+            <summary>
+            Represents exceptions related to an <see cref="T:Silk.NET.OpenAL.AudioContext" />.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContextException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Silk.NET.OpenAL.AudioContextException" /> class.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioContextException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Silk.NET.OpenAL.AudioContextException" /> class.
+            </summary>
+            <param name="message">The error message of the AudioContextException.</param>
+        </member>
+        <member name="T:Silk.NET.OpenAL.AudioDeviceException">
+            <summary>
+            Represents exceptions related to a <see cref="T:Silk.NET.OpenAL.Device" />.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioDeviceException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Silk.NET.OpenAL.AudioDeviceException" /> class.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioDeviceException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Silk.NET.OpenAL.AudioDeviceException" /> class.
+            </summary>
+            <param name="message">The error message of the AudioDeviceException.</param>
+        </member>
+        <member name="T:Silk.NET.OpenAL.AudioException">
+            <summary>
+            Represents exceptions related to the audio subsystem.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Silk.NET.OpenAL.AudioException" /> class.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Silk.NET.OpenAL.AudioException" /> class.
+            </summary>
+            <param name="message">The error message of the AudioException.</param>
+        </member>
+        <member name="T:Silk.NET.OpenAL.AudioValueException">
+            <summary>
+            Represents exceptions related to invalid values.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioValueException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Silk.NET.OpenAL.AudioValueException" /> class.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.AudioValueException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Silk.NET.OpenAL.AudioValueException" /> class.
+            </summary>
+            <param name="message">The error message of the AudioContextException.</param>
+        </member>
+        <member name="T:Silk.NET.OpenAL.Context">
+            <summary>
+            Opaque handle to an OpenAL context.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.Device">
+            <summary>
+            Opaque handle to an OpenAL device.
+            </summary>
+        </member>
+        <member name="T:Silk.NET.OpenAL.Extensions.ALExtensionLoader">
+            <summary>
+            A loader for OpenAL extensions.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.Extensions.ALExtensionLoader.LoadContextExtension``1(Silk.NET.OpenAL.ALContext)">
+            <summary>
+            Loads the API for the given extension, using the base API.
+            </summary>
+            <param name="device">The device of the context.</param>
+            <param name="baseAPI">The base API instance.</param>
+            <typeparam name="TContextExtension">The extension type.</typeparam>
+            <returns>The extension.</returns>
+            <exception cref="!:ExtensionNotSupportedException">Thrown if the API doesn't support the extension.</exception>
+        </member>
+        <member name="T:Silk.NET.OpenAL.Extensions.ContextExtensionBase">
+            <summary>
+            Base class for OpenAL context extensions.
+            </summary>
+        </member>
+        <member name="M:Silk.NET.OpenAL.Extensions.ContextExtensionBase.#ctor(Silk.NET.Core.Contexts.INativeContext)">
+            <inheritdoc cref="!:NativeLibraryBase" />
+        </member>
+        <member name="T:Silk.NET.OpenAL.Extensions.FormatExtensionBase`1">
+            <summary>
+            Base class for OpenAL extensions that add audio formats.
+            </summary>
+            <typeparam name="TExtendedBufferFormat">The extended buffer format enumeration.</typeparam>
+        </member>
+        <member name="M:Silk.NET.OpenAL.Extensions.FormatExtensionBase`1.#ctor(Silk.NET.Core.Contexts.INativeContext)">
+            <inheritdoc cref="!:ExtensionBase" />
+        </member>
+        <member name="M:Silk.NET.OpenAL.Extensions.FormatExtensionBase`1.BufferData(System.UInt32,`0,System.Void*,System.Int32,System.Int32)">
+            <inheritdoc cref = "M:Silk.NET.OpenAL.Extensions.FormatExtensionBase`1.BufferData(System.UInt32,`0,System.Void*,System.Int32,System.Int32)"/>
+        </member>
+        <member name="M:Silk.NET.OpenAL.Extensions.FormatExtensionBase`1.BufferData``1(System.UInt32,`0,``0[],System.Int32)">
+            <summary>
+            Fills a buffer with audio data.
+            </summary>
+            <typeparam name="TElement">The type of the data.</typeparam>
+            <param name="buffer">The buffer to fill.</param>
+            <param name="format">The format of the data.</param>
+            <param name="data">The data.</param>
+            <param name="frequency">The frequency of the data.</param>
+        </member>
+        <member name="T:Silk.NET.OpenAL.OpenALLibraryNameContainer">
+            <summary>
+            Contains the library name of OpenAL.
+            </summary>
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALLibraryNameContainer.Linux">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALLibraryNameContainer.MacOS">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALLibraryNameContainer.Android">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALLibraryNameContainer.IOS">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALLibraryNameContainer.Windows86">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALLibraryNameContainer.Windows64">
+            <inheritdoc />
+        </member>
+        <member name="T:Silk.NET.OpenAL.OpenALNativeLibraryNameContainer">
+            <summary>
+            Contains the library name of OpenAL.
+            </summary>
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALNativeLibraryNameContainer.Linux">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALNativeLibraryNameContainer.MacOS">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALNativeLibraryNameContainer.Android">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALNativeLibraryNameContainer.IOS">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALNativeLibraryNameContainer.Windows86">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALNativeLibraryNameContainer.Windows64">
+            <inheritdoc />
+        </member>
+        <member name="T:Silk.NET.OpenAL.OpenALSoftLibraryNameContainer">
+            <summary>
+            Contains the library name of OpenAL.
+            </summary>
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALSoftLibraryNameContainer.Linux">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALSoftLibraryNameContainer.MacOS">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALSoftLibraryNameContainer.Android">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALSoftLibraryNameContainer.IOS">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALSoftLibraryNameContainer.Windows86">
+            <inheritdoc />
+        </member>
+        <member name="P:Silk.NET.OpenAL.OpenALSoftLibraryNameContainer.Windows64">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
