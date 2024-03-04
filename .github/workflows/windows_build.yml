@@ -26,21 +26,22 @@ jobs:
           restore-keys: |
             Library-
 
+      - name: Get Unity Editor
+        uses: unity-actions/get-editor@v1
+
       - name: Build Unity project
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
-         # Define variables for Unity executable and project path
-         UNITY_EXECUTABLE="/path/to/Unity/Editor"
-         PROJECT_PATH="path/to/your/project"
-         BUILD_TARGET="StandaloneWindows"
-         OUTPUT_PATH="path/to/output/YourGame.exe"
-
-         # Build the Unity project
-         $UNITY_EXECUTABLE \
-           -projectPath $PROJECT_PATH \
-           -buildTarget $BUILD_TARGET \
-           -outputPath $OUTPUT_PATH \
-           -quit
+          # Unity Editor executable path
+          UNITY_EXECUTABLE="${{ env.UNITY_EXECUTABLE }}"
+          # Path to your Unity project
+          PROJECT_PATH="./"
+          # Build target (StandaloneWindows)
+          BUILD_TARGET="StandaloneWindows"
+          # Output path for the build
+          OUTPUT_PATH="./Build/Thesis.exe"
+          # Build the Unity project
+          $UNITY_EXECUTABLE -batchmode -projectPath $PROJECT_PATH -buildTarget $BUILD_TARGET -executeMethod BuildScript.PerformBuild -quit
           
   deploy:
     name: Deploy to itch.io
