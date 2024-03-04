@@ -58,11 +58,11 @@ jobs:
         run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - name: Deploy to itch.io
-        uses: manleydev/butler-publish-itchio-action@v1.0.3
+        uses: manleydev/butler-publish-itchio-action@master
         with:
+          CHANNEL: windows
           butlerCredentials: ${{ secrets.MY_ITCH_API_CODE }}
           game: ${{ secrets.MY_ITCH_GAME }}
           user: ${{ secrets.MY_ITCH_USERNAME }}
           version: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
-          channel: windows
-          directory: ./Build-StandaloneWindows64
+          PACKAGE: build/Build-StandaloneWindows64
