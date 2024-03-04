@@ -61,8 +61,8 @@ jobs:
         uses: manleydev/butler-publish-itchio-action@master
         with:
           CHANNEL: windows
-          butlerCredentials: ${{ secrets.MY_ITCH_API_CODE }}
-          game: ${{ secrets.MY_ITCH_GAME }}
-          user: ${{ secrets.MY_ITCH_USERNAME }}
-          version: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
+          BUTLER_CREDENTIALS: ${{ secrets.MY_ITCH_API_CODE }}
+          ITCH_GAME: ${{ secrets.MY_ITCH_GAME }}
+          ITCH_USER: ${{ secrets.MY_ITCH_USERNAME }}
+          VERSION: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
           PACKAGE: build/Build-StandaloneWindows64
