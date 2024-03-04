@@ -52,7 +52,10 @@ jobs:
 
     - name: Set short hash
       run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> ${GITHUB_ENV}
-
+    
+    - name: List Build Directory Contents
+      run: ls -la ./build
+        
     - name: Push Windows version to itch.io
       uses: manleydev/butler-publish-itchio-action@v1.0.3
       env:
@@ -61,3 +64,4 @@ jobs:
         ITCH_USER: ${{ secrets.MY_ITCH_USERNAME }}
         VERSION: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
         CHANNEL: windows
+        PATH: ./build
