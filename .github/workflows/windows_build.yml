@@ -19,6 +19,7 @@ jobs:
         
       - name: Cache Unity Library
         uses: actions/cache@v2
+        id: cache-unity
         with:
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
@@ -26,7 +27,7 @@ jobs:
             Library-
 
       - name: Build project
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache-unity.outputs.cache-hit != 'true'
         uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
