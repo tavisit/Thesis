@@ -1,0 +1,48 @@
+name: Build Unity Project for Windows
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build:
+    name: Build Project and Publish to itch.io
+    runs-on: ubuntu-latest
+
+    # This stops builds that are in-progress once a new commit comes in
+    concurrency:
+      group: unity-build
+      cancel-in-progress: true
+
+    steps:
+      # Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          path: ./src
+          lfs: true
+
+      # Cache Unity Library
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library
+
+      # Build project
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          projectPath: ./src
+          targetPlatform: StandaloneWindows
+
+      # Upload to Itch.io
+      - uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.MY_ITCH_API_CODE }}
+          CHANNEL: windows
+          ITCH_GAME: ${{ env.MY_ITCH_GAME }}
+          ITCH_USER: ${{ env.MY_ITCH_USERNAME }}
+          PACKAGE: build/StandaloneWindows
