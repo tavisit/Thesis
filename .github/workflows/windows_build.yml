@@ -53,6 +53,6 @@ jobs:
         with:
           path: build
           project: ${{ secrets.MY_ITCH_USERNAME }}/${{ secrets.MY_ITCH_GAME }}
-          channel: win
+          channel: win64
           api-key: ${{ secrets.MY_ITCH_API_CODE }}
           version: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
