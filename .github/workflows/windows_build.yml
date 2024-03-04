@@ -16,9 +16,6 @@ jobs:
         with:
           lfs: true
           submodules: recursive
-          
-      - name: List contents of Builds directory
-        run: ls -la ${{ github.workspace }}/Builds/
         
       - name: Cache Unity Library
         uses: actions/cache@v2
@@ -39,13 +36,12 @@ jobs:
           targetPlatform: StandaloneWindows
           projectPath: .  # Specify the project path if necessary
           buildName: WindowsBuild  # Specify your build name
-          buildsPath: ${{ github.workspace }}/Builds
           
       - name: Upload build to artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: unity-build-artifact
-          path: ${{ github.workspace }}/Builds/**/*
+          path: build
           
   deploy:
     name: Deploy to itch.io
