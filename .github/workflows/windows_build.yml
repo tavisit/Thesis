@@ -55,13 +55,14 @@ jobs:
     
     - name: List Build Directory Contents
       run: ls -Rd */
-        
+
     - name: Push Windows version to itch.io
       uses: manleydev/butler-publish-itchio-action@v1.0.3
+      with:
+        path: ${{ steps.unity_build.outputs.build-path }}
       env:
         BUTLER_CREDENTIALS: ${{ secrets.MY_ITCH_API_CODE }}
         ITCH_GAME: ${{ secrets.MY_ITCH_GAME }}
         ITCH_USER: ${{ secrets.MY_ITCH_USERNAME }}
         VERSION: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
         CHANNEL: windows
-        PATH: ./build
