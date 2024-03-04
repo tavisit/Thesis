@@ -45,11 +45,11 @@ jobs:
       - name: Set release date
         run: echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
 
-      - name: Upload build to itch.io
-        uses: robpc/itchio-upload-action@v1
-        with:
-          path: build
-          project: ${{ secrets.MY_ITCH_USERNAME }}/${{ secrets.MY_ITCH_GAME }}
-          channel: win64
-          api-key: ${{ secrets.MY_ITCH_API_CODE }}
-          version: ${{ env.RELEASE_DATE }}
+      - name: Push windows version to itch.io
+        uses: manleydev/butler-publish-itchio-action@v1.0.3
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          ITCH_GAME: ${{ secrets.MY_ITCH_GAME }}
+          ITCH_USER: ${{ secrets.MY_ITCH_USERNAME }}
+          CHANNEL: win
+          VERSION: ${{ env.RELEASE_DATE }}
