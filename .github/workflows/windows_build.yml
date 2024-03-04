@@ -36,7 +36,7 @@ jobs:
           targetPlatform: StandaloneWindows
           projectPath: .  # Specify the project path if necessary
           buildName: WindowsBuild  # Specify your build name
-          buildPath: ${{ github.workspace }}/Builds
+          buildPath: ${{ github.workspace }}/Build
           
       - name: Upload build to artifact
         uses: actions/upload-artifact@v2
@@ -56,7 +56,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: unity-build-artifact
-          path: ${{ github.workspace }}/DownloadedBuild  # This is where the artifact will be unpacked
 
       - name: Set release date
         run: echo "RELEASE_DATE=$(date --rfc-3339=date)" >> $GITHUB_ENV
@@ -70,9 +69,8 @@ jobs:
       - name: Push Windows version to itch.io
         uses: manleydev/butler-publish-itchio-action@v1.0.3
         with:
-          butlerCredentials: ${{ secrets.MY_ITCH_API_CODE }}
           game: ${{ secrets.MY_ITCH_GAME }}
           user: ${{ secrets.MY_ITCH_USERNAME }}
           channel: windows
-          directory: ${{ github.workspace }}/DownloadedBuild  # Adjust this path based on your structure
+          directory: .  # Assuming the artifact is downloaded to the current working directory
           version: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
