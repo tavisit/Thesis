@@ -13,6 +13,8 @@ public struct OpenClBodyObject
     public float mass;
     public string name;
 
+    public Vector4[] movementPath;
+
     public OpenClBodyObject(Vector3 position, Vector3 rotation, float mass, string name)
     {
         this.position = position;
@@ -21,6 +23,28 @@ public struct OpenClBodyObject
         velocity = new Vector3();
         this.mass = mass;
         this.name = name;
+        movementPath = new Vector4[0];
+    }
+
+    public OpenClBodyObject(Vector3 position, Vector3 velocity, Vector3 rotation, float mass, string name)
+    {
+        this.position = position;
+        this.rotation = rotation;
+        acceleration = new Vector3();
+        this.velocity = velocity;
+        this.mass = mass;
+        this.name = name;
+        movementPath = new Vector4[0];
+    }
+    public OpenClBodyObject(Vector3 position, Vector3 velocity, Vector3 rotation, Vector3 acceleration, float mass, string name)
+    {
+        this.position = position;
+        this.rotation = rotation;
+        this.acceleration = acceleration;
+        this.velocity = velocity;
+        this.mass = mass;
+        this.name = name;
+        movementPath = new Vector4[0];
     }
 
     public List<float> Flatten()

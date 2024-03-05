@@ -8,24 +8,37 @@ public class Body : MonoBehaviour
     public float mass;
     public Vector3 velocity;
     public Vector3 acceleration;
+    private Slider timeDilationSlider;
 
+    private float maxVelocity = 299792458; // Maximum velocity
+    private float velocityDamping = 0.99f;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        timeDilationSlider = GameObject.Find("TimeDillationSlider")?.GetComponent<Slider>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        Slider slider = GameObject.Find("TimeDillationSlider").GetComponent<Slider>();
-        if (slider != null)
+        UpdatePhysics();
+    }
+
+    private void UpdatePhysics()
+    {
+        if (timeDilationSlider != null && Mathf.Abs(timeDilationSlider.value) > Mathf.Epsilon)
         {
-            if(System.Math.Abs(slider.value) > Mathf.Epsilon)
-            {
-                velocity += acceleration * slider.value * Time.deltaTime;
-                transform.position += velocity * Time.deltaTime;
-            }
+            float timeScale = timeDilationSlider.value;
+            float deltaTime = Time.fixedDeltaTime * timeScale;
+
+            velocity = velocity * deltaTime + acceleration * deltaTime * deltaTime;
+            transform.position += velocity;
+
+            velocity *= Mathf.Clamp01(velocityDamping * timeScale); // Apply damping scaled by time
+            velocity = Vector3.ClampMagnitude(velocity, maxVelocity); // Cap velocity
+        }
+        else
+        {
+            timeDilationSlider = GameObject.Find("TimeDillationSlider")?.GetComponent<Slider>();
         }
     }
 }

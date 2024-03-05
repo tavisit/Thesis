@@ -123,7 +123,15 @@ public class OpenClRunner<T>
     public static unsafe nint CreateProgram(CL cl, nint context, nint device, string fileName)
     {
         TextAsset[] clFiles = Resources.LoadAll<TextAsset>("OpenCL_Scripts");
-        string clSource = Array.FindAll(clFiles, match: s => s.name.Equals(fileName))[0].text;
+        TextAsset[] textFiles = Array.FindAll(clFiles, match: s => s.name.Equals(fileName));
+        if(textFiles.Length == 0)
+        {
+            Debug.Log("Cannot find " + fileName + " in Resources\\OpenCL_Scripts\\ ");
+            Debug.Log("All the files I have are: " + clFiles);
+            return IntPtr.Zero;
+        }
+
+        string clSource = textFiles[0].text;
 
         var program = cl.CreateProgramWithSource(context, 1, new string[] { clSource }, null, null);
         if (program == IntPtr.Zero)

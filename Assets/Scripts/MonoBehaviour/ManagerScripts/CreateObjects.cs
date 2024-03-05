@@ -37,11 +37,16 @@ public class CreateObjects : MonoBehaviour
             obj.name = entry.name;
 
             obj.GetComponent<Body>().mass = entry.mass;
+            obj.GetComponent<Body>().velocity = entry.velocity;
 
             float relativeVolume = entry.mass / relativeMass;
             obj.transform.localScale = new(relativeVolume, relativeVolume, relativeVolume);
-            obj.GetComponent<DrawArrow>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+
+            obj.GetComponentInChildren<PathDraw>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            obj.GetComponentInChildren<PathDraw>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+
             obj.GetComponent<Renderer>().material = applyMaterial(obj);
+
             index++;
         }
     }
@@ -71,9 +76,13 @@ public class CreateObjects : MonoBehaviour
     private List<OpenClBodyObject> parseBodyObjects()
     {
         List<OpenClBodyObject> returnList = new List<OpenClBodyObject>();
-        returnList.Add(new OpenClBodyObject(new Vector3(0, 0, 0), new Vector3(0, 0, 0), relativeMass, "Planet - Earth"));
-        returnList.Add(new OpenClBodyObject(new Vector3(10, 10, 10), new Vector3(0, 0, 0), relativeMass * 10, "Planet - Jupiter"));
-        returnList.Add(new OpenClBodyObject(new Vector3(0, 400, 400), new Vector3(0, 0, 0), relativeMass * 100, "Star - Sun"));
+        for(int i = 0; i < 10; i++)
+        {
+            returnList.Add(new OpenClBodyObject(new Vector3(i*10, i * 10, i * 10), Random.onUnitSphere * Random.Range(-10.0f, 10.0f), new Vector3(0, 0, 0), relativeMass, "Planet - Earth" + i.ToString()));
+
+        }
+        returnList.Add(new OpenClBodyObject(new Vector3(-30, -30, -30), Random.onUnitSphere * Random.Range(-10.0f, 10.0f), new Vector3(0, 0, 0), relativeMass * 10, "Planet - Jupiter"));
+        returnList.Add(new OpenClBodyObject(new Vector3(0, 400, 400), Random.onUnitSphere * Random.Range(-10.0f, 10.0f), new Vector3(0, 0, 0), relativeMass * 100, "Star - Sun"));
         return returnList;
     }
 }
