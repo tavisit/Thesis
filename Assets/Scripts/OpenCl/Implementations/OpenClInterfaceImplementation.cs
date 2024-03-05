@@ -41,7 +41,7 @@ public static class OpenClInterfaceImplementation
         }
     }
 
-    public static unsafe bool SetKernelArgs<T>(CL cl, nint kernel, nint[] memObjects, int[] memObjectsPositions, T[] valueObjects, int[] valueObjectsPositions) where T : unmanaged
+    public static unsafe bool SetKernelArgsMemory(CL cl, nint kernel, nint[] memObjects, int[] memObjectsPositions)
     {
         int errNum = 0;
         for (int i = 0; i < memObjects.Length; i++)
@@ -49,6 +49,17 @@ public static class OpenClInterfaceImplementation
             int position = memObjectsPositions[i];
             errNum |= cl.SetKernelArg(kernel, (uint)position, (nuint)sizeof(nint), memObjects[i]);
         }
+        if (errNum != (int)ErrorCodes.Success)
+        {
+            Debug.Log("Error setting kernel arguments memory.");
+            return false;
+        }
+        return true;
+    }
+
+    public static unsafe bool SetKernelArgsVariables<T>(CL cl, nint kernel, T[] valueObjects, int[] valueObjectsPositions) where T : unmanaged
+    {
+        int errNum = 0;
 
         for (uint i = 0; i < valueObjects.Length; i++)
         {

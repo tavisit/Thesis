@@ -1,5 +1,6 @@
 using Silk.NET.OpenCL;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
@@ -20,38 +21,23 @@ public class UniversalAttractionRunner : OpenClRunner<Vector4>
 
         if (OpenClInterfaceImplementation.CreateMemObjects(cl, context, memObjects, true, 0, MemFlags.ReadWrite, result))
         {
-            if (OpenClInterfaceImplementation.CreateMemObjects(cl, context, memObjects, false, 1, MemFlags.ReadOnly | MemFlags.CopyHostPtr, FlattenList(args).ToArray()))
+            if (OpenClInterfaceImplementation.CreateMemObjects<float>(cl, context, memObjects, false, 1, MemFlags.ReadOnly | MemFlags.CopyHostPtr, args.SelectMany(obj => obj.Flatten()).ToArray()))
             {
-                if (OpenClInterfaceImplementation.SetKernelArgs(cl, kernel, memObjects, new int[] { 0, 1 }, valueObjects, new int[] { 2, 3 }))
+                if (OpenClInterfaceImplementation.SetKernelArgsMemory(cl, kernel, memObjects, new int[] { 0, 1 }) &&
+                    OpenClInterfaceImplementation.SetKernelArgsVariables(cl, kernel, valueObjects, new int[] { 2, 3 }))
                 {
                     if (Run(globalWorkSize, localWorkSize, result.Length, memObjects, out result))
                     {
-                        List<OpenClBodyObject> returnList = new List<OpenClBodyObject>();
-                        for (int i = 0; i < result.Length; i++)
-                        {
-                            OpenClBodyObject myObject = args[i];
-                            myObject.acceleration = result[i];
-                            returnList.Add(myObject);
-                        }
-                        return returnList;
+                        return args.Select((obj, index) => {
+                            obj.acceleration = result[index];
+                            return obj;
+                        }).ToList();
+
                     }
                 }
             }
         }
         
         return args;
-    }
-
-    public List<float> FlattenList(List<OpenClBodyObject> args)
-    {
-        List<float> flattenedList = new List<float>();
-
-        foreach (var obj in args)
-        {
-            float[] flattenedObject = obj.Flatten().ToArray();
-            flattenedList.AddRange(flattenedObject);
-        }
-
-        return flattenedList;
     }
 }

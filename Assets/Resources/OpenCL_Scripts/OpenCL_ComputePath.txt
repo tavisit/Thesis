@@ -1,0 +1,30 @@
+﻿// For simulations with many bodies, consider more sophisticated 
+// algorithms like Barnes-Hut, which reduce computational complexity at the cost of some accuracy.
+
+// we care about:
+// - position
+// - velocity
+// - new_position
+// - time_frame
+
+// new_position has length float3*steps*length
+
+// p = p0 + v*t + 0.5*a*t^2
+
+__kernel void compute_movement_path(__global float3* new_position, __global const float* flattenedData, int length, int offset, int steps)
+{
+    int i = get_global_id(0);
+
+    if (i < length) {
+
+        float3 position = (float3)(flattenedData[i*offset], flattenedData[i*offset + 1], flattenedData[i*offset + 2]);
+        float3 velocity = (float3)(flattenedData[i*offset + 4], flattenedData[i*offset + 5], flattenedData[i*offset + 6]);
+        float3 acceleration = (float3)(flattenedData[i*offset + 10], flattenedData[i*offset + 11], flattenedData[i*offset + 12]);
+        
+        for(int j = 0; j < steps; j++){
+            float actual_time = (float)(j - steps / 2);
+            float3 displacement = velocity * actual_time + 0.5f * acceleration * (actual_time * actual_time);
+            new_position[i * steps + j] = position + displacement;
+        }
+    }
+}

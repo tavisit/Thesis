@@ -1,28 +1,49 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ObjectMovement : MonoBehaviour
 {
     UniversalAttractionRunner universalAttraction;
     List<OpenClBodyObject> bodyObjects;
+    MovementPathRunner movementPathRunner;
+
+    int nr_steps = 25;
 
     void Start()
     {
-        universalAttraction = new UniversalAttractionRunner("UniversalAttractionOpenCL", "universal_attraction_force");
+        universalAttraction = new UniversalAttractionRunner("OpenCL_ComputeAcceleration", "universal_attraction_force");
+        movementPathRunner = new MovementPathRunner("OpenCL_ComputePath", "compute_movement_path");
+        bodyObjects = new();
     }
 
     // Update is called once per frame
     void Update()
     {
-        AccelerationComputation();
-    }
+        GameObject[] bodies = GameObject.FindGameObjectsWithTag("Body");
 
+        // UPDATE THE BODIES LIST
+        bodyObjects.Clear();
+        for (int i = 0; i < bodies.Length; i++)
+        {
+            {
+                Body values = bodies[i].GetComponent<Body>();
+                bodyObjects.Add(new OpenClBodyObject(bodies[i].transform.position,
+                                                        values.velocity,
+                                                        bodies[i].transform.eulerAngles,
+                                                        values.acceleration,
+                                                        values.mass,
+                                                        bodies[i].name));
+            }
+        }
 
-    private void AccelerationComputation()
-    {
-        UpdateBodyObjects();
+        // update the acceleration
         bodyObjects = universalAttraction.Update(bodyObjects);
 
+        // update the path
+        bodyObjects = movementPathRunner.Update(bodyObjects, nr_steps);
+
+        // update the objects
         foreach (var item in bodyObjects)
         {
             GameObject body = GameObject.Find(item.name);
@@ -30,30 +51,12 @@ public class ObjectMovement : MonoBehaviour
             {
                 body.GetComponent<Body>().acceleration = item.acceleration;
                 Vector3 arrowDirection = item.acceleration;
+
+                body.GetComponentInChildren<PathDraw>().pathPoints.Clear();
+                body.GetComponentInChildren<PathDraw>().pathPoints.AddRange(item.movementPath.Select(vec4 => new Vector3(vec4.x, vec4.y, vec4.z)).ToList());
+
                 float sum = Mathf.Abs(arrowDirection.x) + Mathf.Abs(arrowDirection.y) + Mathf.Abs(arrowDirection.z);
-                body.GetComponent<DrawArrow>().direction = new Vector3(arrowDirection.x / sum, arrowDirection.y / sum, arrowDirection.z / sum);
-            }
-        }
-
-        bodyObjects.Clear();
-    }
-
-    public void UpdateBodyObjects(bool init=true)
-    {
-        GameObject[] bodies = GameObject.FindGameObjectsWithTag("Body");
-
-        if (bodies.Length == 0) return;
-
-        if (init)
-        {
-            bodyObjects = new();
-            for (int i = 0; i < bodies.Length; i++)
-            {
-                Body values = bodies[i].GetComponent<Body>();
-                bodyObjects.Add(new OpenClBodyObject(bodies[i].transform.position,
-                                                     bodies[i].transform.eulerAngles,
-                                                     values.mass,
-                                                     bodies[i].name));
+                body.GetComponentInChildren<DirectionArrowDraw>().direction = arrowDirection / sum;
             }
         }
     }
