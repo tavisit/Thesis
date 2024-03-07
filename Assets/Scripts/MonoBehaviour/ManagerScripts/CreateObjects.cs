@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ public class CreateObjects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        List<OpenClBodyObject> movableObjects = parseBodyObjects();
+        List<OpenClBodyObject> movableObjects = ParseBodyObjects();
         if (prefab == null || movableObjects.Count <= 0)
         {
             Debug.LogError("Setup incomplete or invalid.");
@@ -30,11 +29,20 @@ public class CreateObjects : MonoBehaviour
             materialsDict.Add(mat.name, mat);
         }
 
-        int index = -3;
         foreach(OpenClBodyObject entry in movableObjects)
         {
-            GameObject obj = Instantiate(prefab, entry.position, Quaternion.Euler(entry.rotation));
+            GameObject obj = Instantiate(prefab, entry.position, Quaternion.Euler(new Vector3(0,0,0)));
             obj.name = entry.name;
+
+            GameObject accArrow = new GameObject("AccelerationArrow");
+            accArrow.AddComponent<DirectionArrowDraw>();
+            accArrow.transform.SetParent(obj.transform);
+
+            GameObject pathArrow = new GameObject("PathArrow");
+            pathArrow.AddComponent<PathDraw>();
+            pathArrow.transform.SetParent(obj.transform);
+
+            obj = ApplyBodyType(obj);
 
             obj.GetComponent<Body>().mass = entry.mass;
             obj.GetComponent<Body>().velocity = entry.velocity;
@@ -43,15 +51,13 @@ public class CreateObjects : MonoBehaviour
             obj.transform.localScale = new(relativeVolume, relativeVolume, relativeVolume);
 
             obj.GetComponentInChildren<PathDraw>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-            obj.GetComponentInChildren<PathDraw>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            obj.GetComponentInChildren<DirectionArrowDraw>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 
-            obj.GetComponent<Renderer>().material = applyMaterial(obj);
-
-            index++;
+            obj.GetComponent<Renderer>().material = ApplyMaterial(obj);
         }
     }
 
-    private Material applyMaterial(GameObject gameObject)
+    private Material ApplyMaterial(GameObject gameObject)
     {
         string objectName = gameObject.name;
         if (objectName.StartsWith("Star") && materialsDict.ContainsKey("Star"))
@@ -73,16 +79,34 @@ public class CreateObjects : MonoBehaviour
         return null;
     }
 
-    private List<OpenClBodyObject> parseBodyObjects()
+    private GameObject ApplyBodyType(GameObject gameObject)
     {
-        List<OpenClBodyObject> returnList = new List<OpenClBodyObject>();
+        string objectName = gameObject.name;
+        if (objectName.StartsWith("Star"))
+        {
+            gameObject.AddComponent<StellarBody>();
+        }
+        else if (objectName.StartsWith("Planet"))
+        {
+            gameObject.AddComponent<PlanetaryBody>();
+        }
+        else
+        {
+            gameObject.AddComponent<Body>();
+        }
+        return gameObject;
+    }
+
+    private List<OpenClBodyObject> ParseBodyObjects()
+    {
+        List<OpenClBodyObject> returnList = new();
         for(int i = 0; i < 1; i++)
         {
-            returnList.Add(new OpenClBodyObject(new Vector3(i*10, 0, 0), new Vector3(0,0, 9.9823f), new Vector3(0, 0, 0), relativeMass, "Planet - Earth" + i.ToString()));
+            returnList.Add(new OpenClBodyObject(new Vector3(i*10, 0, 0), new Vector3(0,0, 9.9823f), relativeMass, "Planet - Earth" + i.ToString()));
 
         }
-        returnList.Add(new OpenClBodyObject(new Vector3(-300, 0, 0), new Vector3(0, 0, 7.5459468401f), new Vector3(0, 0, 0), relativeMass * 10, "Planet - Jupiter"));
-        returnList.Add(new OpenClBodyObject(new Vector3(400, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), relativeMass * 100, "Star - Sun"));
+        returnList.Add(new OpenClBodyObject(new Vector3(-300, 0, 0), new Vector3(0, 0, 7.5459468401f), relativeMass * 10, "Planet - Jupiter"));
+        returnList.Add(new OpenClBodyObject(new Vector3(400, 0, 0), new Vector3(0, 0, 0), relativeMass * 100, "Star - Sun"));
         return returnList;
     }
 }

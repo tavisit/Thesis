@@ -4,10 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class PathDraw: MonoBehaviour
 {
-    public List<Vector3> pathPoints = new List<Vector3>();
+    public List<Vector3> pathPoints = new();
     public Color color = Color.white;
-    private float lineWidthStart = 1;
-    private float lineWidthEnd = 0.1f;
+    private readonly float lineWidthStart = 1;
+    private readonly float lineWidthEnd = 0.1f;
     private LineRenderer lineRenderer;
 
     private void Start()
@@ -41,7 +41,7 @@ public class PathDraw: MonoBehaviour
 
     private void ApplyFadingEffect()
     {
-        Gradient gradient = new Gradient();
+        Gradient gradient = new();
         GradientColorKey[] colorKeys = new GradientColorKey[2];
         GradientAlphaKey[] alphaKeys = new GradientAlphaKey[5];
 

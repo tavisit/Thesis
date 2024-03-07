@@ -7,8 +7,7 @@ public class ObjectMovement : MonoBehaviour
     UniversalAttractionRunner universalAttraction;
     List<OpenClBodyObject> bodyObjects;
     MovementPathRunner movementPathRunner;
-
-    int nr_steps = 25;
+    readonly int nr_steps = 25;
 
     void Start()
     {
@@ -30,7 +29,6 @@ public class ObjectMovement : MonoBehaviour
                 Body values = bodies[i].GetComponent<Body>();
                 bodyObjects.Add(new OpenClBodyObject(bodies[i].transform.position,
                                                         values.velocity,
-                                                        bodies[i].transform.eulerAngles,
                                                         values.acceleration,
                                                         values.mass,
                                                         bodies[i].name));

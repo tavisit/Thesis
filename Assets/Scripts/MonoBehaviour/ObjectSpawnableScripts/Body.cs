@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,21 +6,21 @@ public class Body : MonoBehaviour
     public float mass;
     public Vector3 velocity;
     public Vector3 acceleration;
-    private Slider timeDilationSlider;
+    protected Slider timeDilationSlider;
 
-    private float maxVelocity = 299792458; // Maximum velocity
+    private readonly float maxVelocity = 299792458; // Maximum velocity
 
-    private void Start()
+    protected void Start()
     {
         timeDilationSlider = GameObject.Find("TimeDillationSlider")?.GetComponent<Slider>();
     }
 
-    private void Update()
+    protected void Update()
     {
         UpdatePhysics();
     }
 
-    private void UpdatePhysics()
+    protected void UpdatePhysics()
     {
         if (timeDilationSlider == null)
         {
