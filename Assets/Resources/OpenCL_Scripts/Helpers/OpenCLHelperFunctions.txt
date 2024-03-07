@@ -1,7 +1,7 @@
 ﻿
 // Compute the acceleration of a given object with position relative to the other objects
 
-float3 compute_acceleration(int current_index, float3 position, float mass, const float* flattenedData, int length, int offset){
+float3 compute_acceleration(int current_index, float3 position, float mass, const __global float* flattenedData, int length, int offset){
     float G = 6.67430e-11f; // Gravitational constant
     float3 totalForce = (float3)(0.0f, 0.0f, 0.0f);
     for (int j = 0; j < length; j++) {
