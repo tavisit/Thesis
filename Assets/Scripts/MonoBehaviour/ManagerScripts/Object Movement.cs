@@ -50,13 +50,11 @@ public class ObjectMovement : MonoBehaviour
             if (body != null)
             {
                 body.GetComponent<Body>().acceleration = item.acceleration;
-                Vector3 arrowDirection = item.acceleration;
 
                 body.GetComponentInChildren<PathDraw>().pathPoints.Clear();
                 body.GetComponentInChildren<PathDraw>().pathPoints.AddRange(item.movementPath.Select(vec4 => new Vector3(vec4.x, vec4.y, vec4.z)).ToList());
 
-                float sum = Mathf.Abs(arrowDirection.x) + Mathf.Abs(arrowDirection.y) + Mathf.Abs(arrowDirection.z);
-                body.GetComponentInChildren<DirectionArrowDraw>().direction = arrowDirection / sum;
+                body.GetComponentInChildren<DirectionArrowDraw>().direction = item.acceleration.normalized;
             }
         }
     }

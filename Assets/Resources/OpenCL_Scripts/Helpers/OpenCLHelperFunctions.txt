@@ -1,0 +1,19 @@
+﻿
+// Compute the acceleration of a given object with position relative to the other objects
+
+float3 compute_acceleration(int current_index, float3 position, float mass, const float* flattenedData, int length, int offset){
+    float G = 6.67430e-11f; // Gravitational constant
+    float3 totalForce = (float3)(0.0f, 0.0f, 0.0f);
+    for (int j = 0; j < length; j++) {
+        if (current_index != j) {
+            float3 position_other = (float3)(flattenedData[j*offset], flattenedData[j*offset + 1], flattenedData[j*offset + 2]);
+            float mass_other = flattenedData[j*offset+3];
+            float3 diff = position_other - position;
+            float distSquared = dot(diff, diff) + 1e-10f; // Avoid division by zero
+
+            float forceMagnitude = G * mass * mass_other / distSquared;
+            totalForce += normalize(diff) * forceMagnitude;
+        }
+    }
+    return totalForce / mass;
+}

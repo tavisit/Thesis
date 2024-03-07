@@ -1,6 +1,6 @@
 ﻿using Silk.NET.OpenCL;
 using System;
-using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class OpenClRunner<T>
@@ -122,16 +122,7 @@ public class OpenClRunner<T>
     }
     public static unsafe nint CreateProgram(CL cl, nint context, nint device, string fileName)
     {
-        TextAsset[] clFiles = Resources.LoadAll<TextAsset>("OpenCL_Scripts");
-        TextAsset[] textFiles = Array.FindAll(clFiles, match: s => s.name.Equals(fileName));
-        if(textFiles.Length == 0)
-        {
-            Debug.Log("Cannot find " + fileName + " in Resources\\OpenCL_Scripts\\ ");
-            Debug.Log("All the files I have are: " + clFiles);
-            return IntPtr.Zero;
-        }
-
-        string clSource = textFiles[0].text;
+        string clSource = LoadAndCombineClSources(fileName);
 
         var program = cl.CreateProgramWithSource(context, 1, new string[] { clSource }, null, null);
         if (program == IntPtr.Zero)
@@ -160,5 +151,33 @@ public class OpenClRunner<T>
         }
 
         return program;
+    }
+
+    private static string LoadAndCombineClSources(string fileName)
+    {
+        TextAsset[] clFiles = Resources.LoadAll<TextAsset>("OpenCL_Scripts");
+
+        TextAsset mainFile = clFiles.FirstOrDefault(s => s.name.Equals(fileName));
+        if (mainFile == null)
+        {
+            Debug.LogError($"Cannot find {fileName} in Resources/OpenCL_Scripts/. " +
+                $"All the files I have are: {string.Join(", ", clFiles.Select(f => f.name))}");
+            return null;
+        }
+        TextAsset[] helperFiles = Array.FindAll(clFiles, s => s.name.Contains("Helper"));
+        if (helperFiles.Length == 0)
+        {
+            Debug.LogError("Cannot find any helper functions in Resources/OpenCL_Scripts/. " +
+                "All the files I have are: " + string.Join(", ", clFiles.Select(f => f.name)));
+            return null;
+        }
+
+        string clSource = mainFile.text;
+        foreach (TextAsset textAsset in helperFiles)
+        {
+            clSource = textAsset.text + "\n" + clSource;
+        }
+
+        return clSource;
     }
 }

@@ -76,13 +76,13 @@ public class CreateObjects : MonoBehaviour
     private List<OpenClBodyObject> parseBodyObjects()
     {
         List<OpenClBodyObject> returnList = new List<OpenClBodyObject>();
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 1; i++)
         {
-            returnList.Add(new OpenClBodyObject(new Vector3(i*10, i * 10, i * 10), Random.onUnitSphere * Random.Range(-10.0f, 10.0f), new Vector3(0, 0, 0), relativeMass, "Planet - Earth" + i.ToString()));
+            returnList.Add(new OpenClBodyObject(new Vector3(i*10, 0, 0), new Vector3(0,0, 9.9823f), new Vector3(0, 0, 0), relativeMass, "Planet - Earth" + i.ToString()));
 
         }
-        returnList.Add(new OpenClBodyObject(new Vector3(-30, -30, -30), Random.onUnitSphere * Random.Range(-10.0f, 10.0f), new Vector3(0, 0, 0), relativeMass * 10, "Planet - Jupiter"));
-        returnList.Add(new OpenClBodyObject(new Vector3(0, 400, 400), Random.onUnitSphere * Random.Range(-10.0f, 10.0f), new Vector3(0, 0, 0), relativeMass * 100, "Star - Sun"));
+        returnList.Add(new OpenClBodyObject(new Vector3(-300, 0, 0), new Vector3(0, 0, 7.5459468401f), new Vector3(0, 0, 0), relativeMass * 10, "Planet - Jupiter"));
+        returnList.Add(new OpenClBodyObject(new Vector3(400, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), relativeMass * 100, "Star - Sun"));
         return returnList;
     }
 }

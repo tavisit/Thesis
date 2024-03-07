@@ -6,14 +6,15 @@ public class PathDraw: MonoBehaviour
 {
     public List<Vector3> pathPoints = new List<Vector3>();
     public Color color = Color.white;
-    private float lineWidth = 0.1f;
+    private float lineWidthStart = 1;
+    private float lineWidthEnd = 0.1f;
     private LineRenderer lineRenderer;
 
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.startWidth = lineWidth;
-        lineRenderer.endWidth = lineWidth;
+        lineRenderer.startWidth = lineWidthStart;
+        lineRenderer.endWidth = lineWidthEnd;
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.startColor = color;
         lineRenderer.endColor = color;
@@ -35,8 +36,6 @@ public class PathDraw: MonoBehaviour
         {
             lineRenderer.positionCount = pathPoints.Count;
             lineRenderer.SetPositions(pathPoints.ToArray());
-
-            ApplyFadingEffect();
         }
     }
 
