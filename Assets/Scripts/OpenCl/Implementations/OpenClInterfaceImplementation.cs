@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public static class OpenClInterfaceImplementation
+public static class OpenCLInterfaceImplementation
 {
     public static unsafe bool CreateMemObjects<T>(CL cl, nint context, nint[] memObjects,
                                                    bool nullPtr, int position, MemFlags memFlags, T[] array)
@@ -98,7 +98,7 @@ public static class OpenClInterfaceImplementation
         }
         return cl;
     }
-    public static unsafe CL ReadBuffer<T>(CL cl, nint commandQueue, nint[] memObjects, out T[] result, int resultSize)
+    public static unsafe CL ReadBuffer<T>(CL cl, nint commandQueue, nint[] memObjects, int position, out T[] result, int resultSize)
     {
         result = new T[resultSize]; 
         if (!typeof(T).IsValueType)
@@ -110,7 +110,7 @@ public static class OpenClInterfaceImplementation
         {
             void* ptr = null;
             ptr = Marshal.UnsafeAddrOfPinnedArrayElement(result, 0).ToPointer();
-            int errNum = cl.EnqueueReadBuffer(commandQueue, memObjects[0], true, 0, (nuint)(Marshal.SizeOf(typeof(T)) * resultSize), ptr, 0, null, null);
+            int errNum = cl.EnqueueReadBuffer(commandQueue, memObjects[position], true, 0, (nuint)(Marshal.SizeOf(typeof(T)) * resultSize), ptr, 0, null, null);
             if (errNum != (int)ErrorCodes.Success)
             {
                 Debug.Log("Error reading result buffer.");

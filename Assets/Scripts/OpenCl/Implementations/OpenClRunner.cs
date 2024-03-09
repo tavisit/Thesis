@@ -1,9 +1,10 @@
 ﻿using Silk.NET.OpenCL;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class OpenClRunner<T>
+public abstract class OpenCLRunner<T, Q, P>
 {
     protected nint context;
     protected nint commandQueue;
@@ -11,7 +12,7 @@ public class OpenClRunner<T>
     protected nint kernel;
     protected CL cl;
 
-    public OpenClRunner(string filePath, string functionName)
+    public OpenCLRunner(string filePath, string functionName)
     {
         cl = CL.GetApi();
         nint device = 0;
@@ -22,10 +23,10 @@ public class OpenClRunner<T>
         kernel = CreateKernel(cl, program, functionName);
     }
 
-    protected bool Run(nuint[] globalWorkSize, nuint[] localWorkSize, int resultSize, nint[] memObjects, out T[] result)
+    protected bool Run(nuint[] globalWorkSize, nuint[] localWorkSize, int resultSize, nint[] memObjects, int position,out T[] result)
     {
-        cl = OpenClInterfaceImplementation.Enqueue(cl, commandQueue, kernel, globalWorkSize, localWorkSize, memObjects);
-        cl = OpenClInterfaceImplementation.ReadBuffer(cl, commandQueue, memObjects, out result, resultSize);
+        cl = OpenCLInterfaceImplementation.Enqueue(cl, commandQueue, kernel, globalWorkSize, localWorkSize, memObjects);
+        cl = OpenCLInterfaceImplementation.ReadBuffer(cl, commandQueue, memObjects, position, out result, resultSize);
         return true;
     }
 
@@ -179,5 +180,34 @@ public class OpenClRunner<T>
         }
 
         return clSource;
+    }
+
+
+    public abstract void Update(P args, params object[] additionalParameters);
+
+    protected List<float> Flatten(params object[] parameters)
+    {
+        List<float> flattenedValues = new()
+        {
+            // Add Position
+            ((Vector3)parameters[0]).x,
+            ((Vector3)parameters[0]).y,
+            ((Vector3)parameters[0]).z,
+
+            // Add mass
+            ((float)parameters[1]),
+
+            // Add Velocity
+            ((Vector3)parameters[2]).x,
+            ((Vector3)parameters[2]).y,
+            ((Vector3)parameters[2]).z,
+
+            // Add Acceleration
+            ((Vector3)parameters[3]).x,
+            ((Vector3)parameters[3]).y,
+            ((Vector3)parameters[3]).z
+        };
+
+        return flattenedValues;
     }
 }

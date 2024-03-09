@@ -34,21 +34,21 @@ public class CreateObjects : MonoBehaviour
             GameObject obj = Instantiate(prefab, entry.position, Quaternion.Euler(new Vector3(0,0,0)));
             obj.name = entry.name;
 
-            GameObject accArrow = new GameObject("AccelerationArrow");
+            GameObject accArrow = new("AccelerationArrow");
             accArrow.AddComponent<DirectionArrowDraw>();
             accArrow.transform.SetParent(obj.transform);
 
-            GameObject pathArrow = new GameObject("PathArrow");
+            GameObject pathArrow = new("PathArrow"); 
             pathArrow.AddComponent<PathDraw>();
             pathArrow.transform.SetParent(obj.transform);
 
             obj = ApplyBodyType(obj);
 
-            obj.GetComponent<Body>().mass = entry.mass;
-            obj.GetComponent<Body>().velocity = entry.velocity;
-
             float relativeVolume = entry.mass / relativeMass;
             obj.transform.localScale = new(relativeVolume, relativeVolume, relativeVolume);
+
+            obj.GetComponent<Body>().mass = entry.mass;
+            obj.GetComponent<Body>().velocity = entry.velocity;
 
             obj.GetComponentInChildren<PathDraw>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
             obj.GetComponentInChildren<DirectionArrowDraw>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
@@ -100,9 +100,9 @@ public class CreateObjects : MonoBehaviour
     private List<OpenClBodyObject> ParseBodyObjects()
     {
         List<OpenClBodyObject> returnList = new();
-        for(int i = 0; i < 1; i++)
+        for(int i = 0; i < 1000; i++)
         {
-            returnList.Add(new OpenClBodyObject(new Vector3(i*10, 0, 0), new Vector3(0,0, 9.9823f), relativeMass, "Planet - Earth" + i.ToString()));
+            returnList.Add(new OpenClBodyObject(new Vector3(i*100, 0, 0), new Vector3(0,0, 9.9823f), relativeMass, "Planet - Earth" + i.ToString()));
 
         }
         returnList.Add(new OpenClBodyObject(new Vector3(-300, 0, 0), new Vector3(0, 0, 7.5459468401f), relativeMass * 10, "Planet - Jupiter"));

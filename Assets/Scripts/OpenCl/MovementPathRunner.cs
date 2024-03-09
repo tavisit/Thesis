@@ -4,43 +4,41 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class MovementPathRunner : OpenClRunner<Vector4>
+public class MovementPathRunner : OpenCLRunner<Vector4, Dictionary<string, List<Vector3>>, List<GameObject>>
 {
     public MovementPathRunner(string filePath, string functionName) : base(filePath, functionName)
     {
     }
 
-
-
-    public List<OpenClBodyObject> Update(List<OpenClBodyObject> args, int steps)
+    public override void Update(List<GameObject> args, params object[] additionalParameters)
     {
+        int argsLength = args.Count;
+        int steps = (int)additionalParameters[1];
         nint[] memObjects = new nint[2];
-        int[] intObjects = new int[3] { args.Count, args[0].Flatten().Count, steps};
-        Vector4[] result = new Vector4[(nuint)(args.Count * steps)];
+        int[] intObjects = new int[3] { argsLength, (int)additionalParameters[0], steps};
+        Vector4[] result = new Vector4[(nuint)(argsLength * steps)];
 
-        nuint[] globalWorkSize = new nuint[1] { (nuint)args.Count };
+        nuint[] globalWorkSize = new nuint[1] { (nuint)argsLength };
         nuint[] localWorkSize = new nuint[1] { 1 };
 
-        if (OpenClInterfaceImplementation.CreateMemObjects(cl, context, memObjects, true, 0, MemFlags.ReadWrite, result))
+        if (OpenCLInterfaceImplementation.CreateMemObjects(cl, context, memObjects, true, 0, MemFlags.ReadWrite, result)
+            && OpenCLInterfaceImplementation.CreateMemObjects(cl, context, memObjects, false, 1, MemFlags.ReadOnly | MemFlags.CopyHostPtr, 
+                                            args.SelectMany(obj => {
+                                                Body currentObj = obj.GetComponent<Body>();
+                                                return Flatten(obj.transform.position, currentObj.mass, currentObj.velocity, currentObj.acceleration);
+                                            }).ToArray())
+            && OpenCLInterfaceImplementation.SetKernelArgsMemory(cl, kernel, memObjects, new int[] { 0, 1 })
+            && OpenCLInterfaceImplementation.SetKernelArgsVariables(cl, kernel, intObjects, new int[] { 2, 3, 4 })
+            && Run(globalWorkSize, localWorkSize, result.Length, memObjects, 0, out result))
         {
-            if (OpenClInterfaceImplementation.CreateMemObjects(cl, context, memObjects, false, 1, MemFlags.ReadOnly | MemFlags.CopyHostPtr, args.SelectMany(obj => obj.Flatten()).ToArray()))
+            for(int index =0;index < argsLength; index++)
             {
-                if (OpenClInterfaceImplementation.SetKernelArgsMemory(cl, kernel, memObjects, new int[] { 0, 1 }) &&
-                    OpenClInterfaceImplementation.SetKernelArgsVariables(cl, kernel, intObjects, new int[] { 2, 3, 4 }))
+                args[index].GetComponentInChildren<PathDraw>().pathPoints.Clear();
+                for (int step =0;step<steps; step++)
                 {
-                    if (Run(globalWorkSize, localWorkSize, result.Length, memObjects, out result))
-                    {
-                        return args.Select((obj, index) => {
-                            var movementPathArray = new Vector4[steps];
-                            Array.Copy(result, index * steps, movementPathArray, 0, steps);
-                            obj.movementPath = movementPathArray;
-                            return obj;
-                        }).ToList();
-                    }
+                    args[index].GetComponentInChildren<PathDraw>().pathPoints.Add(result[index*steps+step]);
                 }
             }
         }
-
-        return args;
     }
 }

@@ -26,6 +26,8 @@ public class DirectionArrowDraw : MonoBehaviour
     {
         if (direction != Vector3.zero)
         {
+            transform.position = transform.parent.position;
+
             Vector3 lastPoint = transform.position;
             Vector3 arrowEndPoint = lastPoint + direction.normalized * arrowHeadLength;
 
