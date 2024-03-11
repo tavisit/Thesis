@@ -12,6 +12,7 @@ public class DirectionArrowDraw : MonoBehaviour
 
     private void Start()
     {
+        color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         lineRenderer = GetComponent<LineRenderer>();
 
         // These settings may duplicate those in DrawPath if they share the same LineRenderer

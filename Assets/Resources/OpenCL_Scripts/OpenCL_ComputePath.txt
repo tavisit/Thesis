@@ -17,9 +17,17 @@ __kernel void compute_movement_path(__global float3* new_position,
     int current_index = get_global_id(0);
 
     if (current_index < length) {
-        float3 position = (float3)(flattenedData[current_index * offset], flattenedData[current_index * offset + 1], flattenedData[current_index * offset + 2]);
-        float mass = flattenedData[current_index * offset+3];
-        float3 velocity = (float3)(flattenedData[current_index * offset + 4], flattenedData[current_index * offset + 5], flattenedData[current_index * offset + 6]);
+        float3 position;
+        position.x = flattenedData[current_index * offset];
+        position.y = flattenedData[current_index * offset + 1];
+        position.z = flattenedData[current_index * offset + 2];
+        
+        float mass = flattenedData[current_index * offset + 3];
+        
+        float3 velocity;
+        velocity.x = flattenedData[current_index * offset + 4];
+        velocity.y = flattenedData[current_index * offset + 5];
+        velocity.z = flattenedData[current_index * offset + 6];
 
         for(int step = 0; step < steps; step++){
             float actual_time = (float)step;

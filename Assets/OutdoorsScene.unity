@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2263.4358, g: 2404.797, b: 3502.266, a: 1}
+  m_IndirectSpecularColor: {r: 2261.264, g: 2402.5588, b: 3499.9614, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1061,8 +1061,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1040128519}
-  - component: {fileID: 1040128521}
-  - component: {fileID: 1040128523}
   - component: {fileID: 1040128522}
   m_Layer: 0
   m_Name: Manager
@@ -1086,19 +1084,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1040128521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040128517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f42522011a18c84ab481716d0bd5dd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 1715945862866604723, guid: f0e190d51276a3e40b254f6e3bbb6a24, type: 3}
 --- !u!114 &1040128522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1108,21 +1093,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1040128517}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a87c5ed6a99119428761432a5fd6317, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c8b629042eef2541b2a19ae6b88bd64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1040128523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040128517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1faebdd80eb85340aee65745af71442, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  prefab: {fileID: 1715945862866604723, guid: f0e190d51276a3e40b254f6e3bbb6a24, type: 3}
 --- !u!1 &1295593749
 GameObject:
   m_ObjectHideFlags: 0
@@ -1521,7 +1495,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 10000
+  far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 5

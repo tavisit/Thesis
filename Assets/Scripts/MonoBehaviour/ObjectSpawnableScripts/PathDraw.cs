@@ -12,6 +12,7 @@ public class PathDraw: MonoBehaviour
 
     private void Start()
     {
+        color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.startWidth = lineWidthStart;
         lineRenderer.endWidth = lineWidthEnd;
