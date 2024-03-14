@@ -1,19 +1,22 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 [StructLayout(LayoutKind.Sequential)]
-public struct OpenClBodyObject
+public class OpenClBodyObject
 {
     public string name;
     public float mass;
     public Vector3 position;
     public Vector3 velocity;
-    public Vector3 acceleration;
-    internal Vector3 oldVelocity;
+    public Color color;
+    [NonSerialized]
+    public Vector3 acceleration = new Vector3();
 
-    public List<Vector3> pathPoints;
+    [NonSerialized]
+    public List<Vector3> pathPoints = new List<Vector3>(15);
 
     public OpenClBodyObject(string name, float mass, Vector3 position, Vector3 velocity, Vector3 acceleration)
     {
@@ -22,10 +25,6 @@ public struct OpenClBodyObject
         this.position = position;
         this.velocity = velocity;
         this.acceleration = acceleration;
-
-        this.oldVelocity = this.velocity;
-
-        pathPoints = new List<Vector3>(15);
     }
     public List<float> Flatten()
     {

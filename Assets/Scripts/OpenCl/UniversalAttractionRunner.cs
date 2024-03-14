@@ -17,7 +17,12 @@ public class UniversalAttractionRunner : OpenCLRunner<Vector4, OpenClBodies>
 
         for (int index = 0; index < openClBodies.myObjectBodies.Count; index++)
         {
-            if (openClBodies.myObjectBodies[index].pathPoints.Count == 0)
+            if(openClBodies.myObjectBodies[index].pathPoints == null)
+            {
+                openClBodies.myObjectBodies[index].pathPoints = new List<Vector3>();
+                pointsToUpdate.Add(openClBodies.myObjectBodies[index]);
+            }
+            else if (openClBodies.myObjectBodies[index].pathPoints.Count == 0)
             {
                 pointsToUpdate.Add(openClBodies.myObjectBodies[index]);
             }

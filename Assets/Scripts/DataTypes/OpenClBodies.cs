@@ -1,22 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
-[System.Serializable]
-[StructLayout(LayoutKind.Sequential)]
 public class OpenClBodies
 {
-    private readonly float relativeMass = 5.972E+12f;
+    private readonly float sunMass = 1.989E+30f;
     public List<OpenClBodyObject> myObjectBodies;
     public Dictionary<string, GameObject> celestialBodies;
     private readonly float maxVelocity = 299792458; // Maximum velocity
+
 
     public OpenClBodies()
     {
         myObjectBodies = new List<OpenClBodyObject>();
         celestialBodies = new Dictionary<string, GameObject>();
-        ParseBodyObjects();
+        myObjectBodies = DataFetching.GaiaFetching("galactic_data");
     }
 
     public List<float> Flatten()
@@ -63,11 +61,11 @@ public class OpenClBodies
     {
         if (Mathf.Abs(pathDilation) > Mathf.Epsilon)
         {
-            entry.oldVelocity = entry.velocity;
+            Vector3 oldVelocity = entry.velocity;
             float deltaTime = Time.fixedDeltaTime * pathDilation;
             entry.velocity += entry.acceleration * deltaTime;
             entry.velocity = Vector3.ClampMagnitude(entry.velocity, maxVelocity);
-            entry.position += entry.oldVelocity * deltaTime + 0.5f * entry.acceleration * deltaTime * deltaTime;
+            entry.position += oldVelocity * deltaTime + 0.5f * entry.acceleration * deltaTime * deltaTime;
         }
 
         return entry;
@@ -116,24 +114,26 @@ public class OpenClBodies
         pathArrow.transform.SetParent(obj.transform);
         pathArrow.GetComponent<PathDraw>().pathPoints = entry.pathPoints;
 
-        obj = ApplyBodyType(obj);
+        obj = ApplyBodyType(obj, entry.color, entry.mass);
 
-        obj.GetComponent<Body>().mass = entry.mass;
+        obj.GetComponent<Body>().mass = entry.mass * sunMass;
         obj.GetComponent<Body>().velocity = entry.velocity;
         obj.GetComponent<Body>().acceleration = entry.acceleration;
 
-        float relativeVolume = entry.mass / relativeMass;
+        float relativeVolume = entry.mass;
         obj.transform.localScale = new(relativeVolume, relativeVolume, relativeVolume);
 
         return obj;
     }
 
-    private GameObject ApplyBodyType(GameObject gameObject)
+    private GameObject ApplyBodyType(GameObject gameObject, params object[] additionalParameters)
     {
         string objectName = gameObject.name;
         if (objectName.StartsWith("Star"))
         {
             gameObject.AddComponent<StellarBody>();
+            gameObject.GetComponent<StellarBody>().starColor = (Color)additionalParameters[0];
+            gameObject.GetComponent<StellarBody>().relativeLuminousity = (float)additionalParameters[1];
         }
         else if (objectName.StartsWith("Planet"))
         {
@@ -144,15 +144,5 @@ public class OpenClBodies
             gameObject.AddComponent<Body>();
         }
         return gameObject;
-    }
-
-    private void ParseBodyObjects()
-    {
-        myObjectBodies.Clear();
-        for (int i = 0; i < 10000; i++)
-        {
-            myObjectBodies.Add(new OpenClBodyObject("Planet - Earth" + i.ToString(), relativeMass, new Vector3(i * 10, 0, 0), new Vector3(0, 0, 9.9823f), new Vector3(0, 0, 0)));
-
-        }
     }
 }

@@ -21,10 +21,12 @@ public class ObjectManager : MonoBehaviour
 
     void Start()
     {
+        openClBodies = new OpenClBodies();
+
+
         universalAttraction = new UniversalAttractionRunner("OpenCL_ComputeAcceleration", "universal_attraction_force");
         movementPathRunner = new MovementPathRunner("OpenCL_ComputePath", "compute_movement_path");
 
-        openClBodies = new OpenClBodies();
 
         watch = Stopwatch.StartNew();
 

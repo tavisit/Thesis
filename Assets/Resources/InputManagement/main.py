@@ -2,16 +2,16 @@ import astropy.units as u
 from astropy.coordinates import SkyCoord, Galactic
 from astroquery.gaia import Gaia
 import numpy as np
-import pandas as pd
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from astroquery.simbad import Simbad
+import pandas as pd
+import json
 
 # Constants
 GALACTIC_CENTER_DISTANCE = 8.34 * u.kpc  # Sun's distance from the Galactic center
 SUN_VELOCITY = np.array([-11.1, 244, 7.25]) * u.km / u.s  # Sun's velocity in the Galactic frame: [U, V, W]
 
 star_names = [
-    "Sirius", "Canopus", "Arcturus", "Alpha Centauri", "Vega", "Rigel", "Procyon", "Betelgeuse", "Achernar", "Altair",
+    "Sirius B", "Canopus", "Arcturus", "Proxima", "Vega", "Rigel", "Procyon", "Betelgeuse", "Achernar", "Altair",
     "Aldebaran", "Antares", "Spica", "Pollux", "Fomalhaut", "Deneb", "Regulus", "Castor", "Gacrux", "Bellatrix",
     "Elnath", "Miaplacidus", "Alnilam", "Alnair", "Alpheratz", "Regor", "Dubhe", "Mirfak", "Wezen", "Sargas",
     "Kaus Australis", "Avior", "Alkaid", "Menkalinan", "Acrux", "Almach", "Polaris", "Mirach", "Saiph", "Scheat",
@@ -36,12 +36,9 @@ for name in star_names:
         result_table = Simbad.query_object(name)
         ids = result_table['IDS'][0].split('|')
         gaia_id = next((id for id in ids if id.startswith('Gaia DR3 ')), None)
-        star_name_to_gaia_dr3[name] = gaia_id
+        star_name_to_gaia_dr3[gaia_id] = name
     except Exception as e:
         print(f"Error retrieving data for {name}: {e}")
-        star_name_to_gaia_dr3[name] = None
-
-print(star_name_to_gaia_dr3)
 
 
 def temperature_to_rgb(temperature):
@@ -135,19 +132,40 @@ gal_vel = (galactic_coord.velocity.d_xyz.to(u.km / u.s) - SUN_VELOCITY[:, None])
 data['velocity_x'] = gal_vel[0]
 data['velocity_y'] = gal_vel[1]
 data['velocity_z'] = gal_vel[2]
-
 # Convert to DataFrame for better display
+
+data[["r", "g", "b"]] = data["teff_gspphot"].apply(lambda temp: temperature_to_rgb(temp)).apply(pd.Series)
+
 data_df = pd.DataFrame(data)
 
-data_df["relative_mass"] = estimate_mass(data['phot_g_mean_mag'].values, data['parallax'].values)
-data_df[["r", "g", "b"]] = data_df["teff_gspphot"].apply(lambda temp: temperature_to_rgb(temp)).apply(pd.Series)
+data_df["name"] = data['DESIGNATION'] \
+    .map(star_name_to_gaia_dr3) \
+    .fillna(data_df['DESIGNATION']) \
+    .apply(lambda x: "Star " + x)
+data_df["mass"] = estimate_mass(data['phot_g_mean_mag'].values, data['parallax'].values)
 
-data_df["names"] = data_df['DESIGNATION'].map(star_name_to_gaia_dr3).fillna(data_df['DESIGNATION'])
 
-# Display the updated DataFrame with Galactic positions and velocities
-necessary_df = data_df[['names',
-                        "relative_mass",
-                        "r", "g", "b",
-                        'pos_x', 'pos_y', 'pos_z',
-                        'velocity_x', 'velocity_y', 'velocity_z']]
-necessary_df.to_csv("galactic_data.csv", index=False)
+def normalize_color(row):
+    return {'r': row['r'] / 255.0, 'g': row['g'] / 255.0, 'b': row['b'] / 255.0, 'a': 1}
+
+
+data_df["color"] = data_df.apply(normalize_color, axis=1)
+data_df['position'] = data_df.apply(lambda row: {'x': row['pos_x'], 'y': row['pos_y'], 'z': row['pos_z']}, axis=1)
+data_df['velocity'] = data_df.apply(
+    lambda row: {'x': row['velocity_x'], 'y': row['velocity_y'], 'z': row['velocity_z']}, axis=1)
+
+# Define the necessary columns for the output DataFrame
+necessary_df = data_df[['name', "mass", "color", 'position', 'velocity']]
+
+# Convert DataFrame to a list of dictionaries
+data_list = necessary_df.to_dict('records')
+
+# Wrap the list in a dictionary under the 'Items' key
+final_dict = {"Items": data_list}
+
+# Define the output file path
+output_path = "./output/galactic_data.json"
+
+# Serialize the dictionary to JSON and write to file
+with open(output_path, 'w') as json_file:
+    json.dump(final_dict, json_file, indent=2)
