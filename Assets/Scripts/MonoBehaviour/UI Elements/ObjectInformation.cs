@@ -4,11 +4,12 @@ using UnityEngine.UI;
 public class ObjectInformation : MonoBehaviour
 {
     public Text informationTextUI;
+    public Image panel;
     public float offset = 10;
 
     float clicked = 0;
     float clicktime = 0;
-    float clickdelay = 0.5f;
+    readonly float clickdelay = 0.5f;
 
     GameObject hitObject = null;
     Body body = null;
@@ -17,7 +18,7 @@ public class ObjectInformation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        panel.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -25,36 +26,39 @@ public class ObjectInformation : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+
             _ = new RaycastHit();
-            RaycastHit hitInfo;
-            bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
+            bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hitInfo);
             if (hit)
             {
                 hitObject = hitInfo.transform.gameObject;
                 body = hitObject.GetComponent<Body>();
             }
-        }
-        else
-        {
-            string informationText = string.Empty;
-            if (body != null)
+            else
             {
-                informationText += "\nName: " + hitObject.name;
-                informationText += "\nPosition: " + hitObject.transform.position.ToString("E5");
-                informationText += "\nVelocity: " + body.velocity.ToString("E5");
-                informationText += "\nAcceleration: " + body.acceleration.ToString("E5");
-                informationText += "\nMass: " + body.mass.ToString("E5");
+                panel.gameObject.SetActive(false);
+                informationTextUI.text = "";
+                body = null;
             }
-            if(informationTextUI != null)
+        }
+        else if (body != null)
+        {
+            string informationText = "Information:";
+            informationText += "\nName: " + hitObject.name;
+            informationText += "\nPosition: " + hitObject.transform.position.ToString("E5");
+            informationText += "\nVelocity: " + body.velocity.ToString("E5");
+            informationText += "\nAcceleration: " + body.acceleration.ToString("E5");
+            informationText += "\nMass: " + body.mass.ToString("E5");
+            if (informationTextUI != null)
             {
+                panel.gameObject.SetActive(true);
                 informationTextUI.text = informationText;
             }
-        }
+    }
 
         if (DoubleClick())
         {
-            RaycastHit hitInfo;
-            bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
+            bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hitInfo);
             if (hit)
             {
                 Vector3 directionToCamera = (Camera.main.transform.position - hitInfo.point).normalized;

@@ -1,44 +1,49 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Body : MonoBehaviour
+public abstract class Body : MonoBehaviour
 {
     public float mass;
     public Vector3 velocity;
     public Vector3 acceleration;
-    private Slider timeDilationSlider;
 
-    private float maxVelocity = 299792458; // Maximum velocity
-    private float velocityDamping = 0.99f;
+    protected abstract void SpecificStart();
+    protected abstract void SpecificUpdate();
 
-    private void Start()
+    protected void Start()
     {
-        timeDilationSlider = GameObject.Find("TimeDillationSlider")?.GetComponent<Slider>();
+        ApplyMaterial();
+        SpecificStart();
     }
 
-    private void Update()
+    protected void Update()
     {
-        UpdatePhysics();
+        SpecificUpdate();
     }
 
-    private void UpdatePhysics()
+
+    private void ApplyMaterial()
     {
-        if (timeDilationSlider != null && Mathf.Abs(timeDilationSlider.value) > Mathf.Epsilon)
+        Material[] materials = Resources.LoadAll<Material>("MaterialsPrefabs");
+
+        Dictionary<string, Material> materialsDict = new();
+        foreach (Material mat in materials)
         {
-            float timeScale = timeDilationSlider.value;
-            float deltaTime = Time.fixedDeltaTime * timeScale;
-
-            velocity = velocity * deltaTime + acceleration * deltaTime * deltaTime;
-            transform.position += velocity;
-
-            velocity *= Mathf.Clamp01(velocityDamping * timeScale); // Apply damping scaled by time
-            velocity = Vector3.ClampMagnitude(velocity, maxVelocity); // Cap velocity
+            materialsDict.Add(mat.name, mat);
         }
-        else
+
+        if (name.StartsWith("Star") && materialsDict.ContainsKey("Star"))
         {
-            timeDilationSlider = GameObject.Find("TimeDillationSlider")?.GetComponent<Slider>();
+            GetComponent<Renderer>().material = materialsDict["Star"];
+        }
+        else if (name.StartsWith("Planet") && materialsDict.ContainsKey("Planet"))
+        {
+            GetComponent<Renderer>().material = materialsDict["Planet"];
+        }
+
+        if (materialsDict.ContainsKey("Default"))
+        {
+            GetComponent<Renderer>().material = materialsDict["Default"];
         }
     }
 }

@@ -1,79 +1,52 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 [StructLayout(LayoutKind.Sequential)]
-public struct OpenClBodyObject
+public class OpenClBodyObject
 {
-    public Vector3 position;
-    public Vector3 rotation;
-    public Vector3 acceleration;
-    public Vector3 velocity;
-    public float mass;
     public string name;
+    public float mass;
+    public Vector3 position;
+    public Vector3 velocity;
+    public Color color;
+    [NonSerialized]
+    public Vector3 acceleration = new Vector3();
 
-    public Vector4[] movementPath;
+    [NonSerialized]
+    public List<Vector3> pathPoints = new List<Vector3>(15);
 
-    public OpenClBodyObject(Vector3 position, Vector3 rotation, float mass, string name)
+    public OpenClBodyObject(string name, float mass, Vector3 position, Vector3 velocity, Vector3 acceleration)
     {
-        this.position = position;
-        this.rotation = rotation;
-        acceleration = new Vector3();
-        velocity = new Vector3();
-        this.mass = mass;
         this.name = name;
-        movementPath = new Vector4[0];
-    }
-
-    public OpenClBodyObject(Vector3 position, Vector3 velocity, Vector3 rotation, float mass, string name)
-    {
+        this.mass = mass;
         this.position = position;
-        this.rotation = rotation;
-        acceleration = new Vector3();
         this.velocity = velocity;
-        this.mass = mass;
-        this.name = name;
-        movementPath = new Vector4[0];
-    }
-    public OpenClBodyObject(Vector3 position, Vector3 velocity, Vector3 rotation, Vector3 acceleration, float mass, string name)
-    {
-        this.position = position;
-        this.rotation = rotation;
         this.acceleration = acceleration;
-        this.velocity = velocity;
-        this.mass = mass;
-        this.name = name;
-        movementPath = new Vector4[0];
     }
-
     public List<float> Flatten()
     {
-        List<float> flattenedValues = new List<float>();
+        return new List<float>()
+        {
+            // Add Position
+            position.x,
+            position.y,
+            position.z,
 
-        // Add Position
-        flattenedValues.Add(position.x);
-        flattenedValues.Add(position.y);
-        flattenedValues.Add(position.z);
+            // Add mass
+            mass,
 
-        // Add mass
-        flattenedValues.Add(mass);
+            // Add Velocity
+            velocity.x,
+            velocity.y,
+            velocity.z,
 
-        // Add Velocity
-        flattenedValues.Add(velocity.x);
-        flattenedValues.Add(velocity.y);
-        flattenedValues.Add(velocity.z);
-
-        // Add Rotation
-        flattenedValues.Add(rotation.x);
-        flattenedValues.Add(rotation.y);
-        flattenedValues.Add(rotation.z);
-
-        // Add Acceleration
-        flattenedValues.Add(acceleration.x);
-        flattenedValues.Add(acceleration.y);
-        flattenedValues.Add(acceleration.z);
-
-        return flattenedValues;
+            // Add Acceleration
+            acceleration.x,
+            acceleration.y,
+            acceleration.z
+        };
     }
 }

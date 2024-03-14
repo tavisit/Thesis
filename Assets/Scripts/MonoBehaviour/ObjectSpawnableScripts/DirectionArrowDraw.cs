@@ -6,12 +6,13 @@ public class DirectionArrowDraw : MonoBehaviour
 {
     public Vector3 direction;
     public Color color = Color.white;
-    private float arrowHeadLength = 2.0f;
-    private float lineWidth = 0.1f;
+    private readonly float arrowHeadLength = 2.0f;
+    private readonly float lineWidth = 0.1f;
     private LineRenderer lineRenderer;
 
     private void Start()
     {
+        color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         lineRenderer = GetComponent<LineRenderer>();
 
         // These settings may duplicate those in DrawPath if they share the same LineRenderer
@@ -26,6 +27,8 @@ public class DirectionArrowDraw : MonoBehaviour
     {
         if (direction != Vector3.zero)
         {
+            transform.position = transform.parent.position;
+
             Vector3 lastPoint = transform.position;
             Vector3 arrowEndPoint = lastPoint + direction.normalized * arrowHeadLength;
 
