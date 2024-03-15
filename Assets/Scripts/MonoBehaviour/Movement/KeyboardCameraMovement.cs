@@ -8,7 +8,7 @@ public class KeyboardCameraMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -28,7 +28,8 @@ public class KeyboardCameraMovement : MonoBehaviour
         transform.position += transform.right * Input.GetAxis("Horizontal") * actualSpeed * Time.deltaTime;
 
         // Rotate the camera based on the mouse movement
-        if (Input.GetMouseButton(1)){
+        if (Input.GetMouseButton(1))
+        {
             float mouseX = Input.GetAxis("Mouse X");
             float mouseY = Input.GetAxis("Mouse Y");
             transform.eulerAngles += new Vector3(-mouseY * sensitivity, mouseX * sensitivity, 0);

@@ -10,13 +10,14 @@ public class StellarBody : Body
     public bool setColor = false;
 
     protected override void SpecificStart() { }
-    protected override void SpecificUpdate() {
+    protected override void SpecificUpdate()
+    {
         if (setColor == false && starColor != null)
         {
             Material emission = GetComponent<Renderer>().material;
             emission.SetColor("_BaseColor", starColor);
             emission.SetFloat("_CellDensity", emission.GetFloat("_CellDensity") + Random.Range(-10, 10));
-            emission.SetFloat("_SolarPower", emission.GetFloat("_SolarPower") + Random.Range(-1, 1)* relativeLuminousity);
+            emission.SetFloat("_SolarPower", emission.GetFloat("_SolarPower") + Random.Range(-1, 1) * relativeLuminousity);
             setColor = true;
         }
     }

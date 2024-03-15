@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-public class PathDraw: MonoBehaviour
+public class PathDraw : MonoBehaviour
 {
     public List<Vector3> pathPoints = new();
     public Color color = Color.white;

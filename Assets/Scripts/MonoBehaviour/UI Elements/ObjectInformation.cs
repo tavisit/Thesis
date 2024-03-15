@@ -54,7 +54,7 @@ public class ObjectInformation : MonoBehaviour
                 panel.gameObject.SetActive(true);
                 informationTextUI.text = informationText;
             }
-    }
+        }
 
         if (DoubleClick())
         {

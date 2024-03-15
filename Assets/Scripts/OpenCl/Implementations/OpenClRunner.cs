@@ -23,7 +23,7 @@ public abstract class OpenCLRunner<T, P>
         kernel = CreateKernel(cl, program, functionName);
     }
 
-    protected bool Run(nuint[] globalWorkSize, nuint[] localWorkSize, int resultSize, nint[] memObjects, int position,out T[] result)
+    protected bool Run(nuint[] globalWorkSize, nuint[] localWorkSize, int resultSize, nint[] memObjects, int position, out T[] result)
     {
         cl = OpenCLInterfaceImplementation.Enqueue(cl, commandQueue, kernel, globalWorkSize, localWorkSize, memObjects);
         cl = OpenCLInterfaceImplementation.ReadBuffer(cl, commandQueue, memObjects, position, out result, resultSize);
