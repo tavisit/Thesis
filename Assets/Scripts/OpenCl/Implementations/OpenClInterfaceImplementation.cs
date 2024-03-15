@@ -1,6 +1,5 @@
 using Silk.NET.OpenCL;
 using System;
-using System.IO;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -25,7 +24,7 @@ public static class OpenCLInterfaceImplementation
                 ptr = Marshal.UnsafeAddrOfPinnedArrayElement(array, 0).ToPointer();
             }
 
-            memObjects[position] = cl.CreateBuffer(context, memFlags, (nuint)(Marshal.SizeOf<T>() * array.Length), nullPtr? null:ptr, out var errorCode);
+            memObjects[position] = cl.CreateBuffer(context, memFlags, (nuint)(Marshal.SizeOf<T>() * array.Length), nullPtr ? null : ptr, out var errorCode);
             if (memObjects[position] == IntPtr.Zero)
             {
                 Debug.LogError("Error creating memory objects. Error code: " + errorCode);
@@ -100,7 +99,7 @@ public static class OpenCLInterfaceImplementation
     }
     public static unsafe CL ReadBuffer<T>(CL cl, nint commandQueue, nint[] memObjects, int position, out T[] result, int resultSize)
     {
-        result = new T[resultSize]; 
+        result = new T[resultSize];
         if (!typeof(T).IsValueType)
         {
             Debug.LogError("T " + typeof(T) + " must be a value type.");

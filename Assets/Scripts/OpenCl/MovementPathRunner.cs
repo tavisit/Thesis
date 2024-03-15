@@ -1,5 +1,4 @@
 ﻿using Silk.NET.OpenCL;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -44,7 +43,7 @@ public class MovementPathRunner : OpenCLRunner<Vector4, OpenClBodies>
 
         int steps = (int)additionalParameters[0];
         nint[] memObjects = new nint[2];
-        int[] intObjects = new int[3] { argsLength, pointsToUpdate[0].Flatten().Count(), steps};
+        int[] intObjects = new int[3] { argsLength, pointsToUpdate[0].Flatten().Count(), steps };
         Vector4[] result = new Vector4[(nuint)(argsLength * steps)];
 
         nuint[] globalWorkSize = new nuint[1] { (nuint)argsLength };
@@ -56,13 +55,13 @@ public class MovementPathRunner : OpenCLRunner<Vector4, OpenClBodies>
             && OpenCLInterfaceImplementation.SetKernelArgsVariables(cl, kernel, intObjects, new int[] { 2, 3, 4 })
             && Run(globalWorkSize, localWorkSize, result.Length, memObjects, 0, out result))
         {
-            for(int index = 0;index < argsLength; index++)
+            for (int index = 0; index < argsLength; index++)
             {
                 int index_openCL = openClBodies.myObjectBodies.IndexOf(pointsToUpdate[index]);
                 openClBodies.myObjectBodies[index_openCL].pathPoints.Clear();
-                for (int step =0;step<steps; step++)
+                for (int step = 0; step < steps; step++)
                 {
-                    openClBodies.myObjectBodies[index_openCL].pathPoints.Add(result[index*steps+step]);
+                    openClBodies.myObjectBodies[index_openCL].pathPoints.Add(result[index * steps + step]);
                 }
             }
         }

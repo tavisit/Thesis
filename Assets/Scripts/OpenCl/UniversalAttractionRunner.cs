@@ -1,5 +1,4 @@
 using Silk.NET.OpenCL;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,7 +16,7 @@ public class UniversalAttractionRunner : OpenCLRunner<Vector4, OpenClBodies>
 
         for (int index = 0; index < openClBodies.myObjectBodies.Count; index++)
         {
-            if(openClBodies.myObjectBodies[index].pathPoints == null)
+            if (openClBodies.myObjectBodies[index].pathPoints == null)
             {
                 openClBodies.myObjectBodies[index].pathPoints = new List<Vector3>();
                 pointsToUpdate.Add(openClBodies.myObjectBodies[index]);
@@ -44,7 +43,7 @@ public class UniversalAttractionRunner : OpenCLRunner<Vector4, OpenClBodies>
         if (argsLength == 0) return;
 
         nint[] memObjects = new nint[2];
-        int[] valueObjects = new int[2] { argsLength, pointsToUpdate[0].Flatten().Count()};
+        int[] valueObjects = new int[2] { argsLength, pointsToUpdate[0].Flatten().Count() };
         Vector4[] result = new Vector4[(nuint)argsLength];
 
         nuint[] globalWorkSize = new nuint[1] { (nuint)argsLength };

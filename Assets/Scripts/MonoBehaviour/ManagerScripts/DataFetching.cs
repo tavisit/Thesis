@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 using UnityEngine;
 
 public static class DataFetching
@@ -13,7 +12,7 @@ public static class DataFetching
 
         List<OpenClBodyObject> returnObjects = JsonHelper.FromJson<OpenClBodyObject>(mainFile.text).ToList();
 
-        for(int i = 0; i < returnObjects.Count(); i++) 
+        for (int i = 0; i < returnObjects.Count(); i++)
         {
             returnObjects[i].velocity /= 5000;
         }
@@ -21,7 +20,7 @@ public static class DataFetching
         return returnObjects;
     }
 
-    public static List<OpenClBodyObject>  SolarSystemFetching()
+    public static List<OpenClBodyObject> SolarSystemFetching()
     {
         List<OpenClBodyObject> returnValues = new List<OpenClBodyObject>();
         TextAsset[] clFiles = Resources.LoadAll<TextAsset>("InputManagement/output");
