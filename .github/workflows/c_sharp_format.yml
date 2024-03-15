@@ -33,10 +33,7 @@ jobs:
         uses: xt0rted/dotnet-tool-restore@v1
         
       - name: Run dotnet format
-        run: |
-          dotnet format --verify-no-changes
-        id: format
-        continue-on-error: true
+        run: dotnet format --verify-no-changes "./Thesis.sln"
       
       - name: Check formatting result
         if: steps.format.outcome == 'failure'
