@@ -31,9 +31,18 @@ jobs:
 
       - name: Restore dotnet tools
         uses: xt0rted/dotnet-tool-restore@v1
-
+        
       - name: Run dotnet format
-        uses: xt0rted/dotnet-format@v1
+        run: |
+          dotnet format --verify-no-changes
+        id: format
+        continue-on-error: true
+      
+      - name: Check formatting result
+        if: steps.format.outcome == 'failure'
+        run: |
+          echo "Formatting issues found"
+          exit 1
 
       - name: Check for uncommitted changes
         run: |
