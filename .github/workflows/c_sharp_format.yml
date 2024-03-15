@@ -25,21 +25,12 @@ jobs:
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
           restore-keys: |
             ${{ runner.os }}-nuget-
-
-      - name: Add dotnet-format problem matcher
-        uses: xt0rted/dotnet-format-problem-matcher@v1
-
-      - name: Restore dotnet tools
-        uses: xt0rted/dotnet-tool-restore@v1
+        
+      - name: Restore dependencies
+        run: dotnet restore "./Thesis.sln"
         
       - name: Run dotnet format
         run: dotnet format --verify-no-changes "./Thesis.sln"
-      
-      - name: Check formatting result
-        if: steps.format.outcome == 'failure'
-        run: |
-          echo "Formatting issues found"
-          exit 1
 
       - name: Check for uncommitted changes
         run: |
