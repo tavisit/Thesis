@@ -7,14 +7,8 @@ public class Body : MonoBehaviour
     public Vector3 velocity;
     public Vector3 acceleration;
 
-    protected virtual void SpecificStart()
-    {
-
-    }
-    protected virtual void SpecificUpdate()
-    {
-        
-    }
+    protected virtual void SpecificStart() { }
+    protected virtual void SpecificUpdate() { }
 
     protected void Start()
     {

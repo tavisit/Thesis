@@ -25,7 +25,7 @@ public class MapRenderer : MonoBehaviour
         Vector3 minBoundsTemp = new Vector3(objectManager.openClBodies.bounds[0], objectManager.openClBodies.bounds[2], objectManager.openClBodies.bounds[4]);
         Vector3 maxBoundsTemp = new Vector3(objectManager.openClBodies.bounds[1], objectManager.openClBodies.bounds[3], objectManager.openClBodies.bounds[5]);
 
-        if(minBoundsTemp!=minBounds || maxBoundsTemp != maxBounds)
+        if (minBoundsTemp != minBounds || maxBoundsTemp != maxBounds)
         {
             minBounds = minBoundsTemp;
             maxBounds = maxBoundsTemp;

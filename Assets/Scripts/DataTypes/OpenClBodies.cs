@@ -122,7 +122,7 @@ public class OpenClBodies
             float G = 6.67430e-11f;
             relativeRadius = 2 * G * (entry.mass * sunMass) / (maxVelocity * maxVelocity) / sunRadius;
             obj.GetComponent<Body>().mass = entry.mass * sunMass;
-            obj.GetComponent<Body>().velocity = new Vector3(0,0,0);
+            obj.GetComponent<Body>().velocity = new Vector3(0, 0, 0);
             obj.GetComponent<Body>().acceleration = new Vector3(0, 0, 0);
             obj.transform.localScale = new(relativeRadius, relativeRadius, relativeRadius);
         }

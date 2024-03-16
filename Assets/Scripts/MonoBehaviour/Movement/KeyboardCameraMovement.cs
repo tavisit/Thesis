@@ -32,7 +32,7 @@ public class KeyboardCameraMovement : MonoBehaviour
         {
             targetFOV = backwardFOV;
         }
-        else if(verticalInput > 0 && isBoosted)
+        else if (verticalInput > 0 && isBoosted)
         {
             targetFOV = boostedFOV;
         }
