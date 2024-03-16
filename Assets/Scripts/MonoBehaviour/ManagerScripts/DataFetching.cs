@@ -17,6 +17,10 @@ public static class DataFetching
             returnObjects[i].velocity /= 5000;
         }
 
+        // Add Sagittarius A*
+        OpenClBodyObject sagittariusA = new OpenClBodyObject("Blackhole Sagittarius A*", 4.297E+6f, new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0));
+        returnObjects.Add(sagittariusA);
+
         return returnObjects;
     }
 

@@ -108,7 +108,7 @@ def get_gaia_data_top_n(n: int):
     return result.to_pandas()
 
 
-data = get_gaia_data_top_n(100)
+data = get_gaia_data_top_n(10000)
 # Convert to SkyCoord object
 coord = SkyCoord(ra=data['ra'].values * u.degree,
                  dec=data['dec'].values * u.degree,
@@ -138,9 +138,9 @@ data[["r", "g", "b"]] = data["teff_gspphot"].apply(lambda temp: temperature_to_r
 
 data_df = pd.DataFrame(data)
 
-data_df["name"] = data['DESIGNATION'] \
+data_df["name"] = data_df['designation'] \
     .map(star_name_to_gaia_dr3) \
-    .fillna(data_df['DESIGNATION']) \
+    .fillna(data_df['designation']) \
     .apply(lambda x: "Star " + x)
 data_df["mass"] = estimate_mass(data['phot_g_mean_mag'].values, data['parallax'].values)
 

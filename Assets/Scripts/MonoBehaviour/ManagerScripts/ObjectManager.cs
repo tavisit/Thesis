@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,12 +6,12 @@ public class ObjectManager : MonoBehaviour
 {
     public GameObject prefab;
     protected Slider timeDilationSlider;
-    private readonly int nr_steps = 10;
+    private readonly int nr_steps = 5;
 
-    private OpenClBodies openClBodies;
+    public OpenClBodies openClBodies;
 
-    private UniversalAttractionRunner universalAttraction;
-    private MovementPathRunner movementPathRunner;
+    private AccelerationRunner universalAttraction;
+    private PathRunner movementPathRunner;
 
     private Stopwatch watch;
 
@@ -21,17 +20,15 @@ public class ObjectManager : MonoBehaviour
     {
         openClBodies = new OpenClBodies();
 
-
-        universalAttraction = new UniversalAttractionRunner("OpenCL_ComputeAcceleration", "universal_attraction_force");
-        movementPathRunner = new MovementPathRunner("OpenCL_ComputePath", "compute_movement_path");
-
+        universalAttraction = new AccelerationRunner("OpenCL_ComputeAcceleration", "universal_attraction_force");
+        movementPathRunner = new PathRunner("OpenCL_ComputePath", "compute_movement_path");
 
         watch = Stopwatch.StartNew();
 
         timeDilationSlider = GameObject.Find("TimeDillationSlider")?.GetComponent<Slider>();
 
         universalAttraction.Update(openClBodies);
-        movementPathRunner.Update(openClBodies, nr_steps);
+        movementPathRunner.Update(openClBodies, nr_steps, Camera.main);
     }
 
     void Update()
@@ -55,13 +52,15 @@ public class ObjectManager : MonoBehaviour
 
                 watch.Restart();
 
-                movementPathRunner.Update(openClBodies, nr_steps);
+                movementPathRunner.Update(openClBodies, nr_steps, Camera.main);
 
                 watch.Stop();
                 UnityEngine.Debug.Log($"movementPathRunner : {watch.ElapsedMilliseconds}");
+
             }
 
             openClBodies.UpdateGraphics(Camera.main, prefab, timeDilationSlider.value);
+
         }
     }
 }
