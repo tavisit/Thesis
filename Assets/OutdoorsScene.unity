@@ -985,7 +985,7 @@ MonoBehaviour:
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -1624,7 +1624,7 @@ Transform:
   m_GameObject: {fileID: 1823688464}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.934222, y: 26.926435, z: -8.981623}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1646,6 +1646,7 @@ MonoBehaviour:
   boostedSpeed: 50
   normalFOV: 60
   boostedFOV: 180
+  backwardFOV: 5
   cameraInfoTxt: {fileID: 1233156834}
 --- !u!114 &1823688470
 MonoBehaviour:
