@@ -8,7 +8,7 @@ public static class ViewHelper
             && (pointOnScreen.x > 0) && (pointOnScreen.x < Screen.width)
             && (pointOnScreen.y > 0) && (pointOnScreen.y < Screen.height);
     }
-    
+
     public static bool IsInView(Camera cam, Vector3 position)
     {
         Vector3 pointOnScreen = cam.WorldToScreenPoint(position);
