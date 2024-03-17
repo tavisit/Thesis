@@ -1,6 +1,8 @@
 ﻿
 // Compute the acceleration of a given object with position relative to the other objects
 
+float sun_mass = 1.989E+10f; // in kgs
+
 float3 compute_acceleration(int current_index, float3 position, float mass, const __global float* flattenedData, int length, int offset){
     float G = 6.67430e-11f; // Gravitational constant
     float3 totalForce = (float3)(0.0f, 0.0f, 0.0f);
@@ -11,7 +13,7 @@ float3 compute_acceleration(int current_index, float3 position, float mass, cons
             float3 diff = position_other - position;
             float distSquared = dot(diff, diff) + 1e-10f; // Avoid division by zero
 
-            float forceMagnitude = G * mass * mass_other / distSquared;
+            float forceMagnitude = G * mass * mass_other * sun_mass / distSquared;
             totalForce += normalize(diff) * forceMagnitude;
         }
     }

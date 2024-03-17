@@ -40,9 +40,12 @@ public class KeyboardCameraMovement : MonoBehaviour
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, Time.deltaTime);
         currentSpeed = Mathf.Lerp(currentSpeed, isBoosted ? boostedSpeed : normalSpeed, Time.deltaTime * 10);
 
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
-        transform.eulerAngles += new Vector3(-mouseY, mouseX, 0);
+        if (Input.GetMouseButton(1))
+        {
+            float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+            float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
+            transform.eulerAngles += new Vector3(-mouseY, mouseX, 0);
+        }
 
         Vector3 movement = (transform.forward * verticalInput + transform.right * horizontalInput).normalized;
         transform.Translate(movement * currentSpeed * Time.deltaTime, Space.World);

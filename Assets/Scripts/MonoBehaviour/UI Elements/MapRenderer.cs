@@ -46,7 +46,7 @@ public class MapRenderer : MonoBehaviour
 
         Graphics.SetRenderTarget(frustrumTexture);
         Vector3[] frustumCorners = new Vector3[4];
-        cam.CalculateFrustumCorners(new Rect(0, 0, 1, 1), cam.farClipPlane * 10, Camera.MonoOrStereoscopicEye.Mono, frustumCorners);
+        cam.CalculateFrustumCorners(new Rect(0, 0, 1, 1), cam.farClipPlane, Camera.MonoOrStereoscopicEye.Mono, frustumCorners);
         for (int i = 0; i < frustumCorners.Length; i++)
         {
             frustumCorners[i] = cam.transform.TransformVector(frustumCorners[i]) + cam.transform.position;
@@ -62,8 +62,8 @@ public class MapRenderer : MonoBehaviour
         GL.LoadPixelMatrix(0, frustrumTexture.width, frustrumTexture.height, 0);
 
         GL.Begin(GL.LINES);
+        drawMaterial.SetColor("_Color", Color.magenta);
         drawMaterial.SetPass(0);
-        GL.Color(Color.magenta); // Frustum color
 
         // Connect the frustum corners
         for (int i = 0; i < 4; i++)
@@ -91,7 +91,8 @@ public class MapRenderer : MonoBehaviour
     {
         RenderTexture.active = mapTexture;
 
-        GL.Clear(true, true, Color.black);
+        GL.Clear(true, true, Color.black); 
+        drawMaterial.SetColor("_Color", Color.white);
 
         Graphics.SetRenderTarget(mapTexture);
         GL.PushMatrix();
@@ -106,8 +107,8 @@ public class MapRenderer : MonoBehaviour
                 1,
                 1
             );
-            Texture2D dotTexture = ViewHelper.IsInView(cam, body.position) ? Texture2D.redTexture : Texture2D.whiteTexture;
-            Graphics.DrawTexture(rect, dotTexture, drawMaterial);
+
+            Graphics.DrawTexture(rect, Texture2D.whiteTexture, drawMaterial);
         }
         GL.PopMatrix();
         RenderTexture.active = null;

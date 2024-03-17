@@ -106,6 +106,7 @@
     <Compile Include="Assets\Scripts\DataTypes\DataTypes.cs" />
     <Compile Include="Assets\Scripts\DataTypes\OpenClBodies.cs" />
     <Compile Include="Assets\Scripts\General Scripts\ViewHelper.cs" />
+    <Compile Include="Assets\Scripts\Menu\LoadingScene.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ManagerScripts\DataFetching.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ManagerScripts\JsonHelper.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ManagerScripts\ObjectManager.cs" />
