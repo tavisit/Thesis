@@ -1,6 +1,8 @@
 ﻿using Silk.NET.OpenCL;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class PathRunner : MovementComputationsBaseRunner
@@ -11,8 +13,7 @@ public class PathRunner : MovementComputationsBaseRunner
 
     public override void Update(OpenClBodies args, params object[] additionalParameters)
     {
-        List<OpenClBodyObject> pointsToUpdate = SimplifyUpdateObjects(args);
-        pointsToUpdate = SimplifyByView(pointsToUpdate, (Camera)additionalParameters[1]);
+        List<OpenClBodyObject> pointsToUpdate = SimplifyByView(SimplifyUpdateObjects(args), (Camera)additionalParameters[1]).ToList();
 
         int argsLength = pointsToUpdate.Count;
 
@@ -20,7 +21,7 @@ public class PathRunner : MovementComputationsBaseRunner
 
         int steps = (int)additionalParameters[0];
         nint[] memObjects = new nint[2];
-        int[] intObjects = new int[3] { argsLength, pointsToUpdate[0].Flatten().Count(), steps };
+        int[] intObjects = new int[3] { argsLength, pointsToUpdate.FirstOrDefault().Flatten().Count(), steps };
         Vector4[] result = new Vector4[(nuint)(argsLength * steps)];
 
         nuint[] globalWorkSize = new nuint[1] { (nuint)argsLength };
@@ -41,18 +42,45 @@ public class PathRunner : MovementComputationsBaseRunner
                     args.myObjectBodies[index_openCL].pathPoints.Add(result[index * steps + step]);
                 }
             }
+            Parallel.For(0, pointsToUpdate.Count(), index_openCL =>
+            {
+                int index_myObjectBodies = args.myObjectBodies.IndexOf(pointsToUpdate[index_openCL]);
+                if (index_myObjectBodies >=0)
+                {
+                    List<Vector3> updatedPathPoints = new List<Vector3>();
+                    for (int step = 0; step < steps; step++)
+                    {
+                        updatedPathPoints.Add(result[index_openCL * steps + step]);
+                    }
+
+                    lock (args.myObjectBodies)
+                    {
+                        args.myObjectBodies[index_myObjectBodies].pathPoints.Clear();
+                        args.myObjectBodies[index_myObjectBodies].pathPoints.AddRange(updatedPathPoints);
+                    }
+                }
+            });
         }
     }
-    private List<OpenClBodyObject> SimplifyByView(List<OpenClBodyObject> args, Camera cam)
+    private ConcurrentBag<OpenClBodyObject> SimplifyByView(ConcurrentBag<OpenClBodyObject> args, Camera cam)
     {
-        List<OpenClBodyObject> pointsToUpdate = new();
-        for (int i = 0; i < args.Count; i++)
+        ConcurrentBag<OpenClBodyObject> pointsToUpdate = new ConcurrentBag<OpenClBodyObject>();
+
+        foreach (var obj in args)
         {
-            if (ViewHelper.IsInView(cam, args[i].position))
+            if (IsInFrustumAndInView(cam, obj.position))
             {
-                pointsToUpdate.Add(args[i]);
+                pointsToUpdate.Add(obj);
             }
         }
+
         return pointsToUpdate;
+    }
+
+    private static bool IsInFrustumAndInView(Camera camera, Vector3 position)
+    {
+        Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(camera);
+        Bounds bounds = new Bounds(position, Vector3.zero);
+        return GeometryUtility.TestPlanesAABB(frustumPlanes, bounds) && ViewHelper.IsInView(camera, position);
     }
 }

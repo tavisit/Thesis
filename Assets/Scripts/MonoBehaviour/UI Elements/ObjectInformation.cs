@@ -48,7 +48,7 @@ public class ObjectInformation : MonoBehaviour
             informationText += "\nPosition: " + hitObject.transform.position.ToString("E5");
             informationText += "\nVelocity: " + body.velocity.ToString("E5");
             informationText += "\nAcceleration: " + body.acceleration.ToString("E5");
-            informationText += "\nMass: " + body.mass.ToString("E5");
+            informationText += "\nMass: " + (body.mass * 1.989E+30f).ToString("E5");
             if (informationTextUI != null)
             {
                 panel.gameObject.SetActive(true);

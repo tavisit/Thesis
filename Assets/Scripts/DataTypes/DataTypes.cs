@@ -11,7 +11,7 @@ public class OpenClBodyObject
     public float mass;
     public Vector3 position;
     public Vector3 velocity;
-    public Color color;
+    public float temperature;
     [NonSerialized]
     public Vector3 acceleration = new Vector3();
 

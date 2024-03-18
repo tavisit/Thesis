@@ -18,9 +18,15 @@ public class Body : MonoBehaviour
 
     protected void Update()
     {
+        MovementUpdate();
         SpecificUpdate();
     }
 
+
+    private void MovementUpdate()
+    {
+
+    }
 
     private void ApplyMaterial()
     {

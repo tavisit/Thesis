@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public abstract class MovementComputationsBaseRunner : OpenCLRunner<Vector4, OpenClBodies, OpenClBodyObject>
@@ -7,13 +10,14 @@ public abstract class MovementComputationsBaseRunner : OpenCLRunner<Vector4, Ope
     {
     }
 
-    protected override List<OpenClBodyObject> SimplifyUpdateObjects(OpenClBodies args)
+    protected override ConcurrentBag<OpenClBodyObject> SimplifyUpdateObjects(OpenClBodies args)
     {
         float deviationThreshold = 1f;
 
-        List<OpenClBodyObject> pointsToUpdate = new List<OpenClBodyObject>();
+        ConcurrentBag<OpenClBodyObject> pointsToUpdate = new ConcurrentBag<OpenClBodyObject>();
 
-        for (int index = 0; index < args.myObjectBodies.Count; index++)
+        // Parallelize the loop
+        Parallel.For(0, args.myObjectBodies.Count, index =>
         {
             OpenClBodyObject objectToUpdate = args.myObjectBodies[index];
 
@@ -24,16 +28,19 @@ public abstract class MovementComputationsBaseRunner : OpenCLRunner<Vector4, Ope
                     objectToUpdate.pathPoints = new List<Vector3>();
                 }
                 pointsToUpdate.Add(objectToUpdate);
-                continue;
+                return;
             }
+
             float distanceToPath = PointToRayDistance(objectToUpdate.position, objectToUpdate.pathPoints[0], objectToUpdate.pathPoints[1]);
             float distanceToObjectFromStart = Vector3.Distance(objectToUpdate.position, objectToUpdate.pathPoints[0]);
             float pathLength = Vector3.Distance(objectToUpdate.pathPoints[1], objectToUpdate.pathPoints[0]);
+
             if (distanceToPath > deviationThreshold || distanceToObjectFromStart > pathLength)
             {
                 pointsToUpdate.Add(objectToUpdate);
             }
-        }
+        });
+
         return pointsToUpdate;
     }
 

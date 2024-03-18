@@ -1,5 +1,6 @@
 ﻿using Silk.NET.OpenCL;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -185,5 +186,5 @@ public abstract class OpenCLRunner<T, P, Q>
 
     public abstract void Update(P args, params object[] additionalParameters);
 
-    protected abstract List<Q> SimplifyUpdateObjects(P args);
+    protected abstract ConcurrentBag<Q> SimplifyUpdateObjects(P args);
 }
