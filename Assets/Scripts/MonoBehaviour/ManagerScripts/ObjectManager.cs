@@ -26,10 +26,6 @@ public class ObjectManager : MonoBehaviour
         {
             prefabs[entry.key] = entry.value;
         }
-    }
-
-    void Start()
-    {
         openClBodies = new OpenClBodies();
 
         universalAttraction = new AccelerationRunner("OpenCL_ComputeAcceleration", "universal_attraction_force");
@@ -38,7 +34,10 @@ public class ObjectManager : MonoBehaviour
         watch = Stopwatch.StartNew();
 
         timeDilationSlider = GameObject.Find("TimeDillationSlider")?.GetComponent<Slider>();
+    }
 
+    void Start()
+    {
         universalAttraction.Update(openClBodies);
         movementPathRunner.Update(openClBodies, nr_steps, Camera.main);
     }

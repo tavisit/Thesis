@@ -41,7 +41,7 @@ public class LoadingScene : MonoBehaviour
     public void LoadScene(int sceneId)
     {
         LoadingScreen.SetActive(true);
-        Thread.Sleep(1000);
+        LoadingBarFill.fillAmount = 0;
         StartCoroutine(LoadSceneAsync(sceneId));
     }
 
