@@ -45,7 +45,7 @@ public class PathRunner : MovementComputationsBaseRunner
             Parallel.For(0, pointsToUpdate.Count(), index_openCL =>
             {
                 int index_myObjectBodies = args.myObjectBodies.IndexOf(pointsToUpdate[index_openCL]);
-                if (index_myObjectBodies >=0)
+                if (index_myObjectBodies >= 0)
                 {
                     List<Vector3> updatedPathPoints = new List<Vector3>();
                     for (int step = 0; step < steps; step++)

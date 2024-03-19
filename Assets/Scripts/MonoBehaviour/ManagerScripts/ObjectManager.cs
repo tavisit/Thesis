@@ -1,10 +1,15 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ObjectManager : MonoBehaviour
 {
-    public GameObject prefab;
+    [SerializeField]
+    private List<PrefabEntry> prefabList = new List<PrefabEntry>();
+    public Dictionary<string, GameObject> prefabs;
+
+
     protected Slider timeDilationSlider;
     private readonly int nr_steps = 5;
 
@@ -14,7 +19,14 @@ public class ObjectManager : MonoBehaviour
     private PathRunner movementPathRunner;
 
     private Stopwatch watch;
-
+    private void Awake()
+    {
+        prefabs = new Dictionary<string, GameObject>();
+        foreach (var entry in prefabList)
+        {
+            prefabs[entry.key] = entry.value;
+        }
+    }
 
     void Start()
     {
@@ -59,7 +71,7 @@ public class ObjectManager : MonoBehaviour
 
             }
 
-            openClBodies.UpdateGraphics(Camera.main, prefab, timeDilationSlider.value);
+            openClBodies.UpdateGraphics(Camera.main, prefabs, timeDilationSlider.value);
 
         }
     }

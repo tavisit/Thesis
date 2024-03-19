@@ -91,7 +91,7 @@ public class MapRenderer : MonoBehaviour
     {
         RenderTexture.active = mapTexture;
 
-        GL.Clear(true, true, Color.black); 
+        GL.Clear(true, true, Color.black);
         drawMaterial.SetColor("_Color", Color.white);
 
         Graphics.SetRenderTarget(mapTexture);

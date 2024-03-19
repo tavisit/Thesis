@@ -33,7 +33,7 @@ public class OpenClBodies
         return myObjectBodies.SelectMany(obj => obj.Flatten()).ToList();
     }
 
-    public void UpdateGraphics(Camera camera, GameObject prefab, float pathDilation)
+    public void UpdateGraphics(Camera camera, Dictionary<string, GameObject> prefab, float pathDilation)
     {
         float fixedDelta = Time.fixedDeltaTime;
         DestroyObjects(camera);
@@ -91,7 +91,8 @@ public class OpenClBodies
         {
             GameObject entry = kvp.Value;
 
-            try {
+            try
+            {
                 UnityMainThreadDispatcher.Enqueue(() =>
                 {
                     if (kvp.Value == null)
@@ -105,7 +106,8 @@ public class OpenClBodies
                     }
                 });
 
-            }catch(InvalidOperationException ex)
+            }
+            catch (InvalidOperationException ex)
             {
                 Debug.Log(ex);
                 celestialBodies.TryRemove(kvp.Key, out _);
@@ -113,9 +115,9 @@ public class OpenClBodies
         });
     }
 
-    private GameObject CreateGameObject(GameObject prefab, OpenClBodyObject entry)
+    private GameObject CreateGameObject(Dictionary<string, GameObject> prefab, OpenClBodyObject entry)
     {
-        GameObject obj = UnityEngine.Object.Instantiate(prefab, entry.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+        GameObject obj = ApplyBodyType(prefab, entry);
         obj.name = entry.name;
 
         GameObject accArrow = new("AccelerationArrow");
@@ -128,7 +130,7 @@ public class OpenClBodies
         pathArrow.transform.SetParent(obj.transform);
         pathArrow.GetComponent<PathDraw>().pathPoints = entry.pathPoints;
 
-        obj = ApplyBodyType(obj, entry.temperature, entry.mass);
+
 
 
         float relativeRadius = entry.mass;
@@ -152,28 +154,43 @@ public class OpenClBodies
         return obj;
     }
 
-    private GameObject ApplyBodyType(GameObject gameObject, params object[] additionalParameters)
+    private GameObject ApplyBodyType(Dictionary<string, GameObject> prefabs, OpenClBodyObject entry)
     {
-        string objectName = gameObject.name;
-        if (objectName.StartsWith("Star"))
+
+        if (entry.name.StartsWith("Star"))
         {
+            GameObject gameObject = UnityEngine.Object.Instantiate(prefabs.GetValueOrDefault("Star"), entry.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+
             gameObject.AddComponent<StellarBody>();
-            gameObject.GetComponent<StellarBody>().starTemperature = (float)additionalParameters[0];
-            gameObject.GetComponent<StellarBody>().relativeLuminousity = (float)additionalParameters[1];
+            gameObject.GetComponent<StellarBody>().starTemperature = (float)entry.temperature;
+            gameObject.GetComponent<StellarBody>().relativeLuminousity = (float)entry.mass;
+
+            return gameObject;
         }
-        else if (objectName.StartsWith("Planet"))
+        else if (entry.name.StartsWith("Planet"))
         {
+            GameObject gameObject = UnityEngine.Object.Instantiate(prefabs.GetValueOrDefault("Planet"), entry.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+
             gameObject.AddComponent<PlanetaryBody>();
+
+            return gameObject;
         }
-        else if (objectName.StartsWith("Blackhole"))
+        else if (entry.name.StartsWith("Blackhole"))
         {
+            GameObject gameObject = UnityEngine.Object.Instantiate(prefabs.GetValueOrDefault("Blackhole"), entry.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+
             gameObject.AddComponent<Blackhole>();
+
+            return gameObject;
         }
         else
         {
+            GameObject gameObject = UnityEngine.Object.Instantiate(prefabs.GetValueOrDefault("Star"), entry.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+
             gameObject.AddComponent<Body>();
+
+            return gameObject;
         }
-        return gameObject;
     }
 
     private void UpdateBounds(OpenClBodyObject openClBodyObject)
