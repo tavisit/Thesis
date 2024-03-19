@@ -9,8 +9,6 @@ __kernel void universal_attraction_force(__global float3* acceleration, __global
 {
     int current_index = get_global_id(0);
 
-    float G = 6.67430e-11f;
-
     if (current_index < length) {
         float3 totalForce = (float3)(0.0f, 0.0f, 0.0f);
         float3 position = { flattenedData[current_index * offset], flattenedData[current_index * offset + 1], flattenedData[current_index * offset + 2] };

@@ -1,10 +1,11 @@
 ﻿using Silk.NET.OpenCL;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class OpenCLRunner<T, P>
+public abstract class OpenCLRunner<T, P, Q>
 {
     protected nint context;
     protected nint commandQueue;
@@ -185,29 +186,5 @@ public abstract class OpenCLRunner<T, P>
 
     public abstract void Update(P args, params object[] additionalParameters);
 
-    protected List<float> Flatten(params object[] parameters)
-    {
-        List<float> flattenedValues = new()
-        {
-            // Add Position
-            ((Vector3)parameters[0]).x,
-            ((Vector3)parameters[0]).y,
-            ((Vector3)parameters[0]).z,
-
-            // Add mass
-            ((float)parameters[1]),
-
-            // Add Velocity
-            ((Vector3)parameters[2]).x,
-            ((Vector3)parameters[2]).y,
-            ((Vector3)parameters[2]).z,
-
-            // Add Acceleration
-            ((Vector3)parameters[3]).x,
-            ((Vector3)parameters[3]).y,
-            ((Vector3)parameters[3]).z
-        };
-
-        return flattenedValues;
-    }
+    protected abstract ConcurrentBag<Q> SimplifyUpdateObjects(P args);
 }

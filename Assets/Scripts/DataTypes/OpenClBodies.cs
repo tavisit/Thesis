@@ -1,20 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class OpenClBodies
 {
-    private readonly float sunMass = 1.989E+30f;
+    private readonly float sunMass = 1.989E+30f; // in kgs
+    private readonly float sunRadius = 696340000; // in meters
     public List<OpenClBodyObject> myObjectBodies;
-    public Dictionary<string, GameObject> celestialBodies;
-    private readonly float maxVelocity = 299792458; // Maximum velocity
+    public ConcurrentDictionary<string, GameObject> celestialBodies;
+    private readonly float maxVelocity = 299792458; // Maximum velocity, C, in m/s
+
+    public float[] bounds = new float[6]; // minX, maxX, minY, maxY, minZ, maxZ
 
 
     public OpenClBodies()
     {
         myObjectBodies = new List<OpenClBodyObject>();
-        celestialBodies = new Dictionary<string, GameObject>();
+        celestialBodies = new ConcurrentDictionary<string, GameObject>();
         myObjectBodies = DataFetching.GaiaFetching("galactic_data");
+        Parallel.For(0, myObjectBodies.Count, i =>
+        {
+            int currentIndex = i;
+            UpdateBounds(myObjectBodies[i]);
+        });
     }
 
     public List<float> Flatten()
@@ -22,86 +33,91 @@ public class OpenClBodies
         return myObjectBodies.SelectMany(obj => obj.Flatten()).ToList();
     }
 
-    public void UpdateGraphics(Camera camera, GameObject prefab, float pathDilation)
+    public void UpdateGraphics(Camera camera, Dictionary<string, GameObject> prefab, float pathDilation)
     {
+        float fixedDelta = Time.fixedDeltaTime;
         DestroyObjects(camera);
 
-        Vector3[] pointsOnScreen = myObjectBodies.Select(entry => camera.WorldToScreenPoint(entry.position)).ToArray();
-
-        for (int i = 0; i < myObjectBodies.Count; i++)
+        Parallel.For(0, myObjectBodies.Count, i =>
         {
-            OpenClBodyObject entry = myObjectBodies[i];
-            entry = UpdateEntry(pathDilation, entry);
-            if (IsInView(pointsOnScreen[i], camera.farClipPlane))
+            int currentIndex = i;
+            UpdateBounds(myObjectBodies[currentIndex]);
+            myObjectBodies[currentIndex] = UpdateEntry(pathDilation, myObjectBodies[currentIndex], fixedDelta);
+
+            UnityMainThreadDispatcher.Enqueue(() =>
             {
-                if (!celestialBodies.ContainsKey(entry.name))
+                if (ViewHelper.IsInView(camera, myObjectBodies[currentIndex].position))
                 {
-                    GameObject obj = CreateGameObject(prefab, entry);
-                    celestialBodies.Add(entry.name, obj);
-                }
-                else
-                {
-                    if (Mathf.Abs(pathDilation) > Mathf.Epsilon)
+                    if (!celestialBodies.ContainsKey(myObjectBodies[currentIndex].name))
                     {
-                        GameObject obj = celestialBodies[entry.name];
-                        obj.GetComponent<Body>().mass = entry.mass;
-                        obj.GetComponent<Body>().velocity = entry.velocity;
-                        obj.GetComponent<Body>().acceleration = entry.acceleration;
-                        obj.transform.position = entry.position;
-                        obj.GetComponentInChildren<DirectionArrowDraw>().direction = entry.acceleration;
-                        obj.GetComponentInChildren<PathDraw>().pathPoints = entry.pathPoints;
+                        GameObject obj = CreateGameObject(prefab, myObjectBodies[currentIndex]);
+                        celestialBodies.TryAdd(myObjectBodies[currentIndex].name, obj);
+                    }
+                    else if (Mathf.Abs(pathDilation) > Mathf.Epsilon)
+                    {
+                        GameObject obj = celestialBodies[myObjectBodies[currentIndex].name];
+                        obj.GetComponent<Body>().mass = myObjectBodies[currentIndex].mass;
+                        obj.GetComponent<Body>().velocity = myObjectBodies[currentIndex].velocity;
+                        obj.GetComponent<Body>().acceleration = myObjectBodies[currentIndex].acceleration;
+                        obj.transform.position = myObjectBodies[currentIndex].position;
+                        obj.GetComponentInChildren<DirectionArrowDraw>().direction = myObjectBodies[currentIndex].acceleration;
+                        obj.GetComponentInChildren<PathDraw>().pathPoints = myObjectBodies[currentIndex].pathPoints;
                     }
                 }
-            }
-            myObjectBodies[i] = entry;
-        }
+            });
+        });
     }
 
-    private OpenClBodyObject UpdateEntry(float pathDilation, OpenClBodyObject entry)
+    private OpenClBodyObject UpdateEntry(float pathDilation, OpenClBodyObject entry, float fixedDelta)
     {
         if (Mathf.Abs(pathDilation) > Mathf.Epsilon)
         {
-            Vector3 oldVelocity = entry.velocity;
-            float deltaTime = Time.fixedDeltaTime * pathDilation;
+            Vector3 oldVelocity = entry.velocity / 1E+6f;
+            float deltaTime = fixedDelta * pathDilation;
             entry.velocity += entry.acceleration * deltaTime;
             entry.velocity = Vector3.ClampMagnitude(entry.velocity, maxVelocity);
-            entry.position += oldVelocity * deltaTime + 0.5f * entry.acceleration * deltaTime * deltaTime;
+            Vector3 position_at_t = oldVelocity * deltaTime + 0.5f * entry.acceleration * deltaTime * deltaTime;
+            entry.position += position_at_t;
         }
 
         return entry;
     }
 
-    private bool IsInView(Vector3 pointOnScreen, float farClipping)
-    {
-        return (pointOnScreen.z <= farClipping) && (pointOnScreen.z >= 0)
-            && (pointOnScreen.x > 0) && (pointOnScreen.x < Screen.width)
-            && (pointOnScreen.y > 0) && (pointOnScreen.y < Screen.height);
-    }
-
     private void DestroyObjects(Camera camera)
     {
-        List<string> objectsToRemove = new List<string>();
+        ConcurrentBag<string> objectsToRemove = new ConcurrentBag<string>();
 
-        foreach (var kvp in celestialBodies)
+        Parallel.ForEach(celestialBodies, kvp =>
         {
             GameObject entry = kvp.Value;
-            Vector3 pointOnScreen = camera.WorldToScreenPoint(entry.transform.position);
-            if (!IsInView(pointOnScreen, camera.farClipPlane))
-            {
-                Object.Destroy(entry);
-                objectsToRemove.Add(kvp.Key);
-            }
-        }
 
-        foreach (var key in objectsToRemove)
-        {
-            celestialBodies.Remove(key);
-        }
+            try
+            {
+                UnityMainThreadDispatcher.Enqueue(() =>
+                {
+                    if (kvp.Value == null)
+                    {
+                        celestialBodies.TryRemove(kvp.Key, out _);
+                    }
+                    else if (entry != null && !ViewHelper.IsInView(camera, entry.transform.position))
+                    {
+                        UnityEngine.Object.Destroy(entry);
+                        celestialBodies.TryRemove(kvp.Key, out _);
+                    }
+                });
+
+            }
+            catch (InvalidOperationException ex)
+            {
+                Debug.Log(ex);
+                celestialBodies.TryRemove(kvp.Key, out _);
+            }
+        });
     }
 
-    private GameObject CreateGameObject(GameObject prefab, OpenClBodyObject entry)
+    private GameObject CreateGameObject(Dictionary<string, GameObject> prefab, OpenClBodyObject entry)
     {
-        GameObject obj = Object.Instantiate(prefab, entry.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+        GameObject obj = ApplyBodyType(prefab, entry);
         obj.name = entry.name;
 
         GameObject accArrow = new("AccelerationArrow");
@@ -114,35 +130,76 @@ public class OpenClBodies
         pathArrow.transform.SetParent(obj.transform);
         pathArrow.GetComponent<PathDraw>().pathPoints = entry.pathPoints;
 
-        obj = ApplyBodyType(obj, entry.color, entry.mass);
 
+
+
+        float relativeRadius = entry.mass;
         obj.GetComponent<Body>().mass = entry.mass * sunMass;
-        obj.GetComponent<Body>().velocity = entry.velocity;
-        obj.GetComponent<Body>().acceleration = entry.acceleration;
 
-        float relativeVolume = entry.mass;
-        obj.transform.localScale = new(relativeVolume, relativeVolume, relativeVolume);
+        if (obj.GetComponent<Blackhole>() != null)
+        {
+            // in case of blackhole, r  = 2*G*entry.mass/(c^c)
+            float G = 6.67430e-11f;
+            relativeRadius = 2 * G * (entry.mass * sunMass) / (maxVelocity * maxVelocity) / sunRadius;
+            obj.GetComponent<Body>().velocity = new Vector3(0, 0, 0);
+            obj.GetComponent<Body>().acceleration = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            obj.GetComponent<Body>().velocity = entry.velocity;
+            obj.GetComponent<Body>().acceleration = entry.acceleration;
+        }
+        obj.transform.localScale = new(relativeRadius, relativeRadius, relativeRadius);
 
         return obj;
     }
 
-    private GameObject ApplyBodyType(GameObject gameObject, params object[] additionalParameters)
+    private GameObject ApplyBodyType(Dictionary<string, GameObject> prefabs, OpenClBodyObject entry)
     {
-        string objectName = gameObject.name;
-        if (objectName.StartsWith("Star"))
+
+        if (entry.name.StartsWith("Star"))
         {
+            GameObject gameObject = UnityEngine.Object.Instantiate(prefabs.GetValueOrDefault("Star"), entry.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+
             gameObject.AddComponent<StellarBody>();
-            gameObject.GetComponent<StellarBody>().starColor = (Color)additionalParameters[0];
-            gameObject.GetComponent<StellarBody>().relativeLuminousity = (float)additionalParameters[1];
+            gameObject.GetComponent<StellarBody>().starTemperature = (float)entry.temperature;
+            gameObject.GetComponent<StellarBody>().relativeLuminousity = (float)entry.mass;
+
+            return gameObject;
         }
-        else if (objectName.StartsWith("Planet"))
+        else if (entry.name.StartsWith("Planet"))
         {
+            GameObject gameObject = UnityEngine.Object.Instantiate(prefabs.GetValueOrDefault("Planet"), entry.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+
             gameObject.AddComponent<PlanetaryBody>();
+
+            return gameObject;
+        }
+        else if (entry.name.StartsWith("Blackhole"))
+        {
+            GameObject gameObject = UnityEngine.Object.Instantiate(prefabs.GetValueOrDefault("Blackhole"), entry.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+
+            gameObject.AddComponent<Blackhole>();
+
+            return gameObject;
         }
         else
         {
+            GameObject gameObject = UnityEngine.Object.Instantiate(prefabs.GetValueOrDefault("Star"), entry.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+
             gameObject.AddComponent<Body>();
+
+            return gameObject;
         }
-        return gameObject;
+    }
+
+    private void UpdateBounds(OpenClBodyObject openClBodyObject)
+    {
+        bounds[0] = openClBodyObject.position.x < bounds[0] ? openClBodyObject.position.x : bounds[0];
+        bounds[1] = openClBodyObject.position.x > bounds[1] ? openClBodyObject.position.x : bounds[1];
+        bounds[2] = openClBodyObject.position.y < bounds[2] ? openClBodyObject.position.y : bounds[2];
+        bounds[3] = openClBodyObject.position.y > bounds[3] ? openClBodyObject.position.y : bounds[3];
+        bounds[4] = openClBodyObject.position.z < bounds[4] ? openClBodyObject.position.z : bounds[4];
+        bounds[5] = openClBodyObject.position.z > bounds[5] ? openClBodyObject.position.z : bounds[5];
     }
 }
