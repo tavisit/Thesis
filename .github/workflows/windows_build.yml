@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build Unity Project
-        uses: ./helper_build_unity_project.yml
+        uses: ./.github/workflows/helper_build_unity_project.yml
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Unity Project to itch.io
-        uses: ./helper_deploy_unity_project.yml
+        uses: ./.github/workflows/helper_deploy_unity_project.yml
