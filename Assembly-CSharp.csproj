@@ -118,6 +118,7 @@
     <Compile Include="Assets\Scripts\MonoBehaviour\ObjectSpawnableScripts\PathDraw.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ObjectSpawnableScripts\Bodies\PlanetaryBody.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ObjectSpawnableScripts\Bodies\StellarBody.cs" />
+    <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\FPSCounter.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\MapRenderer.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\SliderValue.cs" />
     <Compile Include="Assets\Scripts\OpenCl\Implementations\OpenCLRunner.cs" />

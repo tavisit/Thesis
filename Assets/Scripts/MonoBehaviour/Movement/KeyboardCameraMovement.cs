@@ -15,6 +15,8 @@ public class KeyboardCameraMovement : MonoBehaviour
 
     public Text cameraInfoTxt;
 
+    public Image redBlueShiftingImage;
+
     private void Start()
     {
         cam = GetComponent<Camera>();
@@ -28,16 +30,21 @@ public class KeyboardCameraMovement : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
 
         float targetFOV = normalFOV;
+        Color targetColor = new Color(1, 1, 1, 0);
         if (verticalInput < 0 && isBoosted)
         {
             targetFOV = backwardFOV;
+            targetColor = new Color(1, 0, 0, 0.5f);
         }
         else if (verticalInput > 0 && isBoosted)
         {
             targetFOV = boostedFOV;
+            targetColor = new Color(0.9333f, 0.5098f, 0.9333f, 0.5f);
         }
 
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, Time.deltaTime);
+        redBlueShiftingImage.color = Color.Lerp(redBlueShiftingImage.color, targetColor, Time.deltaTime);
+
         currentSpeed = Mathf.Lerp(currentSpeed, isBoosted ? boostedSpeed : normalSpeed, Time.deltaTime * 10);
 
         if (Input.GetMouseButton(1))

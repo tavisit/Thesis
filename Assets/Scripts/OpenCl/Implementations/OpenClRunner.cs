@@ -88,9 +88,6 @@ public abstract class OpenCLRunner<T, P, Q>
             return IntPtr.Zero;
         }
 
-        // Next, create an OpenCL context on the platform.  Attempt to
-        // create a GPU-based context, and if that fails, try to create
-        // a CPU-based context.
         nint[] contextProperties = new nint[]
         {
                 (nint)ContextProperties.Platform,
