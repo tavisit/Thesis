@@ -10,11 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build Unity Project
+        uses: actions/checkout@v2
+      - name: Run Build Workflow
         uses: ./.github/workflows/helper_build_unity_project.yml
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy Unity Project to itch.io
+      - name: Deploy Unity Project
+        uses: actions/checkout@v2
+      - name: Run Build Workflow
         uses: ./.github/workflows/helper_deploy_unity_project.yml
