@@ -1,0 +1,48 @@
+name: Deploy Unity Project to itch.io
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  deploy:
+    name: Deploy to itch.io
+    needs: build
+    runs-on: ubuntu-latest
+  
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+  
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: Build-StandaloneWindows64
+          path: ${{ github.workspace }}/Build-StandaloneWindows64
+
+      - name: Zip the Build Directory
+        run: zip -r ThesisProject.zip Build-StandaloneWindows64
+        working-directory: ${{ github.workspace }}
+      
+      - name: Set release date
+        run: echo "RELEASE_DATE=$(date --rfc-3339=date)" >> $GITHUB_ENV
+  
+      - name: Set short hash
+        run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        
+      - name: List directory structure
+        run: ls -R ${{ github.workspace }}
+        
+      - name: Deploy to itch.io
+        uses: manleydev/butler-publish-itchio-action@master
+        env:
+          CHANNEL: windows
+          BUTLER_CREDENTIALS: ${{ secrets.MY_ITCH_API_CODE }}
+          ITCH_GAME: ${{ secrets.MY_ITCH_GAME }}
+          ITCH_USER: ${{ secrets.MY_ITCH_USERNAME }}
+          VERSION: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
+          PACKAGE: ${{ github.workspace }}/ThesisProject.zip
