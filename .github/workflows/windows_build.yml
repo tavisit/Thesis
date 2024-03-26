@@ -13,6 +13,7 @@ jobs:
         uses: ./build-unity-project.yml
 
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Unity Project to itch.io
