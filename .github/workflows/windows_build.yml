@@ -6,8 +6,8 @@ on:
       - 'main'
 
 jobs:
-  build:
-    name: Build Project
+  build_and_deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -36,32 +36,8 @@ jobs:
           targetPlatform: StandaloneWindows64 
           unityVersion: 2022.3.19f1
           
-      - uses: actions/upload-artifact@v3 
-        with:
-          name: Build-StandaloneWindows64 
-          path: build/StandaloneWindows64
-          continue-on-error: true
-          
-  deploy:
-    name: Deploy to itch.io
-    needs: build
-    runs-on: ubuntu-latest
-  
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          lfs: true
-  
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: Build-StandaloneWindows64
-          path: ${{ github.workspace }}/Build-StandaloneWindows64
-
       - name: Zip the Build Directory
-        run: zip -r ThesisProject.zip Build-StandaloneWindows64
+        run: zip -r ThesisProject.zip build/StandaloneWindows64
         working-directory: ${{ github.workspace }}
       
       - name: Set release date
@@ -82,8 +58,3 @@ jobs:
           ITCH_USER: ${{ secrets.MY_ITCH_USERNAME }}
           VERSION: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
           PACKAGE: ${{ github.workspace }}/ThesisProject.zip
-          
-      - name: Delete artifacts
-        uses: actions/delete-artifact@v2
-        with:
-          name: Build-StandaloneWindows64
