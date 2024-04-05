@@ -42,32 +42,6 @@ jobs:
           path: build/StandaloneWindows64
           continue-on-error: true
           
-      - name: Retry on failure and delete old artifacts
-        if: ${{ failure() }}
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const res = await github.rest.actions.listArtifactsForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            })
-
-            res.data.artifacts
-              .forEach(({ id }) => {
-                github.rest.actions.deleteArtifact({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  artifact_id: id,
-                })
-              })
-              
-      - name: Retry artifact upload
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v3 
-        with:
-          name: Build-StandaloneWindows64 
-          path: build/StandaloneWindows64
-          
   deploy:
     name: Deploy to itch.io
     needs: build
