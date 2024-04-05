@@ -5,11 +5,12 @@ on:
     # Every day at 1am
     - cron: '0 1 * * *'
 
+permissions: write-all
+    
 jobs:
   remove-old-artifacts:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    permissions: write-all
     
     steps:
     - name: Remove old artifacts
