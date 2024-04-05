@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
 
 public class UnityMainThreadDispatcher : MonoBehaviour
 {
-    private static readonly Queue<Action> executionQueue = new Queue<Action>();
-    private static readonly object lockObject = new object();
+    private static Action[] executionArray = new Action[64]; // Adjust the initial capacity as needed
+    private static int executionCount = 0;
+    private static readonly object lockObject = new();
     private static bool executing = false;
 
+    private static int mainThreadId;
     // Singleton instance
     private static UnityMainThreadDispatcher instance;
 
@@ -21,6 +22,7 @@ public class UnityMainThreadDispatcher : MonoBehaviour
             return;
         }
         instance = this;
+        mainThreadId = Thread.CurrentThread.ManagedThreadId;
         DontDestroyOnLoad(gameObject);
     }
 
@@ -33,11 +35,19 @@ public class UnityMainThreadDispatcher : MonoBehaviour
     {
         lock (lockObject)
         {
-            while (executionQueue.Count > 0)
+            if (executionCount == 0)
             {
-                Action action = executionQueue.Dequeue();
-                action?.Invoke();
+                executing = false;
+                return;
             }
+
+            // Execute actions
+            for (int i = 0; i < executionCount; i++)
+            {
+                executionArray[i]?.Invoke();
+                executionArray[i] = null; // Clear the action after execution
+            }
+            executionCount = 0;
             executing = false;
         }
     }
@@ -46,14 +56,20 @@ public class UnityMainThreadDispatcher : MonoBehaviour
     {
         lock (lockObject)
         {
-            executionQueue.Enqueue(action);
+            // Expand the array if needed
+            if (executionCount >= executionArray.Length)
+            {
+                Array.Resize(ref executionArray, executionArray.Length * 2);
+            }
+            executionArray[executionCount++] = action;
+
             if (!executing)
             {
                 executing = true;
                 // Ensure the UnityMainThreadDispatcher instance exists
                 if (instance == null)
                 {
-                    GameObject dispatcherObject = new GameObject("UnityMainThreadDispatcher");
+                    GameObject dispatcherObject = new("UnityMainThreadDispatcher");
                     instance = dispatcherObject.AddComponent<UnityMainThreadDispatcher>();
                 }
             }
@@ -72,23 +88,8 @@ public class UnityMainThreadDispatcher : MonoBehaviour
         }
     }
 
-    private static bool IsMainThread()
+    public static bool IsMainThread()
     {
-        return Thread.CurrentThread == System.Threading.Thread.CurrentThread;
-    }
-
-    public static void DestroyGameObject(GameObject gameObject)
-    {
-        RunOnMainThread(() => GameObject.Destroy(gameObject));
-    }
-
-    public static void DestroyGameObjectDelayed(GameObject gameObject, float delay)
-    {
-        RunOnMainThread(() => GameObject.Destroy(gameObject, delay));
-    }
-
-    public static void SetGameObjectActive(GameObject gameObject, bool value)
-    {
-        RunOnMainThread(() => gameObject.SetActive(value));
+        return Thread.CurrentThread.ManagedThreadId == mainThreadId;
     }
 }

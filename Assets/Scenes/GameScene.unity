@@ -1413,10 +1413,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabList:
-  - key: Star
-    value: {fileID: 1715945862866604723, guid: f0e190d51276a3e40b254f6e3bbb6a24, type: 3}
   - key: Blackhole
     value: {fileID: 3538718987150724033, guid: 1932751ecb2c52346aa6aa8ccc14934d, type: 3}
+  - key: Star
+    value: {fileID: 1715945862866604723, guid: f0e190d51276a3e40b254f6e3bbb6a24, type: 3}
+  - key: Planet
+    value: {fileID: 4862717782721205466, guid: 245cfd43ac35da243a5be20028cb01a9, type: 3}
 --- !u!114 &1040128523
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -106,6 +106,7 @@
     <Compile Include="Assets\Scripts\DataTypes\OpenClBodyObject.cs" />
     <Compile Include="Assets\Scripts\DataTypes\OpenClBodies.cs" />
     <Compile Include="Assets\Scripts\DataTypes\PrefabEntry.cs" />
+    <Compile Include="Assets\Scripts\General Scripts\CurrentMillis.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ManagerScripts\UnityMainThreadDispatcher.cs" />
     <Compile Include="Assets\Scripts\General Scripts\ViewHelper.cs" />
     <Compile Include="Assets\Scripts\Menu\LoadingScene.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Assets\Scripts\OpenCl\MovementComputations\AccelerationRunner.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="Assets\Resources\MaterialsPrefabs.meta" />
     <None Include="Assets\Resources\MaterialsPrefabs\Default.mat" />
     <None Include="Assets\Resources\MaterialsPrefabs\Default.mat.meta" />

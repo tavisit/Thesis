@@ -13,10 +13,10 @@ public class OpenClBodyObject
     public Vector3 velocity;
     public float temperature;
     [NonSerialized]
-    public Vector3 acceleration = new Vector3();
+    public Vector3 acceleration = new();
 
     [NonSerialized]
-    public List<Vector3> pathPoints = new List<Vector3>(15);
+    public List<Vector3> pathPoints = new(15);
 
     public OpenClBodyObject(string name, float mass, Vector3 position, Vector3 velocity, Vector3 acceleration)
     {

@@ -10,7 +10,7 @@ public class OpenClBodies
     private readonly float sunMass = 1.989E+30f; // in kgs
     private readonly float sunRadius = 696340000; // in meters
     public List<OpenClBodyObject> myObjectBodies;
-    public ConcurrentDictionary<string, GameObject> celestialBodies;
+    public Dictionary<string, Tuple<GameObject, long>> celestialBodies;
     private readonly float maxVelocity = 299792458; // Maximum velocity, C, in m/s
 
     public float[] bounds = new float[6]; // minX, maxX, minY, maxY, minZ, maxZ
@@ -19,7 +19,7 @@ public class OpenClBodies
     public OpenClBodies()
     {
         myObjectBodies = new List<OpenClBodyObject>();
-        celestialBodies = new ConcurrentDictionary<string, GameObject>();
+        celestialBodies = new Dictionary<string, Tuple<GameObject, long>>();
         myObjectBodies = DataFetching.GaiaFetching("galactic_data");
         Parallel.For(0, myObjectBodies.Count, i =>
         {
@@ -36,32 +36,48 @@ public class OpenClBodies
     public void UpdateGraphics(Camera camera, Dictionary<string, GameObject> prefab, float pathDilation)
     {
         float fixedDelta = Time.fixedDeltaTime;
-        DestroyObjects(camera);
 
         Parallel.For(0, myObjectBodies.Count, i =>
         {
             int currentIndex = i;
-            UpdateBounds(myObjectBodies[currentIndex]);
             myObjectBodies[currentIndex] = UpdateEntry(pathDilation, myObjectBodies[currentIndex], fixedDelta);
+            UpdateBounds(myObjectBodies[currentIndex]);
 
             UnityMainThreadDispatcher.Enqueue(() =>
             {
                 if (ViewHelper.IsInView(camera, myObjectBodies[currentIndex].position))
                 {
-                    if (!celestialBodies.ContainsKey(myObjectBodies[currentIndex].name))
+                    if (celestialBodies.ContainsKey(myObjectBodies[currentIndex].name))
                     {
-                        GameObject obj = CreateGameObject(prefab, myObjectBodies[currentIndex]);
-                        celestialBodies.TryAdd(myObjectBodies[currentIndex].name, obj);
-                    }
-                    else if (Mathf.Abs(pathDilation) > Mathf.Epsilon)
-                    {
-                        GameObject obj = celestialBodies[myObjectBodies[currentIndex].name];
+                        celestialBodies[myObjectBodies[currentIndex].name].Item1.SetActive(true);
+                        celestialBodies[myObjectBodies[currentIndex].name] =
+                                        new Tuple<GameObject, long>(celestialBodies[myObjectBodies[currentIndex].name].Item1, CurrentMillis.GetMillis());
+                        GameObject obj = celestialBodies[myObjectBodies[currentIndex].name].Item1;
                         obj.GetComponent<Body>().mass = myObjectBodies[currentIndex].mass;
                         obj.GetComponent<Body>().velocity = myObjectBodies[currentIndex].velocity;
                         obj.GetComponent<Body>().acceleration = myObjectBodies[currentIndex].acceleration;
                         obj.transform.position = myObjectBodies[currentIndex].position;
                         obj.GetComponentInChildren<DirectionArrowDraw>().direction = myObjectBodies[currentIndex].acceleration;
                         obj.GetComponentInChildren<PathDraw>().pathPoints = myObjectBodies[currentIndex].pathPoints;
+                    }
+                    else
+                    {
+                        GameObject obj = CreateGameObject(prefab, myObjectBodies[currentIndex]);
+                        celestialBodies.TryAdd(myObjectBodies[currentIndex].name, new Tuple<GameObject, long>(obj, CurrentMillis.GetMillis()));
+                    }
+                }
+                else if (celestialBodies.ContainsKey(myObjectBodies[currentIndex].name))
+                {
+                    // if the object is offscreen for more than 1 minute/s, then destroy it, to free up memory
+                    // aka search for stale objects
+                    if (CurrentMillis.GetDifferenceSeconds(celestialBodies[myObjectBodies[currentIndex].name].Item2) > 60)
+                    {
+                        UnityEngine.Object.Destroy(celestialBodies[myObjectBodies[currentIndex].name].Item1);
+                        celestialBodies.Remove(myObjectBodies[currentIndex].name);
+                    }
+                    else
+                    {
+                        celestialBodies[myObjectBodies[currentIndex].name].Item1.SetActive(false);
                     }
                 }
             });
@@ -83,38 +99,6 @@ public class OpenClBodies
         return entry;
     }
 
-    private void DestroyObjects(Camera camera)
-    {
-        ConcurrentBag<string> objectsToRemove = new ConcurrentBag<string>();
-
-        Parallel.ForEach(celestialBodies, kvp =>
-        {
-            GameObject entry = kvp.Value;
-
-            try
-            {
-                UnityMainThreadDispatcher.Enqueue(() =>
-                {
-                    if (kvp.Value == null)
-                    {
-                        celestialBodies.TryRemove(kvp.Key, out _);
-                    }
-                    else if (entry != null && !ViewHelper.IsInView(camera, entry.transform.position))
-                    {
-                        UnityEngine.Object.Destroy(entry);
-                        celestialBodies.TryRemove(kvp.Key, out _);
-                    }
-                });
-
-            }
-            catch (InvalidOperationException ex)
-            {
-                Debug.Log(ex);
-                celestialBodies.TryRemove(kvp.Key, out _);
-            }
-        });
-    }
-
     private GameObject CreateGameObject(Dictionary<string, GameObject> prefab, OpenClBodyObject entry)
     {
         GameObject obj = ApplyBodyType(prefab, entry);
@@ -129,9 +113,6 @@ public class OpenClBodies
         pathArrow.AddComponent<PathDraw>();
         pathArrow.transform.SetParent(obj.transform);
         pathArrow.GetComponent<PathDraw>().pathPoints = entry.pathPoints;
-
-
-
 
         float relativeRadius = entry.mass;
         obj.GetComponent<Body>().mass = entry.mass * sunMass;

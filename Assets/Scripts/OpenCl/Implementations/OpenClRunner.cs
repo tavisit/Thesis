@@ -183,5 +183,5 @@ public abstract class OpenCLRunner<T, P, Q>
 
     public abstract void Update(P args, params object[] additionalParameters);
 
-    protected abstract ConcurrentBag<Q> SimplifyUpdateObjects(P args);
+    protected abstract List<Q> SimplifyUpdateObjects(P args);
 }

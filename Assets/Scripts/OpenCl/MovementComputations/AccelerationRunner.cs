@@ -1,5 +1,4 @@
 using Silk.NET.OpenCL;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +12,7 @@ public class AccelerationRunner : MovementComputationsBaseRunner
 
     public override void Update(OpenClBodies args, params object[] additionalParameters)
     {
-        List<OpenClBodyObject> pointsToUpdate = SimplifyUpdateObjects(args).ToList();
+        List<OpenClBodyObject> pointsToUpdate = SimplifyUpdateObjects(args);
 
         int argsLength = pointsToUpdate.Count;
 

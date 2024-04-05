@@ -10,11 +10,11 @@ public abstract class MovementComputationsBaseRunner : OpenCLRunner<Vector4, Ope
     {
     }
 
-    protected override ConcurrentBag<OpenClBodyObject> SimplifyUpdateObjects(OpenClBodies args)
+    protected override List<OpenClBodyObject> SimplifyUpdateObjects(OpenClBodies args)
     {
         float deviationThreshold = 1f;
 
-        ConcurrentBag<OpenClBodyObject> pointsToUpdate = new ConcurrentBag<OpenClBodyObject>();
+        ConcurrentBag<OpenClBodyObject> pointsToUpdate = new();
 
         // Parallelize the loop
         Parallel.For(0, args.myObjectBodies.Count, index =>
@@ -41,7 +41,7 @@ public abstract class MovementComputationsBaseRunner : OpenCLRunner<Vector4, Ope
             }
         });
 
-        return pointsToUpdate;
+        return pointsToUpdate.ToList();
     }
 
     protected static float PointToRayDistance(Vector3 point, Vector3 origin, Vector3 target)

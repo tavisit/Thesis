@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ObjectManager : MonoBehaviour
 {
     [SerializeField]
-    private List<PrefabEntry> prefabList = new List<PrefabEntry>();
+    private List<PrefabEntry> prefabList = new();
     public Dictionary<string, GameObject> prefabs;
 
 

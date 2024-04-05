@@ -47,7 +47,7 @@ public class PathRunner : MovementComputationsBaseRunner
                 int index_myObjectBodies = args.myObjectBodies.IndexOf(pointsToUpdate[index_openCL]);
                 if (index_myObjectBodies >= 0)
                 {
-                    List<Vector3> updatedPathPoints = new List<Vector3>();
+                    List<Vector3> updatedPathPoints = new();
                     for (int step = 0; step < steps; step++)
                     {
                         updatedPathPoints.Add(result[index_openCL * steps + step]);
@@ -62,9 +62,9 @@ public class PathRunner : MovementComputationsBaseRunner
             });
         }
     }
-    private ConcurrentBag<OpenClBodyObject> SimplifyByView(ConcurrentBag<OpenClBodyObject> args, Camera cam)
+    private List<OpenClBodyObject> SimplifyByView(List<OpenClBodyObject> args, Camera cam)
     {
-        ConcurrentBag<OpenClBodyObject> pointsToUpdate = new ConcurrentBag<OpenClBodyObject>();
+        List<OpenClBodyObject> pointsToUpdate = new();
 
         foreach (var obj in args)
         {
@@ -80,7 +80,7 @@ public class PathRunner : MovementComputationsBaseRunner
     private static bool IsInFrustumAndInView(Camera camera, Vector3 position)
     {
         Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(camera);
-        Bounds bounds = new Bounds(position, Vector3.zero);
+        Bounds bounds = new(position, Vector3.zero);
         return GeometryUtility.TestPlanesAABB(frustumPlanes, bounds) && ViewHelper.IsInView(camera, position);
     }
 }
