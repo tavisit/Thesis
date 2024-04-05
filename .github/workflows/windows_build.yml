@@ -82,3 +82,8 @@ jobs:
           ITCH_USER: ${{ secrets.MY_ITCH_USERNAME }}
           VERSION: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
           PACKAGE: ${{ github.workspace }}/ThesisProject.zip
+          
+      - name: Delete artifacts
+        uses: actions/delete-artifact@v2
+        with:
+          name: Build-StandaloneWindows64
