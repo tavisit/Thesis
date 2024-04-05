@@ -15,6 +15,6 @@ static class CurrentMillis
 
     public static long GetDifferenceSeconds(long value)
     {
-        return GetDifference(value)/1000;
+        return GetDifference(value) / 1000;
     }
 }
