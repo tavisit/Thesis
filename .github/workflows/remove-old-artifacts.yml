@@ -1,19 +1,26 @@
 name: Remove old artifacts
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     # Every day at 1am
     - cron: '0 1 * * *'
 
 permissions: write-all
-    
+
 jobs:
   remove-old-artifacts:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    
+
     steps:
-    - name: Remove old artifacts
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run c-hive/gha-remove-artifacts@v1
       uses: c-hive/gha-remove-artifacts@v1
       with:
         age: '7 days' # '<number> <unit>', e.g. 5 days, 2 years, 90 seconds, parsed by Moment.js
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
