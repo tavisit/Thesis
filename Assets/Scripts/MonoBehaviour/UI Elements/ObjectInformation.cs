@@ -45,10 +45,10 @@ public class ObjectInformation : MonoBehaviour
         {
             string informationText = "Information:";
             informationText += "\nName: " + hitObject.name;
-            informationText += "\nPosition: " + hitObject.transform.position.ToString("E5");
-            informationText += "\nVelocity: " + body.velocity.ToString("E5");
-            informationText += "\nAcceleration: " + body.acceleration.ToString("E5");
-            informationText += "\nMass: " + (body.mass * 1.989E+30f).ToString("E5");
+            informationText += "\nPosition [kiloparsecs]: " + hitObject.transform.position.ToString("E5");
+            informationText += "\nVelocity [kiloparsecs per Million years]: " + body.velocity.ToString("E5");
+            informationText += "\nAcceleration [kiloparsecs per Million years squared]: " + body.acceleration.ToString("E5");
+            informationText += "\nMass [kg]: " + (body.mass * 1.989E+30f).ToString("E5");
             if (informationTextUI != null)
             {
                 panel.gameObject.SetActive(true);

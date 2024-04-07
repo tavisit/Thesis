@@ -14,7 +14,9 @@ public class AccelerationRunner : MovementComputationsBaseRunner
     {
         List<OpenClBodyObject> pointsToUpdate = SimplifyUpdateObjects(args);
 
-        int argsLength = args.myObjectBodies.Count;
+        if (pointsToUpdate == null) return;
+
+        int argsLength = pointsToUpdate.Count;
 
         if (argsLength == 0) return;
 

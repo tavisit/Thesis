@@ -11,7 +11,7 @@ public class ObjectManager : MonoBehaviour
 
 
     protected Slider timeDilationSlider;
-    private readonly int nr_steps = 5;
+    private readonly int nrSteps = 10;
 
     public OpenClBodies openClBodies;
 
@@ -39,7 +39,7 @@ public class ObjectManager : MonoBehaviour
     void Start()
     {
         universalAttraction.Update(openClBodies);
-        movementPathRunner.Update(openClBodies, nr_steps, Camera.main);
+        movementPathRunner.Update(openClBodies, nrSteps, Camera.main);
     }
 
     void Update()
@@ -63,7 +63,7 @@ public class ObjectManager : MonoBehaviour
 
                 watch.Restart();
 
-                movementPathRunner.Update(openClBodies, nr_steps, Camera.main);
+                movementPathRunner.Update(openClBodies, nrSteps, Camera.main);
 
                 watch.Stop();
                 UnityEngine.Debug.Log($"movementPathRunner : {watch.ElapsedMilliseconds}");

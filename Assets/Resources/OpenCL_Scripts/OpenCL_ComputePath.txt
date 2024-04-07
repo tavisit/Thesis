@@ -1,7 +1,4 @@
-﻿// For simulations with many bodies, consider more sophisticated 
-// algorithms like Barnes-Hut, which reduce computational complexity at the cost of some accuracy.
-
-// we care about:
+﻿// we care about:
 // - position
 // - velocity
 // - new_position
@@ -9,6 +6,8 @@
 
 // new_position has length float3*steps*length
 // p = p0 + v*t + 0.5*a*t^2
+
+float factor = 10;
 
 __kernel void compute_movement_path(__global float3* new_position,
                                     __global float* targetDataFlattened, 
@@ -18,38 +17,24 @@ __kernel void compute_movement_path(__global float3* new_position,
     int current_index = get_global_id(0);
 
     if (current_index < length) {
-        float3 position;
-        position.x = targetDataFlattened[current_index * offset];
-        position.y = targetDataFlattened[current_index * offset + 1];
-        position.z = targetDataFlattened[current_index * offset + 2];
-        
+        float3 position = (float3)(targetDataFlattened[current_index * offset],
+                                   targetDataFlattened[current_index * offset + 1],
+                                   targetDataFlattened[current_index * offset + 2]);
         float mass = targetDataFlattened[current_index * offset + 3];
-        
-        float3 velocity;
-        velocity.x = targetDataFlattened[current_index * offset + 4];
-        velocity.y = targetDataFlattened[current_index * offset + 5];
-        velocity.z = targetDataFlattened[current_index * offset + 6];
+        float3 velocity = (float3)(targetDataFlattened[current_index * offset + 4],
+                                   targetDataFlattened[current_index * offset + 5],
+                                   targetDataFlattened[current_index * offset + 6]);
 
-        for(int step = 0; step < steps; step++){
-            float actual_time = (float)step;
-            // Compute acceleration at the beginning of each step based on current positions
+        for(int step = 0; step < steps; step++){ // Time in Myr, assuming each step is 1 Myr
             float3 acceleration = compute_acceleration(current_index, position, mass, globalData, length, offset);
 
-            float3 displacement = velocity * actual_time + 0.5f * acceleration * (actual_time * actual_time);
-            position += displacement;
+            float3 displacement = velocity * step + 0.5f * acceleration * (step * step);
 
-            velocity += acceleration * actual_time;
+            position += displacement;
+            velocity += acceleration * step;
 
             // Store the new position back into the global memory
             new_position[current_index * steps + step] = position;
-
-            targetDataFlattened[current_index * offset] = position.x;
-            targetDataFlattened[current_index * offset + 1] = position.y;
-            targetDataFlattened[current_index * offset + 2] = position.z;
-
-            targetDataFlattened[current_index * offset + 4] = velocity.x;
-            targetDataFlattened[current_index * offset + 5] = velocity.y;
-            targetDataFlattened[current_index * offset + 6] = velocity.z;
         }
     }
 }

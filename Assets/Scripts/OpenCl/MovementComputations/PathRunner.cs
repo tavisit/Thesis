@@ -15,6 +15,8 @@ public class PathRunner : MovementComputationsBaseRunner
     {
         List<OpenClBodyObject> pointsToUpdate = SimplifyByView(SimplifyUpdateObjects(args), (Camera)additionalParameters[1]).ToList();
 
+        if (pointsToUpdate == null) return;
+
         int argsLength = pointsToUpdate.Count;
 
         if (argsLength == 0) return;

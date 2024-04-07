@@ -1,12 +1,10 @@
-﻿#define G 6.67430e-11f
+﻿#define G 4.54e-6f
 #define EPSILON 1e-10f
-#define KPSC_TO_M 3.08567758E+16f
-#define SUN_MASS 1.989E+13f
-
+#define SUN_MASS 1.989f
 
 float normalization_factor()
 {
-    return SUN_MASS * SUN_MASS / KPSC_TO_M;
+    return SUN_MASS * SUN_MASS;
 }
 
 float3 compute_acceleration(int current_index, float3 position, float mass, const __global float* globalData, int length, int offset){
@@ -15,13 +13,13 @@ float3 compute_acceleration(int current_index, float3 position, float mass, cons
         if (current_index != j) {
             float3 position_other = (float3)(globalData[j*offset], globalData[j*offset + 1], globalData[j*offset + 2]);
             float mass_other = globalData[j*offset+3];
-            float3 diff = (position_other - position);
-            float distSquared = dot(diff, diff) + 1e-10f; // Avoid division by zero
+            float3 diff = position_other - position;
+            float distSquared = dot(diff, diff) + EPSILON;
 
             float forceMagnitude = G * mass * mass_other / distSquared;
 
             totalForce += normalize(diff) * forceMagnitude;
         }
     }
-    return totalForce / mass * normalization_factor();
+    return totalForce / mass * normalization_factor(); // kpc/(Myr^2)
 }
