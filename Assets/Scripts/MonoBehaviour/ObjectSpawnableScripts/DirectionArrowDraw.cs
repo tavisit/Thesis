@@ -40,12 +40,24 @@ public class DirectionArrowDraw : MonoBehaviour
     {
         transform.position = transform.parent.position;
 
-        Vector3 lastPoint = transform.position;
-        Vector3 arrowEndPoint = lastPoint + direction.normalized * arrowHeadLength;
+        Vector3 startPoint = transform.position;
+        Vector3 arrowEndPoint = startPoint + direction.normalized * arrowHeadLength;
+        Vector3 arrowBasePoint = startPoint + (direction.normalized * (arrowHeadLength - 0.5f));
 
-        lineRenderer.positionCount = 2;
-        lineRenderer.SetPosition(0, lastPoint);
+        float arrowHeadWidth = 0.5f;
+        Vector3 perpendicular = Vector3.Cross(direction, Vector3.up).normalized * arrowHeadWidth;
+
+        Vector3 arrowBasePoint1 = arrowBasePoint + perpendicular;
+        Vector3 arrowBasePoint2 = arrowBasePoint - perpendicular;
+
+        // Set LineRenderer
+        lineRenderer.positionCount = 5;
+        lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, arrowEndPoint);
+        lineRenderer.SetPosition(2, arrowBasePoint1);
+        lineRenderer.SetPosition(3, arrowBasePoint2);
+        lineRenderer.SetPosition(4, arrowEndPoint);
+
         lastDirection = direction;
     }
 }

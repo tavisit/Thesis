@@ -23,10 +23,19 @@ public class OpenClBodies
         celestialBodies = new Dictionary<string, Tuple<GameObject, long>>();
         myObjectBodies = DataFetching.GaiaFetching("galactic_data");
 
+        float G = 4.54e-6f;
+        var obj = myObjectBodies.Find(k => k.name.Equals("Blackhole Sagittarius A*"));
+        float mass = obj.mass;
+        Vector3 position = obj.position;
+
         Parallel.For(0, myObjectBodies.Count, i =>
         {
-            myObjectBodies[i].velocity *= 0.964275f; // Convert from km/s to kpc/Myr 
-            int currentIndex = i;
+            float r = Vector3.Distance(myObjectBodies[i].position, position);
+            float conversionFactor = MathF.Sqrt(G * mass / r);
+            if (!float.IsNaN(conversionFactor) && float.IsFinite(conversionFactor) && conversionFactor != 0)
+            {
+                myObjectBodies[i].velocity = myObjectBodies[i].velocity.normalized * conversionFactor;
+            }
             UpdateBounds(myObjectBodies[i]);
         });
     }
@@ -83,7 +92,7 @@ public class OpenClBodies
     {
         if (Mathf.Abs(pathDilation) > Mathf.Epsilon)
         {
-            Vector3 oldVelocity = entry.velocity / 10000.0f;
+            Vector3 oldVelocity = entry.velocity;
             float deltaTime = fixedDelta * pathDilation;
             entry.velocity += entry.acceleration * deltaTime;
             entry.velocity = Vector3.ClampMagnitude(entry.velocity, maxVelocityKpc);
@@ -114,8 +123,8 @@ public class OpenClBodies
 
         if (obj.GetComponent<Blackhole>() != null)
         {
-            // in case of blackhole, r  = 2*G*entry.mass/(c^c)
             float G = 6.67430e-11f;
+            // in case of blackhole, r  = 2*G*entry.mass/(c^c)
             relativeRadius = 2 * G * (entry.mass * sunMass) / (maxVelocityM * maxVelocityM) / sunRadius;
             obj.GetComponent<Body>().velocity = new Vector3(0, 0, 0);
             obj.GetComponent<Body>().acceleration = new Vector3(0, 0, 0);

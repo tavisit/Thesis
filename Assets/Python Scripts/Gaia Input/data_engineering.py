@@ -91,7 +91,7 @@ class GaiaData:
         self.data['velocity_y'] = gal_vel[1] * 1.0227
         self.data['velocity_z'] = gal_vel[2] * 1.0227
 
-        print(self.data[['velocity_x', 'velocity_y', 'velocity_z']].describe())
+        print(self.data[['velocity_x', 'velocity_y', 'velocity_z']].describe()) # velocities in kpc/Myr
 
     def positionComputation(self):
         self.data['pos_x'] = (self.galactic_coord.distance *
