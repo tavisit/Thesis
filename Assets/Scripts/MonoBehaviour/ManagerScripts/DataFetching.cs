@@ -13,7 +13,9 @@ public static class DataFetching
         List<OpenClBodyObject> returnObjects = JsonHelper.FromJson<OpenClBodyObject>(mainFile.text).ToList();
 
         // Add Sagittarius A*
-        OpenClBodyObject sagittariusA = new OpenClBodyObject("Blackhole Sagittarius A*", 4.297E+6f, new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0));
+        // Actual mass in solar masses - 1.0179712045256999e+11f
+        // Observed mass in solar masses - 4.297E+6f
+        OpenClBodyObject sagittariusA = new OpenClBodyObject("Blackhole Sagittarius A*", 1.0179712045256999e+11f, new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0));
         returnObjects.Add(sagittariusA);
 
         return returnObjects;

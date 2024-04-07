@@ -11,7 +11,7 @@ public class ObjectManager : MonoBehaviour
 
 
     protected Slider timeDilationSlider;
-    private readonly int nrSteps = 10;
+    private readonly int nrSteps = 5;
 
     public OpenClBodies openClBodies;
 

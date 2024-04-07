@@ -7,7 +7,7 @@ public class PathDraw : MonoBehaviour
     public List<Vector3> pathPoints = new();
     public Color color = Color.white;
     private readonly float lineWidthStart = 0.1f;
-    private readonly float lineWidthEnd = 0.1f;
+    private readonly float lineWidthEnd = 0.0f;
     private LineRenderer lineRenderer;
 
     private void Start()

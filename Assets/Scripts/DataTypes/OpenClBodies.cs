@@ -8,7 +8,7 @@ using UnityEngine;
 public class OpenClBodies
 {
     private readonly float sunMass = 1.989E+30f; // in kgs
-    private readonly float sunRadius = 696340000; // in meters
+    private readonly float sunRadius = 6963400000000; // in meters
     public List<OpenClBodyObject> myObjectBodies;
     public Dictionary<string, Tuple<GameObject, long>> celestialBodies;
     private readonly float maxVelocityKpc = 306.594845f; // Maximum velocity, C, in kiloparsecs/million years
@@ -22,9 +22,10 @@ public class OpenClBodies
         myObjectBodies = new List<OpenClBodyObject>();
         celestialBodies = new Dictionary<string, Tuple<GameObject, long>>();
         myObjectBodies = DataFetching.GaiaFetching("galactic_data");
+
         Parallel.For(0, myObjectBodies.Count, i =>
         {
-            myObjectBodies[i].velocity *= 1.0227e-6f; // Convert from km/s to kpc/Myr 
+            myObjectBodies[i].velocity *= 0.964275f; // Convert from km/s to kpc/Myr 
             int currentIndex = i;
             UpdateBounds(myObjectBodies[i]);
         });
@@ -82,7 +83,7 @@ public class OpenClBodies
     {
         if (Mathf.Abs(pathDilation) > Mathf.Epsilon)
         {
-            Vector3 oldVelocity = entry.velocity;
+            Vector3 oldVelocity = entry.velocity / 10000.0f;
             float deltaTime = fixedDelta * pathDilation;
             entry.velocity += entry.acceleration * deltaTime;
             entry.velocity = Vector3.ClampMagnitude(entry.velocity, maxVelocityKpc);

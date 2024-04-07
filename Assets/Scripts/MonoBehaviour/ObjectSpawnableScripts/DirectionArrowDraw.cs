@@ -5,6 +5,7 @@ public class DirectionArrowDraw : MonoBehaviour
 
 {
     public Vector3 direction;
+    public Vector3 lastDirection;
     public Color color = Color.white;
     private readonly float arrowHeadLength = 2.0f;
     private readonly float lineWidth = 0.1f;
@@ -27,14 +28,24 @@ public class DirectionArrowDraw : MonoBehaviour
     {
         if (direction != Vector3.zero)
         {
-            transform.position = transform.parent.position;
-
-            Vector3 lastPoint = transform.position;
-            Vector3 arrowEndPoint = lastPoint + direction.normalized * arrowHeadLength;
-
-            lineRenderer.positionCount = 2;
-            lineRenderer.SetPosition(0, lastPoint);
-            lineRenderer.SetPosition(1, arrowEndPoint);
+            UpdateArrow(direction);
         }
+        else if(lastDirection != Vector3.zero)
+        {
+            UpdateArrow(lastDirection);
+        }
+    }
+
+    private void UpdateArrow(Vector3 direction)
+    {
+        transform.position = transform.parent.position;
+
+        Vector3 lastPoint = transform.position;
+        Vector3 arrowEndPoint = lastPoint + direction.normalized * arrowHeadLength;
+
+        lineRenderer.positionCount = 2;
+        lineRenderer.SetPosition(0, lastPoint);
+        lineRenderer.SetPosition(1, arrowEndPoint);
+        lastDirection = direction;
     }
 }

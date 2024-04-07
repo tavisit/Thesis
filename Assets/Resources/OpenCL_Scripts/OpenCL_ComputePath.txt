@@ -7,8 +7,6 @@
 // new_position has length float3*steps*length
 // p = p0 + v*t + 0.5*a*t^2
 
-float factor = 10;
-
 __kernel void compute_movement_path(__global float3* new_position,
                                     __global float* targetDataFlattened, 
                                     __global float* globalData, 
@@ -24,14 +22,15 @@ __kernel void compute_movement_path(__global float3* new_position,
         float3 velocity = (float3)(targetDataFlattened[current_index * offset + 4],
                                    targetDataFlattened[current_index * offset + 5],
                                    targetDataFlattened[current_index * offset + 6]);
+        // Store the new position back into the global memory
+        new_position[current_index * steps + 0] = position;
+        
+        float dt = 0.01f;
+        for(int step = 1; step < steps; step++){ // Time in Myr, assuming each step is 1 Myr
+            float3 acceleration = compute_acceleration(current_index, position, mass, globalData, length, offset); // kpc/(Myr^2)
 
-        for(int step = 0; step < steps; step++){ // Time in Myr, assuming each step is 1 Myr
-            float3 acceleration = compute_acceleration(current_index, position, mass, globalData, length, offset);
-
-            float3 displacement = velocity * step + 0.5f * acceleration * (step * step);
-
-            position += displacement;
-            velocity += acceleration * step;
+            velocity += acceleration * dt;
+            position += (velocity * dt) + (0.5f * acceleration * dt * dt);
 
             // Store the new position back into the global memory
             new_position[current_index * steps + step] = position;

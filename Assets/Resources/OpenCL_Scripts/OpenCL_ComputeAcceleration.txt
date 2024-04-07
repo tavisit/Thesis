@@ -13,9 +13,10 @@ __kernel void universal_attraction_force(__global float3* acceleration,
     int current_index = get_global_id(0);
 
     if (current_index < length) {
-        float3 totalForce = (float3)(0.0f, 0.0f, 0.0f);
-        float3 position = { targetDataFlattened[current_index * offset], targetDataFlattened[current_index * offset + 1], targetDataFlattened[current_index * offset + 2] };
-        float mass = targetDataFlattened[current_index * offset+3];
+        float3 position = (float3)(targetDataFlattened[current_index * offset],
+                                   targetDataFlattened[current_index * offset + 1],
+                                   targetDataFlattened[current_index * offset + 2]);
+        float mass = targetDataFlattened[current_index * offset + 3];
 
         acceleration[current_index] = compute_acceleration(current_index, position, mass, globalData, length, offset); // kpc/(Myr^2)
     }
