@@ -5,15 +5,18 @@
 // - position
 // - mass
 
-__kernel void universal_attraction_force(__global float3* acceleration, __global const float* flattenedData, int length, int offset)
+__kernel void universal_attraction_force(__global float3* acceleration, 
+                                         __global float* targetDataFlattened, 
+                                         __global float* globalData, 
+                                         int length, int offset)
 {
     int current_index = get_global_id(0);
 
     if (current_index < length) {
         float3 totalForce = (float3)(0.0f, 0.0f, 0.0f);
-        float3 position = { flattenedData[current_index * offset], flattenedData[current_index * offset + 1], flattenedData[current_index * offset + 2] };
-        float mass = flattenedData[current_index * offset+3];
+        float3 position = { targetDataFlattened[current_index * offset], targetDataFlattened[current_index * offset + 1], targetDataFlattened[current_index * offset + 2] };
+        float mass = targetDataFlattened[current_index * offset+3];
 
-        acceleration[current_index] = compute_acceleration(current_index, position, mass, flattenedData, length, offset);
+        acceleration[current_index] = compute_acceleration(current_index, position, mass, globalData, length, offset);
     }
 }

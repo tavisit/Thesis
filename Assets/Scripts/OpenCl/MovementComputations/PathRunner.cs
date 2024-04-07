@@ -20,7 +20,7 @@ public class PathRunner : MovementComputationsBaseRunner
         if (argsLength == 0) return;
 
         int steps = (int)additionalParameters[0];
-        nint[] memObjects = new nint[2];
+        nint[] memObjects = new nint[3];
         int[] intObjects = new int[3] { argsLength, pointsToUpdate.FirstOrDefault().Flatten().Count(), steps };
         Vector4[] result = new Vector4[(nuint)(argsLength * steps)];
 
@@ -29,19 +29,11 @@ public class PathRunner : MovementComputationsBaseRunner
 
         if (OpenCLInterfaceImplementation.CreateMemObjects(cl, context, memObjects, true, 0, MemFlags.ReadWrite, result)
             && OpenCLInterfaceImplementation.CreateMemObjects(cl, context, memObjects, false, 1, MemFlags.ReadOnly | MemFlags.CopyHostPtr, pointsToUpdate.SelectMany(obj => obj.Flatten()).ToArray())
-            && OpenCLInterfaceImplementation.SetKernelArgsMemory(cl, kernel, memObjects, new int[] { 0, 1 })
-            && OpenCLInterfaceImplementation.SetKernelArgsVariables(cl, kernel, intObjects, new int[] { 2, 3, 4 })
+            && OpenCLInterfaceImplementation.CreateMemObjects(cl, context, memObjects, false, 2, MemFlags.ReadOnly | MemFlags.CopyHostPtr, args.Flatten().ToArray())
+            && OpenCLInterfaceImplementation.SetKernelArgsMemory(cl, kernel, memObjects, new int[] { 0, 1, 2 })
+            && OpenCLInterfaceImplementation.SetKernelArgsVariables(cl, kernel, intObjects, new int[] { 3, 4, 5 })
             && Run(globalWorkSize, localWorkSize, result.Length, memObjects, 0, out result))
         {
-            for (int index = 0; index < argsLength; index++)
-            {
-                int index_openCL = args.myObjectBodies.IndexOf(pointsToUpdate[index]);
-                args.myObjectBodies[index_openCL].pathPoints.Clear();
-                for (int step = 0; step < steps; step++)
-                {
-                    args.myObjectBodies[index_openCL].pathPoints.Add(result[index * steps + step]);
-                }
-            }
             Parallel.For(0, pointsToUpdate.Count(), index_openCL =>
             {
                 int index_myObjectBodies = args.myObjectBodies.IndexOf(pointsToUpdate[index_openCL]);
