@@ -1418,7 +1418,9 @@ MonoBehaviour:
   - key: Star
     value: {fileID: 1715945862866604723, guid: f0e190d51276a3e40b254f6e3bbb6a24, type: 3}
   - key: Planet
-    value: {fileID: 4862717782721205466, guid: 245cfd43ac35da243a5be20028cb01a9, type: 3}
+    value: {fileID: 1715945862866604723, guid: 6225feb4d6d19fb4288912acd8775f9d, type: 3}
+  - key: GenericData
+    value: {fileID: 5934256551390618299, guid: 39c6a8b8db0213a41b657cb3f8d8aeaf, type: 3}
 --- !u!114 &1040128523
 MonoBehaviour:
   m_ObjectHideFlags: 0

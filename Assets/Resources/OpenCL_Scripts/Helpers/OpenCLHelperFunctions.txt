@@ -1,10 +1,6 @@
-﻿#define G 4.54e-6f
-#define EPSILON 1e-10f
-#define SUN_MASS 1.989f
-
-float normalization_factor()
+﻿float normalization_factor()
 {
-    return SUN_MASS * SUN_MASS;
+    return SUN_MASS_SIMPLIFIED * SUN_MASS_SIMPLIFIED;
 }
 
 float3 compute_acceleration(int current_index, float3 position, float mass, const __global float* globalData, int length, int offset){

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5234045473036008618}
   - component: {fileID: 1976582262746463093}
   m_Layer: 0
-  m_Name: Star
+  m_Name: Planet
   m_TagString: Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 00a7132c290a5824290016dfc223df94, type: 2}
+  - {fileID: -876546973899608171, guid: 549a07c681d9cb1428088dbd23319105, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

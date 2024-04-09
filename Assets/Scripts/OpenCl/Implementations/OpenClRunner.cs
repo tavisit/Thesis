@@ -170,12 +170,20 @@ public abstract class OpenCLRunner<T, P, Q>
                 "All the files I have are: " + string.Join(", ", clFiles.Select(f => f.name)));
             return null;
         }
+        TextAsset constantFile = Array.FindAll(clFiles, s => s.name.Contains("Constants"))[0];
+        if (constantFile == null || constantFile.text.Length == 0)
+        {
+            Debug.LogError("Cannot find any constant in Resources/OpenCL_Scripts/. " +
+                "All the files I have are: " + string.Join(", ", clFiles.Select(f => f.name)));
+            return null;
+        }
 
         string clSource = mainFile.text;
         foreach (TextAsset textAsset in helperFiles)
         {
-            clSource = textAsset.text + "\n" + clSource;
+            clSource = textAsset.text + "\n\n" + clSource;
         }
+        clSource = constantFile.text + "\n\n" + clSource;
 
         return clSource;
     }

@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class OpenClBodies
+public class OpenClBodies : ICloneable
 {
-    private readonly float sunMass = 1.989E+30f; // in kgs
-    private readonly float sunRadius = 6963400000000; // in meters
     public List<OpenClBodyObject> myObjectBodies;
     public Dictionary<string, Tuple<GameObject, long>> celestialBodies;
-    private readonly float maxVelocityKpc = 306.594845f; // Maximum velocity, C, in kiloparsecs/million years
-    private readonly float maxVelocityM = 299792458; // Maximum velocity, C, in m/s
-
     public float[] bounds = new float[6]; // minX, maxX, minY, maxY, minZ, maxZ
 
 
@@ -23,7 +17,6 @@ public class OpenClBodies
         celestialBodies = new Dictionary<string, Tuple<GameObject, long>>();
         myObjectBodies = DataFetching.GaiaFetching("galactic_data");
 
-        float G = 4.54e-6f;
         var obj = myObjectBodies.Find(k => k.name.Equals("Blackhole Sagittarius A*"));
         float mass = obj.mass;
         Vector3 position = obj.position;
@@ -31,7 +24,7 @@ public class OpenClBodies
         Parallel.For(0, myObjectBodies.Count, i =>
         {
             float r = Vector3.Distance(myObjectBodies[i].position, position);
-            float conversionFactor = MathF.Sqrt(G * mass / r);
+            float conversionFactor = MathF.Sqrt(Constants.G * mass / r);
             if (!float.IsNaN(conversionFactor) && float.IsFinite(conversionFactor) && conversionFactor != 0)
             {
                 myObjectBodies[i].velocity = myObjectBodies[i].velocity.normalized * conversionFactor;
@@ -40,10 +33,20 @@ public class OpenClBodies
         });
     }
 
+    #region ICloneable Members
+
+    public OpenClBodies DeepClone()
+    {
+        return (OpenClBodies)MemberwiseClone();
+    }
+
+    #endregion
+
     public List<float> Flatten()
     {
         return myObjectBodies.SelectMany(obj => obj.Flatten()).ToList();
     }
+
 
     public void UpdateGraphics(Camera camera, Dictionary<string, GameObject> prefab, float pathDilation)
     {
@@ -95,7 +98,7 @@ public class OpenClBodies
             Vector3 oldVelocity = entry.velocity;
             float deltaTime = fixedDelta * pathDilation;
             entry.velocity += entry.acceleration * deltaTime;
-            entry.velocity = Vector3.ClampMagnitude(entry.velocity, maxVelocityKpc);
+            entry.velocity = Vector3.ClampMagnitude(entry.velocity, Constants.MAX_VELOCITY_KPC);
             Vector3 position_at_t = oldVelocity * deltaTime + 0.5f * entry.acceleration * deltaTime * deltaTime;
             entry.position += position_at_t;
         }
@@ -108,24 +111,18 @@ public class OpenClBodies
         GameObject obj = ApplyBodyType(prefab, entry);
         obj.name = entry.name;
 
-        GameObject accArrow = new("AccelerationArrow");
-        accArrow.AddComponent<DirectionArrowDraw>();
-        accArrow.transform.SetParent(obj.transform);
-        accArrow.GetComponent<DirectionArrowDraw>().direction = entry.acceleration;
+        GameObject generaicData = UnityEngine.Object.Instantiate(prefab.GetValueOrDefault("GenericData"), obj.transform.position, new Quaternion(0,0,0, 0), obj.transform);
 
-        GameObject pathArrow = new("PathArrow");
-        pathArrow.AddComponent<PathDraw>();
-        pathArrow.transform.SetParent(obj.transform);
-        pathArrow.GetComponent<PathDraw>().pathPoints = entry.pathPoints;
+        obj.GetComponentInChildren<DirectionArrowDraw>().direction = entry.acceleration;
+        obj.GetComponentInChildren<PathDraw>().pathPoints = entry.pathPoints;
 
         float relativeRadius = entry.mass;
-        obj.GetComponent<Body>().mass = entry.mass * sunMass;
+        obj.GetComponent<Body>().mass = entry.mass * Constants.SUN_MASS;
 
         if (obj.GetComponent<Blackhole>() != null)
         {
-            float G = 6.67430e-11f;
             // in case of blackhole, r  = 2*G*entry.mass/(c^c)
-            relativeRadius = 2 * G * (entry.mass * sunMass) / (maxVelocityM * maxVelocityM) / sunRadius;
+            relativeRadius = 2 * Constants.G_NORMAL * (entry.mass * Constants.SUN_MASS) / (Constants.MAX_VELOCITY * Constants.MAX_VELOCITY) / Constants.SUN_RADIUS;
             obj.GetComponent<Body>().velocity = new Vector3(0, 0, 0);
             obj.GetComponent<Body>().acceleration = new Vector3(0, 0, 0);
         }
@@ -200,5 +197,10 @@ public class OpenClBodies
         bounds[3] = openClBodyObject.position.y > bounds[3] ? openClBodyObject.position.y : bounds[3];
         bounds[4] = openClBodyObject.position.z < bounds[4] ? openClBodyObject.position.z : bounds[4];
         bounds[5] = openClBodyObject.position.z > bounds[5] ? openClBodyObject.position.z : bounds[5];
+    }
+
+    public object Clone()
+    {
+        throw new NotImplementedException();
     }
 }

@@ -5,7 +5,7 @@ public class DirectionArrowDraw : MonoBehaviour
 
 {
     public Vector3 direction;
-    public Vector3 lastDirection;
+    private Vector3 lastDirection;
     public Color color = Color.white;
     private readonly float arrowHeadLength = 2.0f;
     private readonly float lineWidth = 0.1f;

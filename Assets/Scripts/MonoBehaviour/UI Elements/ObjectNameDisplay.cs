@@ -13,7 +13,7 @@ public class ObjectNameDisplay : MonoBehaviour
         nameText = gameObject.GetComponent<TextMeshPro>();
         if (nameText != null)
         {
-            nameText.text = gameObject.transform.parent.name;
+            nameText.text = gameObject.transform.parent.parent.name;
         }
     }
 
