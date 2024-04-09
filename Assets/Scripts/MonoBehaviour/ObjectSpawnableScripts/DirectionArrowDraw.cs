@@ -30,7 +30,7 @@ public class DirectionArrowDraw : MonoBehaviour
         {
             UpdateArrow(direction);
         }
-        else if(lastDirection != Vector3.zero)
+        else if (lastDirection != Vector3.zero)
         {
             UpdateArrow(lastDirection);
         }

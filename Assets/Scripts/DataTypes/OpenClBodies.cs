@@ -111,7 +111,7 @@ public class OpenClBodies : ICloneable
         GameObject obj = ApplyBodyType(prefab, entry);
         obj.name = entry.name;
 
-        GameObject generaicData = UnityEngine.Object.Instantiate(prefab.GetValueOrDefault("GenericData"), obj.transform.position, new Quaternion(0,0,0, 0), obj.transform);
+        GameObject generaicData = UnityEngine.Object.Instantiate(prefab.GetValueOrDefault("GenericData"), obj.transform.position, new Quaternion(0, 0, 0, 0), obj.transform);
 
         obj.GetComponentInChildren<DirectionArrowDraw>().direction = entry.acceleration;
         obj.GetComponentInChildren<PathDraw>().pathPoints = entry.pathPoints;

@@ -45,7 +45,7 @@ public class ObjectManager : MonoBehaviour
 
     void Start()
     {
-        openClBodies = computePhysics(openClBodies); 
+        openClBodies = computePhysics(openClBodies);
     }
 
     void Update()
@@ -92,7 +92,7 @@ public class ObjectManager : MonoBehaviour
     {
         TextAsset[] clFiles = Resources.LoadAll<TextAsset>("OpenCL_Scripts");
         TextAsset constantFile = Array.FindAll(clFiles, s => s.name.Contains("Constants"))[0];
-        
+
         string outputPath = "./Assets/Scripts/DataTypes/Constants.cs"; // Output path for the generated C# class
 
         StringBuilder classBuilder = new StringBuilder();
@@ -136,7 +136,7 @@ public class ObjectManager : MonoBehaviour
         classBuilder.AppendLine("}");
         string oldFile = File.ReadAllText(outputPath, Encoding.UTF8);
 
-        if(oldFile != classBuilder.ToString())
+        if (oldFile != classBuilder.ToString())
         {
             File.WriteAllText(outputPath, classBuilder.ToString());
             UnityEngine.Debug.Log($"Constants class has been updated to {outputPath}");
