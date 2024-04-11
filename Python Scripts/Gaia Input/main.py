@@ -35,7 +35,7 @@ def main():
     star_name_to_gaia_dr3 = star_name_to_gaia()
     data = GaiaData(10000)
     data.prepare_data_for_csv(star_name_to_gaia_dr3)
-    output_path = "../../Resources/InputManagement/galactic_data.json"
+    output_path = "../Assets/Resources/InputManagement/galactic_data.json"
     data.output_data_csv(output_path, ['name', "mass", "temperature", 'position', 'velocity'])
 
 
