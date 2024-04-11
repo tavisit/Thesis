@@ -10,16 +10,16 @@ public abstract class MovementComputationsBaseRunner : OpenCLRunner<Vector4, Ope
     {
     }
 
-    protected override List<OpenClBodyObject> SimplifyUpdateObjects(OpenClBodies args)
+    protected override List<OpenClBodyObject> SimplifyUpdateObjects(List<OpenClBodyObject> myObjectBodies)
     {
         float deviationThreshold = 1f;
 
         ConcurrentBag<OpenClBodyObject> pointsToUpdate = new();
 
         // Parallelize the loop
-        Parallel.For(0, args.myObjectBodies.Count, index =>
+        Parallel.For(0, myObjectBodies.Count, index =>
         {
-            OpenClBodyObject objectToUpdate = args.myObjectBodies[index];
+            OpenClBodyObject objectToUpdate = myObjectBodies[index];
 
             if (objectToUpdate.pathPoints == null || objectToUpdate.pathPoints.Count < 2)
             {

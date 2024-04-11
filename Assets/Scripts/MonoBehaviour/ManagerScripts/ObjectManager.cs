@@ -4,10 +4,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+
 
 public class ObjectManager : MonoBehaviour
 {
@@ -15,8 +16,9 @@ public class ObjectManager : MonoBehaviour
     private List<PrefabEntry> prefabList = new();
     public Dictionary<string, GameObject> prefabs;
 
+    public Slider timeDilationSlider;
 
-    protected Slider timeDilationSlider;
+    private float timeDilationValue;
     private readonly int nrSteps = 15;
 
     public OpenClBodies openClBodies;
@@ -25,6 +27,7 @@ public class ObjectManager : MonoBehaviour
     private PathRunner movementPathRunner;
 
     private Stopwatch watch;
+
     private void Awake()
     {
         CreateConstantsClass();
@@ -39,52 +42,59 @@ public class ObjectManager : MonoBehaviour
         movementPathRunner = new PathRunner("OpenCL_ComputePath", "compute_movement_path");
 
         watch = Stopwatch.StartNew();
-
-        timeDilationSlider = GameObject.Find("TimeDillationSlider")?.GetComponent<Slider>();
     }
 
     void Start()
     {
-        openClBodies = computePhysics(openClBodies);
+        timeDilationSlider.onValueChanged.AddListener(delegate {
+            timeDilationValue = timeDilationSlider.value;
+        });
+        openClBodies.myObjectBodies = computePhysics(openClBodies.myObjectBodies);
     }
 
     void Update()
     {
-        if (timeDilationSlider == null)
+        if (Mathf.Abs(timeDilationValue) > Mathf.Epsilon)
         {
-            timeDilationSlider = GameObject.Find("TimeDilationSlider")?.GetComponent<Slider>();
+            openClBodies.myObjectBodies = computePhysics(openClBodies.myObjectBodies);
         }
         else
         {
-            if (Mathf.Abs(timeDilationSlider.value) > Mathf.Epsilon)
-            {
-                openClBodies = computePhysics(openClBodies);
-            }
-
-            openClBodies.UpdateGraphics(Camera.main, prefabs, timeDilationSlider.value);
-
+            openClBodies.myObjectBodies = computePath(openClBodies.myObjectBodies);
         }
+
+        openClBodies.UpdateGraphics(Camera.main, prefabs, timeDilationValue);
+    }
+     
+    private List<OpenClBodyObject> computePhysics(List<OpenClBodyObject> inputBodies)
+    {
+        List<OpenClBodyObject> returnValues = inputBodies.Select(obj => obj.DeepClone()).ToList();
+        returnValues = computeAttraction(returnValues);
+        returnValues = computePath(returnValues);
+        return returnValues;
     }
 
-    private OpenClBodies computePhysics(OpenClBodies openClBodies)
+    private List<OpenClBodyObject> computeAttraction(List<OpenClBodyObject> inputBodies)
     {
-        OpenClBodies returnValues = openClBodies.DeepClone();
+        List<OpenClBodyObject> returnValues = inputBodies.Select(obj => obj.DeepClone()).ToList();
         watch.Restart();
 
-        universalAttraction.Update(returnValues);
+        returnValues = universalAttraction.Update(returnValues);
 
         watch.Stop();
         UnityEngine.Debug.Log($"universalAttraction : {watch.ElapsedMilliseconds}");
+        return returnValues;
+    }
+
+    private List<OpenClBodyObject> computePath(List<OpenClBodyObject> inputBodies)
+    {
+        List<OpenClBodyObject> returnValues = inputBodies.Select(obj => obj.DeepClone()).ToList();
         watch.Restart();
 
-
-        watch.Restart();
-
-        movementPathRunner.Update(returnValues, nrSteps, Camera.main);
+        returnValues = movementPathRunner.Update(returnValues, nrSteps, Camera.main);
 
         watch.Stop();
         UnityEngine.Debug.Log($"movementPathRunner : {watch.ElapsedMilliseconds}");
-
         return returnValues;
     }
 

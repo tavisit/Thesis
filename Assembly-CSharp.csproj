@@ -114,6 +114,7 @@
     <Compile Include="Assets\Scripts\MonoBehaviour\ManagerScripts\DataFetching.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ManagerScripts\JsonHelper.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ManagerScripts\ObjectManager.cs" />
+    <Compile Include="Assets\Scripts\MonoBehaviour\Movement\VRMovement.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ObjectSpawnableScripts\Bodies\Blackhole.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ObjectSpawnableScripts\Bodies\Body.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ObjectSpawnableScripts\DirectionArrowDraw.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\FPSCounter.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\MapRenderer.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\SliderValue.cs" />
+    <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\ToggleVR.cs" />
     <Compile Include="Assets\Scripts\OpenCl\Implementations\OpenCLRunner.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\ObjectInformation.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\Movement\KeyboardCameraMovement.cs" />
