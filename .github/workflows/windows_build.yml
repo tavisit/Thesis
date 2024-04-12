@@ -37,10 +37,12 @@ jobs:
           unityVersion: 2022.3.19f1
           
       - name: Zip project
-        uses: montudor/action-zip@v1
+        uses: thedoctor0/zip-release@0.7.6
         with:
-          args: zip -qq -r ThesisProject.zip build/StandaloneWindows64   
-          working-directory: ${{ github.workspace }}
+          type: 'zip'
+          directory: ${{ github.workspace }}
+          filename: 'ThesisProject.zip'
+          path: /build/StandaloneWindows64
       
       - name: Set release date
         run: echo "RELEASE_DATE=$(date --rfc-3339=date)" >> $GITHUB_ENV
