@@ -8,7 +8,7 @@ on:
 jobs:
   build_and_deploy:
     name: Build and Deploy
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
@@ -25,26 +25,16 @@ jobs:
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
             Library-
-            
-      - name: Setup Unity
-        uses: kuler90/setup-unity@v1
-        timeout-minutes: 60
+
+      - name: Build project
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          unity-version: 2022.3.19f1
-          unity-modules: windows-il2cpp
-      
-      - name: Activate Unity
-        uses: kuler90/activate-unity@v1
-        with:
-          unity-username: ${{ secrets.UNITY_EMAIL }}
-          unity-password: ${{ secrets.UNITY_PASSWORD }}
-          unity-authenticator-key: ${{ secrets.UNITY_LICENSE }}
-      
-      - name: Build Unity
-        uses: kuler90/build-unity@v1
-        with:
-          build-target: StandaloneWindows64
-          build-path: ./build
+          targetPlatform: StandaloneWindows64 
+          unityVersion: 2022.3.19f1
           
       - name: Zip the Build Directory
         run: zip -r ThesisProject.zip build/StandaloneWindows64
