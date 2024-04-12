@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -10,8 +11,11 @@ public class OpenClBodies : ICloneable
     public Dictionary<string, Tuple<GameObject, long>> celestialBodies;
     public float[] bounds = new float[6]; // minX, maxX, minY, maxY, minZ, maxZ
 
+    public GameObject genericDataObject;
+    public Dictionary<string, GameObject> prefab;
 
-    public OpenClBodies()
+
+    public OpenClBodies(GameObject genericDataObject, Dictionary<string, GameObject> prefab)
     {
         myObjectBodies = new List<OpenClBodyObject>();
         celestialBodies = new Dictionary<string, Tuple<GameObject, long>>();
@@ -23,32 +27,22 @@ public class OpenClBodies : ICloneable
 
         Parallel.For(0, myObjectBodies.Count, i =>
         {
-            float r = Vector3.Distance(myObjectBodies[i].position, position);
-            float conversionFactor = MathF.Sqrt(Constants.G * mass / r);
-            if (!float.IsNaN(conversionFactor) && float.IsFinite(conversionFactor) && conversionFactor != 0)
+            if (myObjectBodies[i] != null && !myObjectBodies[i].Equals(obj))
             {
-                myObjectBodies[i].velocity = myObjectBodies[i].velocity.normalized * conversionFactor;
+                float r = Vector3.Distance(myObjectBodies[i].position, position);
+                float conversionFactor = MathF.Sqrt(Constants.G * mass / r);
+                if (!float.IsNaN(conversionFactor) && float.IsFinite(conversionFactor) && conversionFactor != 0)
+                {
+                    myObjectBodies[i].velocity = myObjectBodies[i].velocity.normalized * conversionFactor;
+                }
+                UpdateBounds(myObjectBodies[i]);
             }
-            UpdateBounds(myObjectBodies[i]);
         });
+        this.genericDataObject = genericDataObject;
+        this.prefab = prefab;
     }
 
-    #region ICloneable Members
-
-    public OpenClBodies DeepClone()
-    {
-        return (OpenClBodies)MemberwiseClone();
-    }
-
-    #endregion
-
-    public List<float> Flatten()
-    {
-        return myObjectBodies.SelectMany(obj => obj.Flatten()).ToList();
-    }
-
-
-    public void UpdateGraphics(Camera camera, Dictionary<string, GameObject> prefab, float pathDilation)
+    public void UpdateGraphics(Camera camera, float pathDilation)
     {
         float fixedDelta = Time.fixedDeltaTime;
 
@@ -111,7 +105,8 @@ public class OpenClBodies : ICloneable
         GameObject obj = ApplyBodyType(prefab, entry);
         obj.name = entry.name;
 
-        GameObject generaicData = UnityEngine.Object.Instantiate(prefab.GetValueOrDefault("GenericData"), obj.transform.position, new Quaternion(0, 0, 0, 0), obj.transform);
+        // add generic data, such as name tag, path and acceleration arrows tot he obj
+        GameObject generaicData = UnityEngine.Object.Instantiate(genericDataObject, obj.transform.position, new Quaternion(0, 0, 0, 0), obj.transform);
 
         obj.GetComponentInChildren<DirectionArrowDraw>().direction = entry.acceleration;
         obj.GetComponentInChildren<PathDraw>().pathPoints = entry.pathPoints;
@@ -121,8 +116,13 @@ public class OpenClBodies : ICloneable
 
         if (obj.GetComponent<Blackhole>() != null)
         {
-            // in case of blackhole, r  = 2*G*entry.mass/(c^c)
-            relativeRadius = 2 * Constants.G_NORMAL * (entry.mass * Constants.SUN_MASS) / (Constants.MAX_VELOCITY * Constants.MAX_VELOCITY) / Constants.SUN_RADIUS;
+            // in case of blackhole, r  = 2*G*M/(c*c)
+            // but M is the mass of the object, which is relative to the mass of the sun in our simulation
+            // so r = 2*G*m_relative * mass_sun / (c*c)
+            // in case of relative radius rr = r / r_sun
+            // that comes as rr = entry.mass * 4.242363E-10
+            float schwarzschild_radius = entry.mass * 4.242363E-10f;
+            relativeRadius = schwarzschild_radius;
             obj.GetComponent<Body>().velocity = new Vector3(0, 0, 0);
             obj.GetComponent<Body>().acceleration = new Vector3(0, 0, 0);
         }
@@ -176,6 +176,11 @@ public class OpenClBodies : ICloneable
             GameObject gameObject = UnityEngine.Object.Instantiate(prefabs.GetValueOrDefault("Blackhole"), entry.position, Quaternion.Euler(new Vector3(0, 0, 0)));
 
             gameObject.AddComponent<Blackhole>();
+
+            using (StreamWriter w = File.AppendText("log.txt"))
+            {
+                w.WriteLine(gameObject.GetComponent<Blackhole>().ToString() + " " + entry.position.ToString());
+            }
 
             return gameObject;
         }

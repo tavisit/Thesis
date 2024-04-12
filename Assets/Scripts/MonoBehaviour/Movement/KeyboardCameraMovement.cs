@@ -14,7 +14,7 @@ public class KeyboardCameraMovement : MonoBehaviour
 
     public Text cameraInfoTxt;
     public Image redBlueShiftingImage;
-    
+
     public Slider timeDilationSlider;
     float oldValueSlider;
 
