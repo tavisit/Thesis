@@ -9,7 +9,9 @@ public class StellarBody : Body
     public float relativeLuminousity;
     public bool setColor = false;
 
-    protected override void SpecificStart() { }
+    protected override void SpecificStart()
+    {
+    }
     protected override void SpecificUpdate()
     {
         if (setColor == false)

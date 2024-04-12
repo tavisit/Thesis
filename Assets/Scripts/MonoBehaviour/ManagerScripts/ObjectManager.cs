@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
-using UnityEditor;
 
 
 public class ObjectManager : MonoBehaviour
@@ -102,7 +102,7 @@ public class ObjectManager : MonoBehaviour
 
     private void CreateConstantsClass()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         TextAsset[] clFiles = Resources.LoadAll<TextAsset>("OpenCL_Scripts");
         TextAsset constantFile = Array.FindAll(clFiles, s => s.name.Contains("Constants"))[0];
 
@@ -161,6 +161,6 @@ public class ObjectManager : MonoBehaviour
             File.WriteAllText(outputPath, classBuilder.ToString());
             UnityEngine.Debug.Log($"Constants class has been updated to {outputPath}");
         }
-        #endif
+#endif
     }
 }

@@ -1,7 +1,7 @@
-﻿using Silk.NET.OpenCL;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Silk.NET.OpenCL;
 using UnityEngine;
 
 public class PathRunner : MovementComputationsBaseRunner

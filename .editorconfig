@@ -3,6 +3,8 @@
 # You can learn more about editorconfig here: https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference
 [*.cs]
 
+dotnet_sort_system_directives_first = false
+csharp_using_directive_placement = inside_namespace:silent
 
 #Core editorconfig formatting - indentation
 
