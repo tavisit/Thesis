@@ -35,7 +35,9 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64 
           unityVersion: 2022.3.19f1
-      - uses: montudor/action-zip@v1
+          
+      - name: Zip project
+        uses: montudor/action-zip@v1
         with:
           args: zip -qq -r ThesisProject.zip build/StandaloneWindows64   
           working-directory: ${{ github.workspace }}
