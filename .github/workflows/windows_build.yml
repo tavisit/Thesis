@@ -35,6 +35,7 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64 
           unityVersion: 2022.3.19f1
+          buildsPath: ${{ github.workspace }}/build/StandaloneWindows64
           
       - name: Zip project
         uses: thedoctor0/zip-release@0.7.6
