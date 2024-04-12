@@ -35,6 +35,7 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64 
           unityVersion: 2022.3.19f1
+          components: il2cpp
           
       - name: Zip the Build Directory
         run: zip -r ThesisProject.zip build/StandaloneWindows64
