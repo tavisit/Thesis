@@ -4,5 +4,6 @@
 #define MAX_VELOCITY_KPC 306.594845f // kiloparsecs/million years
 #define MAX_VELOCITY 299792458 // m/s
 #define EPSILON 1e-10f
-#define SUN_MASS_SIMPLIFIED 1.989f // quettakilograms (10^30)
-#define SUN_MASS 1.989e+30f //  kg 
+#define SUN_MASS_SIMPLIFIED 1.989f // meters quettakilograms (10^30)
+#define SUN_MASS 1.989e+30f //  kilograms 
+#define RELATIVE_RADIUS_BLACKHOLE 4.242363E-10f //

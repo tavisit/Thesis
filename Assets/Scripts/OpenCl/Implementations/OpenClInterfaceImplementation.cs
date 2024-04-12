@@ -1,6 +1,6 @@
-using Silk.NET.OpenCL;
 using System;
 using System.Runtime.InteropServices;
+using Silk.NET.OpenCL;
 using UnityEngine;
 
 public static class OpenCLInterfaceImplementation

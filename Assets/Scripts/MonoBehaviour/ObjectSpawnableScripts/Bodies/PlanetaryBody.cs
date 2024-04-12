@@ -4,6 +4,10 @@ using System.Runtime.InteropServices;
 [StructLayout(LayoutKind.Sequential)]
 public class PlanetaryBody : Body
 {
-    protected override void SpecificStart() { }
-    protected override void SpecificUpdate() { }
+    protected override void SpecificStart()
+    {
+    }
+    protected override void SpecificUpdate()
+    {
+    }
 }

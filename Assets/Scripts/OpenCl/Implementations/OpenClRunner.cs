@@ -1,8 +1,7 @@
-﻿using Silk.NET.OpenCL;
-using System;
-using System.Collections.Concurrent;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Silk.NET.OpenCL;
 using UnityEngine;
 
 public abstract class OpenCLRunner<T, P, Q>
@@ -189,7 +188,7 @@ public abstract class OpenCLRunner<T, P, Q>
     }
 
 
-    public abstract void Update(P args, params object[] additionalParameters);
+    public abstract List<Q> Update(List<Q> args, params object[] additionalParameters);
 
-    protected abstract List<Q> SimplifyUpdateObjects(P args);
+    protected abstract List<Q> SimplifyUpdateObjects(List<Q> args);
 }

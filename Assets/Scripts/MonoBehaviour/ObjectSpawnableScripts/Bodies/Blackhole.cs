@@ -5,6 +5,10 @@ using System.Runtime.InteropServices;
 public class Blackhole : Body
 {
 
-    protected override void SpecificStart() { }
-    protected override void SpecificUpdate() { }
+    protected override void SpecificStart()
+    {
+    }
+    protected override void SpecificUpdate()
+    {
+    }
 }

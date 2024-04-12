@@ -5,7 +5,7 @@ using UnityEngine;
 
 [Serializable]
 [StructLayout(LayoutKind.Sequential)]
-public class OpenClBodyObject
+public class OpenClBodyObject : ICloneable
 {
     public string name;
     public float mass;
@@ -49,4 +49,18 @@ public class OpenClBodyObject
             acceleration.z
         };
     }
+
+    #region ICloneable Members
+
+    public OpenClBodyObject DeepClone()
+    {
+        return (OpenClBodyObject)MemberwiseClone();
+    }
+
+    public object Clone()
+    {
+        return MemberwiseClone();
+    }
+
+    #endregion
 }

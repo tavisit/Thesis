@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class ObjectManager : MonoBehaviour
 {
@@ -15,8 +16,9 @@ public class ObjectManager : MonoBehaviour
     private List<PrefabEntry> prefabList = new();
     public Dictionary<string, GameObject> prefabs;
 
+    public Slider timeDilationSlider;
 
-    protected Slider timeDilationSlider;
+    private float timeDilationValue;
     private readonly int nrSteps = 15;
 
     public OpenClBodies openClBodies;
@@ -25,6 +27,9 @@ public class ObjectManager : MonoBehaviour
     private PathRunner movementPathRunner;
 
     private Stopwatch watch;
+
+    public GameObject genericDataObject;
+
     private void Awake()
     {
         CreateConstantsClass();
@@ -33,63 +38,71 @@ public class ObjectManager : MonoBehaviour
         {
             prefabs[entry.key] = entry.value;
         }
-        openClBodies = new OpenClBodies();
+        openClBodies = new OpenClBodies(genericDataObject, prefabs);
 
         universalAttraction = new AccelerationRunner("OpenCL_ComputeAcceleration", "universal_attraction_force");
         movementPathRunner = new PathRunner("OpenCL_ComputePath", "compute_movement_path");
 
         watch = Stopwatch.StartNew();
-
-        timeDilationSlider = GameObject.Find("TimeDillationSlider")?.GetComponent<Slider>();
     }
 
     void Start()
     {
-        openClBodies = computePhysics(openClBodies);
+        timeDilationSlider.onValueChanged.AddListener(delegate {
+            timeDilationValue = timeDilationSlider.value;
+        });
+        openClBodies.myObjectBodies = computePhysics(openClBodies.myObjectBodies);
     }
 
     void Update()
     {
-        if (timeDilationSlider == null)
+        if (Mathf.Abs(timeDilationValue) > Mathf.Epsilon)
         {
-            timeDilationSlider = GameObject.Find("TimeDilationSlider")?.GetComponent<Slider>();
+            openClBodies.myObjectBodies = computePhysics(openClBodies.myObjectBodies);
         }
         else
         {
-            if (Mathf.Abs(timeDilationSlider.value) > Mathf.Epsilon)
-            {
-                openClBodies = computePhysics(openClBodies);
-            }
-
-            openClBodies.UpdateGraphics(Camera.main, prefabs, timeDilationSlider.value);
-
+            openClBodies.myObjectBodies = computePath(openClBodies.myObjectBodies);
         }
+
+        openClBodies.UpdateGraphics(Camera.main, timeDilationValue);
     }
 
-    private OpenClBodies computePhysics(OpenClBodies openClBodies)
+    private List<OpenClBodyObject> computePhysics(List<OpenClBodyObject> inputBodies)
     {
-        OpenClBodies returnValues = openClBodies.DeepClone();
+        List<OpenClBodyObject> returnValues = inputBodies.Select(obj => obj.DeepClone()).ToList();
+        returnValues = computeAttraction(returnValues);
+        returnValues = computePath(returnValues);
+        return returnValues;
+    }
+
+    private List<OpenClBodyObject> computeAttraction(List<OpenClBodyObject> inputBodies)
+    {
+        List<OpenClBodyObject> returnValues = inputBodies.Select(obj => obj.DeepClone()).ToList();
         watch.Restart();
 
-        universalAttraction.Update(returnValues);
+        returnValues = universalAttraction.Update(returnValues);
 
         watch.Stop();
         UnityEngine.Debug.Log($"universalAttraction : {watch.ElapsedMilliseconds}");
+        return returnValues;
+    }
+
+    private List<OpenClBodyObject> computePath(List<OpenClBodyObject> inputBodies)
+    {
+        List<OpenClBodyObject> returnValues = inputBodies.Select(obj => obj.DeepClone()).ToList();
         watch.Restart();
 
-
-        watch.Restart();
-
-        movementPathRunner.Update(returnValues, nrSteps, Camera.main);
+        returnValues = movementPathRunner.Update(returnValues, nrSteps, Camera.main);
 
         watch.Stop();
         UnityEngine.Debug.Log($"movementPathRunner : {watch.ElapsedMilliseconds}");
-
         return returnValues;
     }
 
     private void CreateConstantsClass()
     {
+#if UNITY_EDITOR
         TextAsset[] clFiles = Resources.LoadAll<TextAsset>("OpenCL_Scripts");
         TextAsset constantFile = Array.FindAll(clFiles, s => s.name.Contains("Constants"))[0];
 
@@ -101,8 +114,8 @@ public class ObjectManager : MonoBehaviour
         classBuilder.AppendLine("public static class Constants");
         classBuilder.AppendLine("{");
 
-        Regex definePattern = new Regex(@"^\s*#define\s+(\w+)\s+([\d.e+-]+f?)\s*(//\s*(.*))?$");
-        Regex constPattern = new Regex(@"^\s*const\s+\w+\s+(\w+)\s*=\s*([\d.e+-]+f?);\s*(//\s*(.*))?$");
+        Regex definePattern = new Regex(@"^\s*#define\s+(\w+)\s+([\d.e+-]+f?)\s*(?://\s*(.*))?$");
+        Regex constPattern = new Regex(@"^\s*const\s+\w+\s+(\w+)\s*=\s*([\d.e+-]+f?);\s*(?://\s*(.*))?$");
 
 
         foreach (var line in constantFile.text.Split("\r\n"))
@@ -117,23 +130,30 @@ public class ObjectManager : MonoBehaviour
                 var comment = defineMatch.Success ? defineMatch.Groups[3].Value : constMatch.Groups[3].Value;
 
                 string constType = "float";
+
+                classBuilder.AppendLine("    /// <summary>");
+                classBuilder.AppendLine($"    /// It is measured in: {comment}");
+                classBuilder.AppendLine("    /// </summary>");
+
                 if (value.ToLower().Contains("e"))
                 {
-                    classBuilder.AppendLine($"    public const {constType} {name} = {value}; {comment}");
+                    classBuilder.AppendLine($"    public const {constType} {name} = {value};");
                 }
                 else if (value.EndsWith("f"))
                 {
-                    classBuilder.AppendLine($"    public const {constType} {name} = {value}; {comment}");
+                    classBuilder.AppendLine($"    public const {constType} {name} = {value};");
                 }
                 else
                 {
-                    classBuilder.AppendLine($"    public const {constType} {name} = {value}f; {comment}");
+                    classBuilder.AppendLine($"    public const {constType} {name} = {value}f;");
                 }
+                classBuilder.AppendLine($"\n");
             }
         }
 
         // End of the class
         classBuilder.AppendLine("}");
+        classBuilder.AppendLine($"\n");
         string oldFile = File.ReadAllText(outputPath, Encoding.UTF8);
 
         if (oldFile != classBuilder.ToString())
@@ -141,5 +161,6 @@ public class ObjectManager : MonoBehaviour
             File.WriteAllText(outputPath, classBuilder.ToString());
             UnityEngine.Debug.Log($"Constants class has been updated to {outputPath}");
         }
+#endif
     }
 }

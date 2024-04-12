@@ -576,7 +576,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282669430}
-  - component: {fileID: 282669431}
   - component: {fileID: 282669432}
   - component: {fileID: 282669434}
   - component: {fileID: 282669435}
@@ -607,18 +606,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &282669431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 282669429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dfba1bdabe59d44687f9b9554dd74fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &282669432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -966,8 +953,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 282669431}
-        m_TargetAssemblyTypeName: ButtonsUI, Assembly-CSharp
+      - m_Target: {fileID: 1823688469}
+        m_TargetAssemblyTypeName: KeyboardCameraMovement, Assembly-CSharp
         m_MethodName: OnClickResetSlider
         m_Mode: 1
         m_Arguments:
@@ -1419,8 +1406,9 @@ MonoBehaviour:
     value: {fileID: 1715945862866604723, guid: f0e190d51276a3e40b254f6e3bbb6a24, type: 3}
   - key: Planet
     value: {fileID: 1715945862866604723, guid: 6225feb4d6d19fb4288912acd8775f9d, type: 3}
-  - key: GenericData
-    value: {fileID: 5934256551390618299, guid: 39c6a8b8db0213a41b657cb3f8d8aeaf, type: 3}
+  timeDilationSlider: {fileID: 1699947463}
+  genericDataObject: {fileID: 5934256551390618299, guid: 39c6a8b8db0213a41b657cb3f8d8aeaf,
+    type: 3}
 --- !u!114 &1040128523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1955,7 +1943,7 @@ GameObject:
   - component: {fileID: 1393835529}
   - component: {fileID: 1393835528}
   m_Layer: 5
-  m_Name: NormalBackground
+  m_Name: MainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2506,8 +2494,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823688464}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.51121575, y: 0.07480523, z: -0.04472588, w: -0.8550218}
-  m_LocalPosition: {x: 10.494167, y: 126.00235, z: -56.709595}
+  m_LocalRotation: {x: -0.028254982, y: -0.08712247, z: -0.0024719986, w: 0.99579376}
+  m_LocalPosition: {x: 16.290966, y: 22.894909, z: -119.600876}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2532,6 +2520,7 @@ MonoBehaviour:
   backwardFOV: 5
   cameraInfoTxt: {fileID: 1233156834}
   redBlueShiftingImage: {fileID: 1606185199}
+  timeDilationSlider: {fileID: 1699947463}
 --- !u!114 &1823688470
 MonoBehaviour:
   m_ObjectHideFlags: 0
