@@ -16,7 +16,10 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-        
+
+      - name: Set up butler
+        uses: jdno/setup-butler@v1.4.0
+            
       - name: Cache Unity Library
         uses: actions/cache@v2
         id: cache-unity
@@ -50,11 +53,7 @@ jobs:
         run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
         
       - name: Deploy to itch.io
-        uses: manleydev/butler-publish-itchio-action@master
+        run: butler push ThesisProject.zip ${{ secrets.MY_ITCH_USERNAME }}/${{ secrets.MY_ITCH_GAME }}:windows --userversion ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
         env:
-          CHANNEL: windows
-          BUTLER_CREDENTIALS: ${{ secrets.MY_ITCH_API_CODE }}
-          ITCH_GAME: ${{ secrets.MY_ITCH_GAME }}
-          ITCH_USER: ${{ secrets.MY_ITCH_USERNAME }}
-          VERSION: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
-          PACKAGE: ThesisProject.zip
+          BUTLER_API_KEY: ${{ secrets.MY_ITCH_API_CODE }}
+          
