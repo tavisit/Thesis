@@ -35,24 +35,19 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64 
           unityVersion: 2022.3.19f1
-          buildsPath: build\StandaloneWindows64
           
       - name: Zip project
         uses: thedoctor0/zip-release@0.7.6
         with:
           type: 'zip'
-          directory: C:\github\workspace\
+          path: build/StandaloneWindows64
           filename: 'ThesisProject.zip'
-          path: build\StandaloneWindows64
       
       - name: Set release date
         run: echo "RELEASE_DATE=$(date --rfc-3339=date)" >> $GITHUB_ENV
   
       - name: Set short hash
         run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-        
-      - name: List directory structure
-        run: ls -R ${{ github.workspace }}
         
       - name: Deploy to itch.io
         uses: manleydev/butler-publish-itchio-action@master
@@ -62,4 +57,4 @@ jobs:
           ITCH_GAME: ${{ secrets.MY_ITCH_GAME }}
           ITCH_USER: ${{ secrets.MY_ITCH_USERNAME }}
           VERSION: ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
-          PACKAGE: ${{ github.workspace }}/ThesisProject.zip
+          PACKAGE: ThesisProject.zip
