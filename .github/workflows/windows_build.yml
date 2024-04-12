@@ -35,7 +35,7 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64 
           unityVersion: 2022.3.19f1
-          buildsPath: /build/StandaloneWindows64
+          buildsPath: build\StandaloneWindows64
           
       - name: Zip project
         uses: thedoctor0/zip-release@0.7.6
@@ -43,7 +43,7 @@ jobs:
           type: 'zip'
           directory: C:\github\workspace\
           filename: 'ThesisProject.zip'
-          path: ./build/StandaloneWindows64
+          path: build\StandaloneWindows64
       
       - name: Set release date
         run: echo "RELEASE_DATE=$(date --rfc-3339=date)" >> $GITHUB_ENV
