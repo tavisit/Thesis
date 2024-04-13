@@ -53,7 +53,7 @@ jobs:
         run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
         
       - name: Deploy to itch.io
-        run: butler push ThesisProject.zip ${{ secrets.MY_ITCH_USERNAME }}/${{ secrets.MY_ITCH_GAME }}:windows --userversion ${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
+        run: butler push ThesisProject.zip ${{ secrets.MY_ITCH_USERNAME }}/${{ secrets.MY_ITCH_GAME }}:windows --userversion=${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
         env:
           BUTLER_API_KEY: ${{ secrets.MY_ITCH_API_CODE }}
           
