@@ -45,8 +45,8 @@ jobs:
           path: build/${{ env.BUILD_NAME }}
           filename: 'ThesisProject.zip'
           exclusions: |
-            '${{ env.BUILD_NAME }}_BackUpThisFolder_ButDontShipItWithYourGame'
-            '${{ env.BUILD_NAME }}_BurstDebugInformation_DoNotShip'
+            '**/${{ env.BUILD_NAME }}_BackUpThisFolder_ButDontShipItWithYourGame/**'
+            '**/${{ env.BUILD_NAME }}_BurstDebugInformation_DoNotShip/**'
       
       - name: Set release date
         run: echo "RELEASE_DATE=$(date --rfc-3339=date)" >> $GITHUB_ENV
@@ -58,7 +58,7 @@ jobs:
         uses: jdno/setup-butler@v1.4.0
         
       - name: Deploy to itch.io
-        run: butler push ThesisProject.zip ${{ secrets.MY_ITCH_USERNAME }}/${{ secrets.MY_ITCH_GAME }}:windows --userversion='${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}'
+        run: butler push ThesisProject.zip ${{ secrets.MY_ITCH_USERNAME }}/${{ secrets.MY_ITCH_GAME }}:windows --userversion=${{ env.RELEASE_DATE }}-${{ env.SHORT_HASH }}
         env:
           BUTLER_API_KEY: ${{ secrets.MY_ITCH_API_CODE }}
           
