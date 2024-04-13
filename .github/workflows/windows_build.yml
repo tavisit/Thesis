@@ -44,9 +44,7 @@ jobs:
           type: 'zip'
           path: build/${{ env.BUILD_NAME }}
           filename: 'ThesisProject.zip'
-          exclusions: |
-            '**/${{ env.BUILD_NAME }}_BackUpThisFolder_ButDontShipItWithYourGame/**'
-            '**/${{ env.BUILD_NAME }}_BurstDebugInformation_DoNotShip/**'
+          exclusions: '/*${{ env.BUILD_NAME }}_BackUpThisFolder_ButDontShipItWithYourGame /*${{ env.BUILD_NAME }}_BurstDebugInformation_DoNotShip'
       
       - name: Set release date
         run: echo "RELEASE_DATE=$(date --rfc-3339=date)" >> $GITHUB_ENV
