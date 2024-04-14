@@ -38,24 +38,20 @@ jobs:
         with:
           targetPlatform: ${{ env.BUILD_NAME }} 
           unityVersion: 2022.3.19f1
-            
+          
+      - name: Remove unwanted directories
+        run: |
+          Remove-Item -Path ".\${{ env.BUILD_NAME }}_BackUpThisFolder_ButDontShipItWithYourGame", ".\${{ env.BUILD_NAME }}_BurstDebugInformation_DoNotShip" -Recurse -Force
+        working-directory: build/${{ env.BUILD_NAME }}
+        shell: powershell
+      
       - name: Zip project
         uses: thedoctor0/zip-release@0.7.6
         with:
           type: 'zip'
           path: build/${{ env.BUILD_NAME }}
           filename: ${{ env.INPUT_FILENAME }}
-          exclusions: "'${{ env.BUILD_NAME }}_BackUpThisFolder_ButDontShipItWithYourGame' '${{ env.BUILD_NAME }}_BurstDebugInformation_DoNotShip'"
        
-      - name: Confirm directory structure before zipping
-        run: Get-ChildItem -Path . -Recurse | Format-List
-        working-directory: build/${{ env.BUILD_NAME }}
-        shell: powershell
-        
-      - name: List contents of the zip file
-        run: Expand-Archive -Path ${{ env.INPUT_FILENAME }} -DestinationPath ./unzipped -Force; Get-ChildItem -Path ./unzipped -Recurse | Format-List
-        shell: powershell
-
       - name: Set release date
         run: echo "RELEASE_DATE=$(Get-Date -Format "yyyy-MM-dd")" >> $env:GITHUB_ENV
         shell: powershell
