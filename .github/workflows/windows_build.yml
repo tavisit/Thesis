@@ -37,20 +37,22 @@ jobs:
         with:
           targetPlatform: ${{ env.BUILD_NAME }} 
           unityVersion: 2022.3.19f1
-          
+            
       - name: Zip project
         uses: thedoctor0/zip-release@0.7.6
         with:
           type: 'zip'
           path: build/${{ env.BUILD_NAME }}
           filename: 'ThesisProject.zip'
-          exclusions: '/*${{ env.BUILD_NAME }}_BackUpThisFolder_ButDontShipItWithYourGame /*${{ env.BUILD_NAME }}_BurstDebugInformation_DoNotShip'
+          exclusions: '${{ env.BUILD_NAME }}_BackUpThisFolder_ButDontShipItWithYourGame ${{ env.BUILD_NAME }}_BurstDebugInformation_DoNotShip'
       
       - name: Set release date
-        run: echo "RELEASE_DATE=$(date --rfc-3339=date)" >> $GITHUB_ENV
-  
+        run: echo "RELEASE_DATE=$(Get-Date -Format "yyyy-MM-dd")" >> $env:GITHUB_ENV
+        shell: powershell
+      
       - name: Set short hash
-        run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        run: echo "SHORT_HASH=$(git rev-parse --short HEAD)" >> $env:GITHUB_ENV
+        shell: powershell
         
       - name: Set up butler
         uses: jdno/setup-butler@v1.4.0
