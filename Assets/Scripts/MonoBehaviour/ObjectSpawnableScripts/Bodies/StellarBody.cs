@@ -11,12 +11,17 @@ public class StellarBody : Body
 
     protected override void SpecificStart()
     {
+        if (float.IsNaN(starTemperature))
+        {
+            starTemperature = 5778;
+        }
     }
     protected override void SpecificUpdate()
     {
         if (setColor == false)
         {
             Material emission = GetComponent<Renderer>().material;
+
             emission.SetFloat("_Temperature", starTemperature);
             emission.SetFloat("_CellDensity", emission.GetFloat("_CellDensity") + Random.Range(-10, 10));
             emission.SetFloat("_SolarPower", emission.GetFloat("_SolarPower") + Random.Range(-1, 1) * relativeLuminousity);

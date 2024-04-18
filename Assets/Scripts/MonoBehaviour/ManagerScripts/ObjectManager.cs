@@ -26,8 +26,6 @@ public class ObjectManager : MonoBehaviour
     private AccelerationRunner universalAttraction;
     private PathRunner movementPathRunner;
 
-    private Stopwatch watch;
-
     public GameObject genericDataObject;
 
     private void Awake()
@@ -42,8 +40,6 @@ public class ObjectManager : MonoBehaviour
 
         universalAttraction = new AccelerationRunner("OpenCL_ComputeAcceleration", "universal_attraction_force");
         movementPathRunner = new PathRunner("OpenCL_ComputePath", "compute_movement_path");
-
-        watch = Stopwatch.StartNew();
     }
 
     void Start()
@@ -79,24 +75,14 @@ public class ObjectManager : MonoBehaviour
     private List<OpenClBodyObject> computeAttraction(List<OpenClBodyObject> inputBodies)
     {
         List<OpenClBodyObject> returnValues = inputBodies.Select(obj => obj.DeepClone()).ToList();
-        watch.Restart();
-
         returnValues = universalAttraction.Update(returnValues);
-
-        watch.Stop();
-        UnityEngine.Debug.Log($"universalAttraction : {watch.ElapsedMilliseconds}");
         return returnValues;
     }
 
     private List<OpenClBodyObject> computePath(List<OpenClBodyObject> inputBodies)
     {
         List<OpenClBodyObject> returnValues = inputBodies.Select(obj => obj.DeepClone()).ToList();
-        watch.Restart();
-
         returnValues = movementPathRunner.Update(returnValues, nrSteps, Camera.main);
-
-        watch.Stop();
-        UnityEngine.Debug.Log($"movementPathRunner : {watch.ElapsedMilliseconds}");
         return returnValues;
     }
 
