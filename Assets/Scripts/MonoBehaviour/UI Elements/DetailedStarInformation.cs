@@ -55,7 +55,7 @@ public class DetailedStarInformation
         (HarvardSpectralClassLetter, int) harvardSpectralAndNumber = StarClassifier.ClassifyHarvardSpectral(starTemperature);
         int harvardSpectral = Array.IndexOf(Enum.GetValues(harvardSpectralAndNumber.ToTuple().Item1.GetType()), harvardSpectralAndNumber.ToTuple().Item1);
         // Detailed Text information:
-        String text = "\n"; 
+        string text = "\n";
         text += "\nName: " + star.name;
 
         text += "\nPosition [kiloparsecs]: \n" + star.transform.position.ToString();
@@ -98,7 +98,7 @@ public class DetailedStarInformation
     }
 
     Dictionary<string, GameObject> GetAllChildren(GameObject obj)
-    {   
+    {
         Dictionary<string, GameObject> children = new();
 
         if (obj.tag == "NotFetch") return children;
@@ -114,20 +114,13 @@ public class DetailedStarInformation
 
     float CalculateInnerBoundary(double luminosity, double temperature)
     {
-        float luminositySun = 1.0f;
-        float temperatureSun = 5778;
-
-        // Calculate the inner boundary using the Kasting equation
-        float innerBoundary = (float)(Math.Sqrt(luminosity / luminositySun) * Math.Sqrt(temperatureSun / temperature));
+        float innerBoundary = (float)(Math.Sqrt(luminosity) * Math.Sqrt(Constants.SUN_TEMPERATURE / temperature));
 
         return innerBoundary;
     }
     float CalculateOuterBoundary(double luminosity, double temperature)
     {
-        float luminositySun = 1.0f;
-        float temperatureSun = 5778;
-
-        float outerBoundary = (float)(Math.Sqrt(luminosity / luminositySun) * Math.Sqrt(temperatureSun / temperature) * 1.4);
+        float outerBoundary = (float)(Math.Sqrt(luminosity) * Math.Sqrt(Constants.SUN_TEMPERATURE / temperature) * 1.4);
 
         return outerBoundary;
     }

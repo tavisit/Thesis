@@ -48,6 +48,12 @@ public static class Constants
     public const float SUN_MASS = 1.989e+30f;
 
 
+    /// <summary>
+    /// It is measured in: In Kelvin
+    /// </summary>
+    public const float SUN_TEMPERATURE = 5778f;
+
+
 }
 
 

@@ -7,3 +7,4 @@
 #define SUN_MASS_SIMPLIFIED 1.989f // meters quettakilograms (10^30)
 #define SUN_MASS 1.989e+30f //  kilograms 
 #define RELATIVE_RADIUS_BLACKHOLE 4.242363E-10f //
+#define SUN_TEMPERATURE 5778 // In Kelvin
