@@ -72,7 +72,7 @@ public class ObjectInformation : MonoBehaviour
             if (hit)
             {
                 Vector3 directionToCamera = (Camera.main.transform.position - hitInfo.point).normalized;
-                Vector3 newCameraPosition = hitInfo.point + directionToCamera * offset;
+                Vector3 newCameraPosition = hitInfo.point + directionToCamera * ViewHelper.CalculateOffset(hitInfo.transform.localScale.magnitude);
 
                 Camera.main.transform.position = newCameraPosition;
                 Camera.main.transform.LookAt(hitInfo.transform.position);

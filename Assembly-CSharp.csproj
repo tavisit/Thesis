@@ -105,6 +105,7 @@
     <Compile Include="Assets\Scripts\MonoBehaviour\ObjectSpawnableScripts\Bodies\Body.cs" />
     <Compile Include="Assets\Scripts\OpenCl\MovementComputations\MovementComputationsBaseRunner.cs" />
     <Compile Include="Assets\Scripts\OpenCl\Implementations\OpenClInterfaceImplementation.cs" />
+    <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\StellarSearchClickable.cs" />
     <Compile Include="Assets\Scripts\DataTypes\StarType.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\SliderValue.cs" />
     <Compile Include="Assets\Scripts\OpenCl\MovementComputations\PathRunner.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Assets\Scripts\MonoBehaviour\ManagerScripts\UnityMainThreadDispatcher.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\Movement\KeyboardCameraMovement.cs" />
     <Compile Include="Assets\Scripts\Menu\LoadingScene.cs" />
+    <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\SearchEngine.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ManagerScripts\JsonHelper.cs" />
     <Compile Include="Assets\Scripts\DataTypes\OpenClBodies.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ObjectSpawnableScripts\Bodies\Blackhole.cs" />
