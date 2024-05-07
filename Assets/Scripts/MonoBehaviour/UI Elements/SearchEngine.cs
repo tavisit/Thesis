@@ -34,7 +34,7 @@ public class SearchEngine : MonoBehaviour
         else
         {
             scrollView.gameObject.SetActive(true);
-            
+
         }
 
     }
