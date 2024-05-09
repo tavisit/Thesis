@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class OpenClBodies : ICloneable
+public class CelestialBodyManager : ICloneable
 {
     public List<OpenClBodyObject> myObjectBodies;
     public Dictionary<string, Tuple<GameObject, long>> celestialBodies;
@@ -15,7 +14,7 @@ public class OpenClBodies : ICloneable
     public Dictionary<string, GameObject> prefab;
 
 
-    public OpenClBodies(GameObject genericDataObject, Dictionary<string, GameObject> prefab)
+    public CelestialBodyManager(GameObject genericDataObject, Dictionary<string, GameObject> prefab)
     {
         myObjectBodies = new List<OpenClBodyObject>();
         celestialBodies = new Dictionary<string, Tuple<GameObject, long>>();
@@ -121,7 +120,14 @@ public class OpenClBodies : ICloneable
             // so r = 2*G*m_relative * mass_sun / (c*c)
             // in case of relative radius rr = r / r_sun
             // that comes as rr = entry.mass * 4.242363E-10
-            float schwarzschild_radius = entry.mass * 4.242363E-10f;
+
+            // In order to see the other blackholes, the rr = 1
+
+            float schwarzschild_radius = 1.0f;
+            if (entry.mass > 1e+4f)
+            {
+                schwarzschild_radius = entry.mass * 4.242363E-10f;
+            }
             relativeRadius = schwarzschild_radius;
             obj.GetComponent<Body>().velocity = new Vector3(0, 0, 0);
             obj.GetComponent<Body>().acceleration = new Vector3(0, 0, 0);

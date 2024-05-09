@@ -59,7 +59,7 @@ public class SearchEngine : MonoBehaviour
 
         searchFieldText = searchField.text.ToLower();
 
-        List<OpenClBodyObject> objects = objectManager.openClBodies.myObjectBodies
+        List<OpenClBodyObject> objects = objectManager.celestialBodyManager.myObjectBodies
                                                                                 .AsParallel()
                                                                                 .Where(obj => obj.name.ToLower().Contains(searchFieldText))
                                                                                 .ToList();

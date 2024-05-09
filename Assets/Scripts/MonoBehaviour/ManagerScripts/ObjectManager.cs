@@ -21,7 +21,7 @@ public class ObjectManager : MonoBehaviour
     private float timeDilationValue;
     private readonly int nrSteps = 15;
 
-    public OpenClBodies openClBodies;
+    public CelestialBodyManager celestialBodyManager;
 
     private AccelerationRunner universalAttraction;
     private PathRunner movementPathRunner;
@@ -36,7 +36,7 @@ public class ObjectManager : MonoBehaviour
         {
             prefabs[entry.key] = entry.value;
         }
-        openClBodies = new OpenClBodies(genericDataObject, prefabs);
+        celestialBodyManager = new CelestialBodyManager(genericDataObject, prefabs);
 
         universalAttraction = new AccelerationRunner("OpenCL_ComputeAcceleration", "universal_attraction_force");
         movementPathRunner = new PathRunner("OpenCL_ComputePath", "compute_movement_path");
@@ -47,21 +47,21 @@ public class ObjectManager : MonoBehaviour
         timeDilationSlider.onValueChanged.AddListener(delegate {
             timeDilationValue = timeDilationSlider.value;
         });
-        openClBodies.myObjectBodies = computePhysics(openClBodies.myObjectBodies);
+        celestialBodyManager.myObjectBodies = computePhysics(celestialBodyManager.myObjectBodies);
     }
 
     void Update()
     {
         if (Mathf.Abs(timeDilationValue) > Mathf.Epsilon)
         {
-            openClBodies.myObjectBodies = computePhysics(openClBodies.myObjectBodies);
+            celestialBodyManager.myObjectBodies = computePhysics(celestialBodyManager.myObjectBodies);
         }
         else
         {
-            openClBodies.myObjectBodies = computePath(openClBodies.myObjectBodies);
+            celestialBodyManager.myObjectBodies = computePath(celestialBodyManager.myObjectBodies);
         }
 
-        openClBodies.UpdateGraphics(Camera.main, timeDilationValue);
+        celestialBodyManager.UpdateGraphics(Camera.main, timeDilationValue);
     }
 
     private List<OpenClBodyObject> computePhysics(List<OpenClBodyObject> inputBodies)

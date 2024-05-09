@@ -22,8 +22,8 @@ public class MapRenderer : MonoBehaviour
 
     void LateUpdate()
     {
-        Vector3 minBoundsTemp = new Vector3(objectManager.openClBodies.bounds[0], objectManager.openClBodies.bounds[2], objectManager.openClBodies.bounds[4]);
-        Vector3 maxBoundsTemp = new Vector3(objectManager.openClBodies.bounds[1], objectManager.openClBodies.bounds[3], objectManager.openClBodies.bounds[5]);
+        Vector3 minBoundsTemp = new Vector3(objectManager.celestialBodyManager.bounds[0], objectManager.celestialBodyManager.bounds[2], objectManager.celestialBodyManager.bounds[4]);
+        Vector3 maxBoundsTemp = new Vector3(objectManager.celestialBodyManager.bounds[1], objectManager.celestialBodyManager.bounds[3], objectManager.celestialBodyManager.bounds[5]);
 
         if (minBoundsTemp != minBounds || maxBoundsTemp != maxBounds)
         {
@@ -97,7 +97,7 @@ public class MapRenderer : MonoBehaviour
         Graphics.SetRenderTarget(mapTexture);
         GL.PushMatrix();
         GL.LoadPixelMatrix(0, mapTexture.width, mapTexture.height, 0);
-        foreach (OpenClBodyObject body in objectManager.openClBodies.myObjectBodies)
+        foreach (OpenClBodyObject body in objectManager.celestialBodyManager.myObjectBodies)
         {
             Vector2 normalizedPosition = NormalizeToMinimap(body.position, minBounds, maxBounds);
 
