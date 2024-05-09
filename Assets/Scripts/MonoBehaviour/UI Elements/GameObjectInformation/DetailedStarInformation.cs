@@ -34,7 +34,6 @@ public class DetailedStarInformation
         Color color = TemperatureToRGB(starTemperature);
         Color adjustedColor = AdjustLuminosity(color, relativeLuminousity);
 
-
         // resize to actual star size:
         allChildren.GetValueOrDefault("Star").transform.localScale = allChildren.GetValueOrDefault("Star").transform.localScale * star.transform.localScale[0];
 
@@ -56,10 +55,10 @@ public class DetailedStarInformation
         int harvardSpectral = Array.IndexOf(Enum.GetValues(harvardSpectralAndNumber.ToTuple().Item1.GetType()), harvardSpectralAndNumber.ToTuple().Item1);
         // Detailed Text information:
         string text = "\n";
-        text += "\nName: " + star.name;
-
         text += "\nPosition [kiloparsecs]: \n" + star.transform.position.ToString();
+        text += "\nMagnitude of Velocity [kiloparsecs per Million years]: \n" + star.GetComponent<Body>().velocity.magnitude.ToString();
         text += "\nVelocity [kiloparsecs per Million years]: \n" + star.GetComponent<Body>().velocity.ToString();
+        text += "\nMagnitude of Acceleration [kiloparsecs per Million years squared]: \n" + star.GetComponent<Body>().acceleration.magnitude.ToString();
         text += "\nAcceleration [kiloparsecs per Million years squared]: \n" + star.GetComponent<Body>().acceleration.ToString();
         text += "\n\n";
 
@@ -84,14 +83,15 @@ public class DetailedStarInformation
         text += "\n\n";
 
         text += "\nMass [kg]: " + (star.GetComponent<Body>().mass * Constants.SUN_MASS);
-        text += "\nRelative Size to Sun: " + star.transform.localScale[0];
+        text += "\nRelative mass respective to Sun: " + star.transform.localScale[0].ToString();
         text += "\n\n";
 
         text += "\nLower threshold for habitable [relative to Sun]: " + innerBoundary.ToString();
         text += "\nLower threshold for habitable [km]: " + (innerBoundary * innerHabitableSunAbsolute).ToString();
         text += "\nUpper threshold for habitable [relative to Sun]: " + outerBoundary.ToString();
         text += "\nUpper threshold for habitable [km]: " + (outerBoundary * outerHabitableSunAbsolute).ToString();
-        text += "\n\n";
+
+        text += "\n\n\n\n";
 
         allChildren.GetValueOrDefault("DetailedInformationTextBox").GetComponent<TMP_Text>().text = text;
 

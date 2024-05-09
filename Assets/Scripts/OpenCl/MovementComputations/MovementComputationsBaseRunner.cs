@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public abstract class MovementComputationsBaseRunner : OpenCLRunner<Vector4, OpenClBodies, OpenClBodyObject>
+public abstract class MovementComputationsBaseRunner : OpenCLRunner<Vector4, CelestialBodyManager, OpenClBodyObject>
 {
     public MovementComputationsBaseRunner(string filePath, string functionName) : base(filePath, functionName)
     {

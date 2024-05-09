@@ -49,6 +49,8 @@ public class KeyboardCameraMovement : MonoBehaviour
 
     private bool moveCamera()
     {
+        if (ViewHelper.MotionPanelIsOn()) return false;
+
         bool isBoosted = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
@@ -86,6 +88,8 @@ public class KeyboardCameraMovement : MonoBehaviour
 
     private bool rotateCamera()
     {
+        if (ViewHelper.MotionPanelIsOn()) return false;
+
         if (Input.GetMouseButton(1))
         {
             float mouseX = Input.GetAxis("Mouse X") * sensitivity;

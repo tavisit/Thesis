@@ -1,13 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class SearchEngine : MonoBehaviour
 {
@@ -62,13 +59,16 @@ public class SearchEngine : MonoBehaviour
 
         searchFieldText = searchField.text.ToLower();
 
-        List<OpenClBodyObject> objects = objectManager.openClBodies.myObjectBodies
+        List<OpenClBodyObject> objects = objectManager.celestialBodyManager.myObjectBodies
                                                                                 .AsParallel()
                                                                                 .Where(obj => obj.name.ToLower().Contains(searchFieldText))
                                                                                 .ToList();
 
         StringBuilder sb = new StringBuilder();
+
         sb.AppendLine();
+        sb.AppendLine();
+
         foreach (OpenClBodyObject obj in objects)
         {
             sb.AppendLine("- <link=\"" + obj.name + "\">" + obj.name + "</link>");

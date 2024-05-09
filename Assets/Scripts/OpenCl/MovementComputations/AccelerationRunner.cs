@@ -34,13 +34,9 @@ public class AccelerationRunner : MovementComputationsBaseRunner
             && OpenCLInterfaceImplementation.SetKernelArgsVariables(cl, kernel, valueObjects, new int[] { 3, 4 })
             && Run(globalWorkSize, localWorkSize, result.Length, memObjects, 0, out result))
         {
-            // Parallelize the loop to update acceleration values
-            Parallel.For(0, pointsToUpdate.Count(), index =>
+            Parallel.For(0, pointsToUpdate.Count, index =>
             {
-                int index_openCL = args.IndexOf(pointsToUpdate[index]);
-                OpenClBodyObject obj = args[index_openCL];
-                obj.acceleration = result[index];
-                args[index_openCL] = obj;
+                args[args.IndexOf(pointsToUpdate[index])].acceleration = result[index];
             });
         }
         return args;

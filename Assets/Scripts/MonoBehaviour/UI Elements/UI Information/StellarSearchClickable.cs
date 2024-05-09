@@ -16,7 +16,7 @@ public class StellarSearchClickable : MonoBehaviour, IPointerClickHandler
                 var linkInfo = text.textInfo.linkInfo[linkIndex];
                 var linkId = linkInfo.GetLinkID();
 
-                var itemData = objectManager.openClBodies.myObjectBodies.Find(obj => obj.name == linkId);
+                var itemData = objectManager.celestialBodyManager.myObjectBodies.Find(obj => obj.name == linkId);
                 if (itemData != null)
                 {
                     Vector3 directionToCamera = (Camera.main.transform.position - itemData.position).normalized;
