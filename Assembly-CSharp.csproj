@@ -129,6 +129,7 @@
     <Compile Include="Assets\Scripts\MonoBehaviour\ObjectSpawnableScripts\Bodies\Blackhole.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\UI Information\FPSCounter.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\GameObjectInformation\ObjectNameDisplay.cs" />
+    <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\UI Information\WikiPage.cs" />
     <Compile Include="Assets\Scripts\OpenCl\Implementations\OpenClRunner.cs" />
     <Compile Include="Assets\Scripts\DataTypes\Constants.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ObjectSpawnableScripts\Bodies\PlanetaryBody.cs" />

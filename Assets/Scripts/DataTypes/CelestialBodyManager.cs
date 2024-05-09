@@ -183,11 +183,6 @@ public class CelestialBodyManager : ICloneable
 
             gameObject.AddComponent<Blackhole>();
 
-            using (StreamWriter w = File.AppendText("log.txt"))
-            {
-                w.WriteLine(gameObject.GetComponent<Blackhole>().ToString() + " " + entry.position.ToString());
-            }
-
             return gameObject;
         }
         else

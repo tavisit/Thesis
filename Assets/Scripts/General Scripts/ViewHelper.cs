@@ -30,4 +30,16 @@ public static class ViewHelper
 
         return offset;
     }
+
+    public static bool MotionPanelIsOn()
+    {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Panel");
+
+        foreach (GameObject obj in objects)
+        {
+            if (obj.activeSelf) return true;
+        }
+
+        return false;
+    }
 }

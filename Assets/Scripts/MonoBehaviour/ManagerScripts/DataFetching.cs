@@ -30,7 +30,7 @@ public static class DataFetching
             float y = Random.Range(minPosition.y, maxPosition.y);
             float z = Random.Range(minPosition.z, maxPosition.z);
 
-            OpenClBodyObject blackHole = new OpenClBodyObject("Blackhole " + Random.Range(0, 9999).ToString(), Random.Range(1.0f, 1000.0f), new Vector3(x, y, z), new Vector3(0, 0, 0), new Vector3(0, 0, 0));
+            OpenClBodyObject blackHole = new OpenClBodyObject("Blackhole " + Random.Range(0, 9999).ToString(), Random.Range(3.0f, 10.0f), new Vector3(x, y, z), new Vector3(0, 0, 0), new Vector3(0, 0, 0));
             returnObjects.Add(blackHole);
         }
 

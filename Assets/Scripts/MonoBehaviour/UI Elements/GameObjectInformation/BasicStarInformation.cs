@@ -30,7 +30,7 @@ public class BasicStarInformation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !ViewHelper.MotionPanelIsOn())
         {
 
             _ = new RaycastHit();
@@ -69,7 +69,7 @@ public class BasicStarInformation : MonoBehaviour
             }
         }
 
-        if (DoubleClick())
+        if (DoubleClick() && !ViewHelper.MotionPanelIsOn())
         {
             bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hitInfo);
             if (hit)
