@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ObjectInformation : MonoBehaviour
+public class BasicStarInformation : MonoBehaviour
 {
     public Text informationTextUI;
     public Image panel;
