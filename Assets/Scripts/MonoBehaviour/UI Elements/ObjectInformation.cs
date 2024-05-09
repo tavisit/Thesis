@@ -52,12 +52,15 @@ public class ObjectInformation : MonoBehaviour
         }
         else if (body != null)
         {
-            string informationText = "Information:";
+            string informationText = "";
             informationText += "\nName: " + hitObject.name;
-            informationText += "\nPosition [kiloparsecs]: " + hitObject.transform.position.ToString("E5");
-            informationText += "\nVelocity [kiloparsecs per Million years]: " + body.velocity.ToString("E5");
-            informationText += "\nAcceleration [kiloparsecs per Million years squared]: " + body.acceleration.ToString("E5");
-            informationText += "\nMass [kg]: " + (body.mass * Constants.SUN_MASS).ToString("E5");
+            informationText += "\nPosition[kiloparsecs]:";
+            informationText += "\nX: " + hitObject.transform.position.x.ToString();
+            informationText += "\nY: " + hitObject.transform.position.y.ToString();
+            informationText += "\nZ: " + hitObject.transform.position.z.ToString();
+            informationText += "\nVelocity[kiloparsecs/Million years]: " + string.Format("{0:F2}", body.velocity.magnitude);
+            informationText += "\nAcceleration[kiloparsecs/Million years^2]: " + string.Format("{0:F2}", body.acceleration.magnitude);
+            informationText += "\nMass[kg]: " + (body.mass * Constants.SUN_MASS).ToString("E3");
             if (informationTextUI != null)
             {
                 moreInforamtionButton.SetActive(hitObject.name.StartsWith("Star"));
@@ -108,5 +111,11 @@ public class ObjectInformation : MonoBehaviour
     public void CloseMoreInformation()
     {
         moreInformationPanel.gameObject.SetActive(false);
+    }
+
+    public void CloseBasicInformation()
+    {
+        body = null;
+        panel.gameObject.SetActive(false);
     }
 }

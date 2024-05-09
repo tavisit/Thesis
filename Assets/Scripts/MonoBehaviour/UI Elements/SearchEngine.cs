@@ -68,7 +68,10 @@ public class SearchEngine : MonoBehaviour
                                                                                 .ToList();
 
         StringBuilder sb = new StringBuilder();
+
         sb.AppendLine();
+        sb.AppendLine();
+
         foreach (OpenClBodyObject obj in objects)
         {
             sb.AppendLine("- <link=\"" + obj.name + "\">" + obj.name + "</link>");
