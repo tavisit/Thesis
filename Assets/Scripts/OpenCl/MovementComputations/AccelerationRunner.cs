@@ -27,11 +27,11 @@ public class AccelerationRunner : MovementComputationsBaseRunner
         nuint[] globalWorkSize = new nuint[1] { (nuint)argsLength };
         nuint[] localWorkSize = new nuint[1] { 1 };
 
-        if (OpenCLInterfaceImplementation.CreateMemObjects(cl, context, memObjects, true, 0, MemFlags.ReadWrite, result)
-            && OpenCLInterfaceImplementation.CreateMemObjects(cl, context, memObjects, false, 1, MemFlags.ReadOnly | MemFlags.CopyHostPtr, pointsToUpdate.SelectMany(obj => obj.Flatten()).ToArray())
-            && OpenCLInterfaceImplementation.CreateMemObjects(cl, context, memObjects, false, 2, MemFlags.ReadOnly | MemFlags.CopyHostPtr, args.SelectMany(obj => obj.Flatten()).ToArray())
-            && OpenCLInterfaceImplementation.SetKernelArgsMemory(cl, kernel, memObjects, new int[] { 0, 1, 2 })
-            && OpenCLInterfaceImplementation.SetKernelArgsVariables(cl, kernel, valueObjects, new int[] { 3, 4 })
+        if (openCLInterfaceImplementation.CreateMemObjects(cl, context, memObjects, true, 0, MemFlags.ReadWrite, result)
+            && openCLInterfaceImplementation.CreateMemObjects(cl, context, memObjects, false, 1, MemFlags.ReadOnly | MemFlags.CopyHostPtr, pointsToUpdate.SelectMany(obj => obj.Flatten()).ToArray())
+            && openCLInterfaceImplementation.CreateMemObjects(cl, context, memObjects, false, 2, MemFlags.ReadOnly | MemFlags.CopyHostPtr, args.SelectMany(obj => obj.Flatten()).ToArray())
+            && openCLInterfaceImplementation.SetKernelArgsMemory(cl, kernel, memObjects, new int[] { 0, 1, 2 })
+            && openCLInterfaceImplementation.SetKernelArgsVariables(cl, kernel, valueObjects, new int[] { 3, 4 })
             && Run(globalWorkSize, localWorkSize, result.Length, memObjects, 0, out result))
         {
             Parallel.For(0, pointsToUpdate.Count, index =>

@@ -3,9 +3,25 @@ using System.Runtime.InteropServices;
 using Silk.NET.OpenCL;
 using UnityEngine;
 
-public static class OpenCLInterfaceImplementation
+public class OpenCLInterfaceImplementation
 {
-    public static unsafe bool CreateMemObjects<T>(CL cl, nint context, nint[] memObjects,
+    private static readonly OpenCLInterfaceImplementation instance = new OpenCLInterfaceImplementation();
+
+    // Private constructor to prevent instantiation
+    private OpenCLInterfaceImplementation()
+    {
+    }
+
+    // Public static method to access the singleton instance
+    public static OpenCLInterfaceImplementation Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    public unsafe bool CreateMemObjects<T>(CL cl, nint context, nint[] memObjects,
                                                    bool nullPtr, int position, MemFlags memFlags, T[] array)
     {
         if (!typeof(T).IsValueType)
@@ -40,7 +56,7 @@ public static class OpenCLInterfaceImplementation
         }
     }
 
-    public static unsafe bool SetKernelArgsMemory(CL cl, nint kernel, nint[] memObjects, int[] memObjectsPositions)
+    public unsafe bool SetKernelArgsMemory(CL cl, nint kernel, nint[] memObjects, int[] memObjectsPositions)
     {
         int errNum = 0;
         for (int i = 0; i < memObjects.Length; i++)
@@ -56,7 +72,7 @@ public static class OpenCLInterfaceImplementation
         return true;
     }
 
-    public static unsafe bool SetKernelArgsVariables<T>(CL cl, nint kernel, T[] valueObjects, int[] valueObjectsPositions) where T : unmanaged
+    public unsafe bool SetKernelArgsVariables<T>(CL cl, nint kernel, T[] valueObjects, int[] valueObjectsPositions) where T : unmanaged
     {
         int errNum = 0;
 
@@ -75,7 +91,7 @@ public static class OpenCLInterfaceImplementation
         return true;
     }
 
-    public static unsafe CL Enqueue(CL cl, nint commandQueue, nint kernel, nuint[] globalWorkSize, nuint[] localWorkSize, nint[] memObjects)
+    public unsafe CL Enqueue(CL cl, nint commandQueue, nint kernel, nuint[] globalWorkSize, nuint[] localWorkSize, nint[] memObjects)
     {
         int errNum = (int)ErrorCodes.InvalidQueueProperties;
         try
@@ -97,7 +113,7 @@ public static class OpenCLInterfaceImplementation
         }
         return cl;
     }
-    public static unsafe CL ReadBuffer<T>(CL cl, nint commandQueue, nint[] memObjects, int position, out T[] result, int resultSize)
+    public unsafe CL ReadBuffer<T>(CL cl, nint commandQueue, nint[] memObjects, int position, out T[] result, int resultSize)
     {
         result = new T[resultSize];
         if (!typeof(T).IsValueType)

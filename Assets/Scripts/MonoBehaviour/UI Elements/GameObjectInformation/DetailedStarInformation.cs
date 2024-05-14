@@ -13,11 +13,14 @@ public class DetailedStarInformation
     float innerHabitableSunAbsolute = 142118977f;
     float outerHabitableSunAbsolute = 205049590f;
 
+    StarClassifier starClassifier;
 
     public DetailedStarInformation(GameObject informationPanel, GameObject star)
     {
         this.informationPanel = informationPanel;
         this.star = star;
+
+        starClassifier = StarClassifier.Instance;
     }
 
     public void drawMap()
@@ -51,7 +54,7 @@ public class DetailedStarInformation
         allChildren.GetValueOrDefault("ActualZone").transform.localScale = new Vector3(1, 1, 1) * outerBoundary;
         allChildren.GetValueOrDefault("UpperHabitableZoneDistance").transform.localScale = new Vector3(1, 1, 1) * outerBoundary;
 
-        (HarvardSpectralClassLetter, int) harvardSpectralAndNumber = StarClassifier.ClassifyHarvardSpectral(starTemperature);
+        (HarvardSpectralClassLetter, int) harvardSpectralAndNumber = starClassifier.ClassifyHarvardSpectral(starTemperature);
         int harvardSpectral = Array.IndexOf(Enum.GetValues(harvardSpectralAndNumber.ToTuple().Item1.GetType()), harvardSpectralAndNumber.ToTuple().Item1);
         // Detailed Text information:
         string text = "\n";

@@ -2,12 +2,28 @@
 using System.Linq;
 using UnityEngine;
 
-public static class DataFetching
+public class DataFetching
 {
-    private static Vector3 minPosition;
-    private static Vector3 maxPosition;
+    private Vector3 minPosition;
+    private Vector3 maxPosition;
 
-    public static List<OpenClBodyObject> GaiaFetching(string fileName)
+    private static readonly DataFetching instance = new DataFetching();
+
+    // Private constructor to prevent instantiation
+    private DataFetching()
+    {
+    }
+
+    // Public static method to access the singleton instance
+    public static DataFetching Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    public List<OpenClBodyObject> GaiaFetching(string fileName)
     {
         List<OpenClBodyObject> returnValues = new List<OpenClBodyObject>();
         TextAsset[] clFiles = Resources.LoadAll<TextAsset>("InputManagement");
@@ -37,7 +53,7 @@ public static class DataFetching
         return returnObjects;
     }
 
-    public static List<OpenClBodyObject> SolarSystemFetching()
+    public List<OpenClBodyObject> SolarSystemFetching()
     {
         List<OpenClBodyObject> returnValues = new List<OpenClBodyObject>();
         TextAsset[] clFiles = Resources.LoadAll<TextAsset>("InputManagement/output");
@@ -45,7 +61,7 @@ public static class DataFetching
         return JsonHelper.FromJson<OpenClBodyObject>("{\"Items\":" + mainFile.text + "}").ToList();
     }
 
-    private static void FindMinMaxPositions(List<OpenClBodyObject> returnObjects)
+    private void FindMinMaxPositions(List<OpenClBodyObject> returnObjects)
     {
         minPosition = returnObjects[0].position;
         maxPosition = returnObjects[0].position;
