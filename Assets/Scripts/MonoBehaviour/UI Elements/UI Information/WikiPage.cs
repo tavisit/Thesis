@@ -31,7 +31,7 @@ public class WikiPage : MonoBehaviour
     void Start()
     {
         DataFetching dataFetching = DataFetching.Instance;
-        wikiPageObjLists = dataFetching.WikiFetching("wiki_data");
+        wikiPageObjLists = dataFetching.WikiFetching("wiki_data.json");
 
         for (int i = 0; i < wikiPageObjLists.Count; i++)
         {
