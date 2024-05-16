@@ -22,7 +22,7 @@ public class CelestialBodyManager : ICloneable
 
         DataFetching dataFetching = DataFetching.Instance;
 
-        myObjectBodies = dataFetching.GaiaFetching("galactic_data");
+        myObjectBodies = dataFetching.GaiaFetching("galactic_data.json");
 
         var obj = myObjectBodies.Find(k => k.name.Equals("Blackhole Sagittarius A*"));
         float mass = obj.mass;
