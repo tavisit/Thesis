@@ -53,6 +53,16 @@ public class DataFetching
         return returnObjects;
     }
 
+    public List<WikiPageObjList> WikiFetching(string fileName)
+    {
+        List<WikiPageObjList> returnValues = new List<WikiPageObjList>();
+        TextAsset[] clFiles = Resources.LoadAll<TextAsset>("InputManagement");
+        TextAsset mainFile = clFiles.FirstOrDefault(s => s.name.Contains(fileName));
+
+        List<WikiPageObjList> returnObjects = JsonHelper.FromJson<WikiPageObjList>(mainFile.text).ToList();
+        return returnObjects;
+    }
+
     public List<OpenClBodyObject> SolarSystemFetching()
     {
         List<OpenClBodyObject> returnValues = new List<OpenClBodyObject>();
