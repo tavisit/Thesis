@@ -33,7 +33,7 @@ public class WikiPage : MonoBehaviour
         DataFetching dataFetching = DataFetching.Instance;
         wikiPageObjLists = dataFetching.WikiFetching("wiki_data");
 
-        for(int i=0;i<wikiPageObjLists.Count;i++)
+        for (int i = 0; i < wikiPageObjLists.Count; i++)
         {
             string category = wikiPageObjLists[i].Category;
 
@@ -61,7 +61,7 @@ public class WikiPage : MonoBehaviour
     {
         WikiPageObjList currentCategory = wikiPageObjLists.Find(x => x.Category == category);
 
-        if(currentCategory != null)
+        if (currentCategory != null)
         {
             ClearPage(pagesContent.transform);
         }
