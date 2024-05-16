@@ -12,7 +12,23 @@ public enum HarvardSpectralClassLetter
 
 public class StarClassifier
 {
-    public static (HarvardSpectralClassLetter, int) ClassifyHarvardSpectral(double temperature)
+    private static readonly StarClassifier instance = new StarClassifier();
+
+    // Private constructor to prevent instantiation
+    private StarClassifier()
+    {
+    }
+
+    // Public static method to access the singleton instance
+    public static StarClassifier Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    public (HarvardSpectralClassLetter, int) ClassifyHarvardSpectral(double temperature)
     {
         if (temperature >= 33000)
         {

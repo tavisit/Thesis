@@ -108,6 +108,7 @@
     <Compile Include="Assets\Scripts\DataTypes\StarType.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\SliderValue.cs" />
     <Compile Include="Assets\Scripts\OpenCl\MovementComputations\PathRunner.cs" />
+    <Compile Include="Assets\Scripts\DataTypes\WikiPageObj.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\GameObjectInformation\DetailedStarInformation.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ManagerScripts\ObjectManager.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\UI Information\StellarSearchClickable.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Assets\Scripts\MonoBehaviour\Movement\KeyboardCameraMovement.cs" />
     <Compile Include="Assets\Scripts\Menu\LoadingScene.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ManagerScripts\JsonHelper.cs" />
+    <Compile Include="Assets\Scripts\DataTypes\WikiPageObjList.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\ObjectSpawnableScripts\Bodies\Blackhole.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\UI Information\FPSCounter.cs" />
     <Compile Include="Assets\Scripts\MonoBehaviour\UI Elements\GameObjectInformation\ObjectNameDisplay.cs" />

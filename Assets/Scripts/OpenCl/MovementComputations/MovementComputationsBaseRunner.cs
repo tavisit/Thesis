@@ -44,7 +44,7 @@ public abstract class MovementComputationsBaseRunner : OpenCLRunner<Vector4, Cel
         return pointsToUpdate.ToList();
     }
 
-    protected static float PointToRayDistance(Vector3 point, Vector3 origin, Vector3 target)
+    protected float PointToRayDistance(Vector3 point, Vector3 origin, Vector3 target)
     {
         var ray = new Ray(origin, target - origin);
         var cross = Vector3.Cross(ray.direction, point - ray.origin);

@@ -12,8 +12,12 @@ public abstract class OpenCLRunner<T, P, Q>
     protected nint kernel;
     protected CL cl;
 
+    protected OpenCLInterfaceImplementation openCLInterfaceImplementation;
+
     public OpenCLRunner(string filePath, string functionName)
     {
+        openCLInterfaceImplementation = OpenCLInterfaceImplementation.Instance;
+
         cl = CL.GetApi();
         nint device = 0;
 
@@ -25,12 +29,12 @@ public abstract class OpenCLRunner<T, P, Q>
 
     protected bool Run(nuint[] globalWorkSize, nuint[] localWorkSize, int resultSize, nint[] memObjects, int position, out T[] result)
     {
-        cl = OpenCLInterfaceImplementation.Enqueue(cl, commandQueue, kernel, globalWorkSize, localWorkSize, memObjects);
-        cl = OpenCLInterfaceImplementation.ReadBuffer(cl, commandQueue, memObjects, position, out result, resultSize);
+        cl = openCLInterfaceImplementation.Enqueue(cl, commandQueue, kernel, globalWorkSize, localWorkSize, memObjects);
+        cl = openCLInterfaceImplementation.ReadBuffer(cl, commandQueue, memObjects, position, out result, resultSize);
         return true;
     }
 
-    public static unsafe nint CreateKernel(CL cl, nint program, string functionName)
+    private unsafe nint CreateKernel(CL cl, nint program, string functionName)
     {
         nint kernel = cl.CreateKernel(program, functionName, null);
         if (kernel == IntPtr.Zero)
@@ -40,7 +44,7 @@ public abstract class OpenCLRunner<T, P, Q>
         return kernel;
     }
 
-    public static unsafe nint CreateCommandQueue(CL cl, nint context, ref nint device)
+    private unsafe nint CreateCommandQueue(CL cl, nint context, ref nint device)
     {
         int errNum = cl.GetContextInfo(context, ContextInfo.Devices, 0, null, out nuint deviceBufferSize);
         if (errNum != (int)ErrorCodes.Success)
@@ -78,7 +82,7 @@ public abstract class OpenCLRunner<T, P, Q>
         return commandQueue;
     }
 
-    public static unsafe nint CreateContext(CL cl)
+    private unsafe nint CreateContext(CL cl)
     {
         var errNum = cl.GetPlatformIDs(1, out nint firstPlatformId, out uint numPlatforms);
         if (errNum != (int)ErrorCodes.Success || numPlatforms <= 0)
@@ -118,7 +122,7 @@ public abstract class OpenCLRunner<T, P, Q>
             return context;
         }
     }
-    public static unsafe nint CreateProgram(CL cl, nint context, nint device, string fileName)
+    private unsafe nint CreateProgram(CL cl, nint context, nint device, string fileName)
     {
         string clSource = LoadAndCombineClSources(fileName);
 
@@ -151,7 +155,7 @@ public abstract class OpenCLRunner<T, P, Q>
         return program;
     }
 
-    private static string LoadAndCombineClSources(string fileName)
+    private string LoadAndCombineClSources(string fileName)
     {
         TextAsset[] clFiles = Resources.LoadAll<TextAsset>("OpenCL_Scripts");
 

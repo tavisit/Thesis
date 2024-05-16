@@ -18,7 +18,11 @@ public class CelestialBodyManager : ICloneable
     {
         myObjectBodies = new List<OpenClBodyObject>();
         celestialBodies = new Dictionary<string, Tuple<GameObject, long>>();
-        myObjectBodies = DataFetching.GaiaFetching("galactic_data");
+
+
+        DataFetching dataFetching = DataFetching.Instance;
+
+        myObjectBodies = dataFetching.GaiaFetching("galactic_data");
 
         var obj = myObjectBodies.Find(k => k.name.Equals("Blackhole Sagittarius A*"));
         float mass = obj.mass;
