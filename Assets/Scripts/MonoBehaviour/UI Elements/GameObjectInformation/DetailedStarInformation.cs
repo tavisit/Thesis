@@ -37,7 +37,7 @@ public class DetailedStarInformation
         Color color = TemperatureToRGB(starTemperature);
 
         // resize to actual star size:
-        allChildren.GetValueOrDefault("Star").transform.localScale = new Vector3(1,1,1) * star.transform.localScale[0];
+        allChildren.GetValueOrDefault("Star").transform.localScale = new Vector3(1, 1, 1) * star.transform.localScale[0];
 
         // Adjust its color
         allChildren.GetValueOrDefault("Star").GetComponent<Image>().color = color;
