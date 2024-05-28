@@ -7,25 +7,18 @@ public class StellarSearchClickable : MonoBehaviour, IPointerClickHandler
     [SerializeField] private ObjectManager objectManager;
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (eventData.button != PointerEventData.InputButton.Left) return;
+
         var text = GetComponent<TextMeshProUGUI>();
-        if (eventData.button == PointerEventData.InputButton.Left)
-        {
-            int linkIndex = TMP_TextUtilities.FindIntersectingLink(text, Input.mousePosition, null);
-            if (linkIndex > -1)
-            {
-                var linkInfo = text.textInfo.linkInfo[linkIndex];
-                var linkId = linkInfo.GetLinkID();
+        int linkIndex = TMP_TextUtilities.FindIntersectingLink(text, Input.mousePosition, null);
+        if (linkIndex == -1) return;
 
-                var itemData = objectManager.celestialBodyManager.myObjectBodies.Find(obj => obj.name == linkId);
-                if (itemData != null)
-                {
-                    Vector3 directionToCamera = (Camera.main.transform.position - itemData.position).normalized;
-                    Vector3 newCameraPosition = itemData.position + directionToCamera * ViewHelper.CalculateOffset(itemData.mass);
+        var linkId = text.textInfo.linkInfo[linkIndex].GetLinkID();
+        var itemData = objectManager.celestialBodyManager.myObjectBodies.Find(obj => obj.name == linkId);
+        if (itemData == null) return;
 
-                    Camera.main.transform.position = newCameraPosition;
-                    Camera.main.transform.LookAt(itemData.position);
-                }
-            }
-        }
+        Vector3 directionToCamera = (Camera.main.transform.position - itemData.position).normalized;
+        Camera.main.transform.position = itemData.position + directionToCamera * ViewHelper.CalculateOffset(itemData.mass);
+        Camera.main.transform.LookAt(itemData.position);
     }
 }

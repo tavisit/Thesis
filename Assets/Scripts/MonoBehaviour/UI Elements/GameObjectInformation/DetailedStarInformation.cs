@@ -35,13 +35,12 @@ public class DetailedStarInformation
 
         // give star the right color
         Color color = TemperatureToRGB(starTemperature);
-        Color adjustedColor = AdjustLuminosity(color, relativeLuminousity);
 
         // resize to actual star size:
-        allChildren.GetValueOrDefault("Star").transform.localScale = allChildren.GetValueOrDefault("Star").transform.localScale * star.transform.localScale[0];
+        allChildren.GetValueOrDefault("Star").transform.localScale = new Vector3(1,1,1) * star.transform.localScale[0];
 
         // Adjust its color
-        allChildren.GetValueOrDefault("Star").GetComponent<Image>().color = adjustedColor;
+        allChildren.GetValueOrDefault("Star").GetComponent<Image>().color = color;
 
         // inner and outer habitable zones:
         float innerBoundary = CalculateInnerBoundary(relativeLuminousity, starTemperature);
@@ -80,7 +79,7 @@ public class DetailedStarInformation
         text += "\n                                           <sprite=12>";
         text += "\n\n";
 
-        text += "\nStar Color [RGB]: " + adjustedColor.ToString();
+        text += "\nStar Color [RGB]: " + color.ToString();
         text += "\nStar Temperature [Kelvin]: " + starTemperature.ToString();
         text += "\nStar Relative Luminousity: " + relativeLuminousity.ToString();
         text += "\n\n";
@@ -130,9 +129,10 @@ public class DetailedStarInformation
 
     Color TemperatureToRGB(double temperature)
     {
+        temperature -= 3000;
         double red, green, blue;
 
-        if (temperature <= 6600)
+        if (temperature <= 3600)
         {
             red = 255;
             green = temperature / 100 - 2;
@@ -150,12 +150,5 @@ public class DetailedStarInformation
         int b = (int)Math.Clamp(blue, 0, 255);
 
         return new Color(r / 255f, g / 255f, b / 255f);
-    }
-
-    Color AdjustLuminosity(Color color, double relativeLuminosity)
-    {
-        Color adjustedColor = new Color(color.r * (float)relativeLuminosity, color.g * (float)relativeLuminosity, color.b * (float)relativeLuminosity);
-
-        return adjustedColor;
     }
 }

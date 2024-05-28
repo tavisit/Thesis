@@ -4,7 +4,7 @@ using System.Linq;
 using Silk.NET.OpenCL;
 using UnityEngine;
 
-public abstract class OpenCLRunner<T, P, Q>
+public abstract class OpenCLRunner<T, Q>
 {
     protected nint context;
     protected nint commandQueue;
