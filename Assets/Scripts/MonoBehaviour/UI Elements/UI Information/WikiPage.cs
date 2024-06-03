@@ -26,23 +26,12 @@ public class WikiPage : MonoBehaviour
     [SerializeField]
     private TMP_Text informationBody;
 
+    DataFetching dataFetching;
 
     // Start is called before the first frame update
     void Start()
     {
-        DataFetching dataFetching = DataFetching.Instance;
-        wikiPageObjLists = dataFetching.WikiFetching("wiki_data.json");
-
-        for (int i = 0; i < wikiPageObjLists.Count; i++)
-        {
-            string category = wikiPageObjLists[i].Category;
-
-            GameObject btn = Instantiate(buttonTemplate);
-            btn.GetComponentInChildren<TMP_Text>().text = category;
-            btn.transform.SetParent(categoryContent.transform);
-            btn.GetComponent<Button>().onClick.AddListener(() => SelectCategory(category));
-        }
-
+        dataFetching = DataFetching.Instance;
     }
 
     // Update is called once per frame
@@ -54,6 +43,8 @@ public class WikiPage : MonoBehaviour
     public void PanelSetVisibility()
     {
         ClearPage(pagesContent.transform);
+        ClearPage(categoryContent.transform);
+        UpdateWikiData();
         panelWikiPage.gameObject.SetActive(!panelWikiPage.gameObject.activeSelf);
     }
 
@@ -99,5 +90,20 @@ public class WikiPage : MonoBehaviour
 
         informationTitle.text = "";
         informationBody.text = "";
+    }
+
+    private void UpdateWikiData()
+    {
+        wikiPageObjLists = dataFetching.WikiFetching("wiki_data.json");
+
+        for (int i = 0; i < wikiPageObjLists.Count; i++)
+        {
+            string category = wikiPageObjLists[i].Category;
+
+            GameObject btn = Instantiate(buttonTemplate);
+            btn.GetComponentInChildren<TMP_Text>().text = category;
+            btn.transform.SetParent(categoryContent.transform);
+            btn.GetComponent<Button>().onClick.AddListener(() => SelectCategory(category));
+        }
     }
 }

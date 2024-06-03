@@ -11,7 +11,7 @@ public class StellarBody : Body
 
     protected override void SpecificStart()
     {
-        if (float.IsNaN(starTemperature))
+        if (float.IsNaN(starTemperature) || starTemperature == 0)
         {
             starTemperature = Constants.SUN_TEMPERATURE * Mathf.Pow(transform.localScale[0], -0.5f);
         }
