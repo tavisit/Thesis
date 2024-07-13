@@ -76,7 +76,7 @@ public class WikiPage : MonoBehaviour
     private void SelectPage(string title, string description)
     {
         informationTitle.text = title;
-        informationBody.text = description;
+        informationBody.text = "\n\n" + description;
     }
 
     private void ClearPage(Transform t)

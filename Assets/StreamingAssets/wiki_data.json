@@ -63,24 +63,24 @@
       "Pages": [
         {
           "Title": "Force of universal Attraction",
-          "Description": "Description 2.1"
+          "Description": "Description 3.1"
         },
         {
           "Title": "GAIA API",
-          "Description": "Description 2.2"
+          "Description": "Description 3.2"
         },
         {
           "Title": "Acceleration of bodies",
-          "Description": "Description 2.2"
+          "Description": "Description 3.3"
         },
         {
           "Title": "Star Color",
-          "Description": "Description 2.2"
+          "Description": "Description 3.4"
         },
-        {
-          "Title": "Harvard Spectral Types",
-          "Description": "Description 1.2"
-        }
+		{
+		  "Title": "Harvard Spectral Types",
+		  "Description": "Description 3.5"
+		}
       ]
     }
   ]
