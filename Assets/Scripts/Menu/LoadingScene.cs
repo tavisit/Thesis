@@ -10,6 +10,8 @@ public class LoadingScene : MonoBehaviour
 
     public GameObject InGameMenu;
 
+    public GameObject GameManager;
+
     public void OnClickExitGame()
     {
         Application.Quit();
@@ -17,6 +19,7 @@ public class LoadingScene : MonoBehaviour
 
     public void OnClickGoToMainMenu()
     {
+        Destroy(GameManager);
         LoadScene(0);
     }
 

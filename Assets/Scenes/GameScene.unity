@@ -1173,7 +1173,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Exit to menu
+  m_Text: Exit to Menu
 --- !u!222 &208601386
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5284,6 +5284,7 @@ MonoBehaviour:
   LoadingScreen: {fileID: 266881478}
   LoadingBarFill: {fileID: 266881477}
   InGameMenu: {fileID: 1393835527}
+  GameManager: {fileID: 1040128517}
 --- !u!4 &1034743783
 Transform:
   m_ObjectHideFlags: 0
@@ -7258,8 +7259,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 7fc8e4b2cbe4d6e469e7a7a761e204eb, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7469,7 +7470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1477973166
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10148,7 +10149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10168,7 +10169,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Menu...
+  m_Text: Menu
 --- !u!222 &1878850588
 CanvasRenderer:
   m_ObjectHideFlags: 0

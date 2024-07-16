@@ -11,6 +11,7 @@ public static class ViewHelper
 
     public static bool IsInView(Camera cam, Vector3 position)
     {
+        if (cam == null) return false;
         Vector3 pointOnScreen = cam.WorldToScreenPoint(position);
         return (pointOnScreen.z <= cam.farClipPlane) && (pointOnScreen.z >= cam.nearClipPlane)
             && (pointOnScreen.x > 0) && (pointOnScreen.x < Screen.width)
